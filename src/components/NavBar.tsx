@@ -2,20 +2,45 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Nav = styled.nav`
-  border-bottom: 1px solid black;
   display: flex;
   flex-direction: row;
   justify-content: center;
+
 `;
 
 const LogoImage = styled.img`
-  width: 3rem;
+  height: 2.3rem;
+  margin: auto 8rem auto 0;
+`;
+
+const MenuList = styled.ul`
+  list-style-type: none;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  margin: 0;
+  padding: 0;
+`;
+
+const MenuListItem = styled.li`
+  padding: 0.7rem 1.5rem;
+  border-bottom: 2px solid #ff0090;
+  font-size: 1.1rem;
+
+  margin-right: 2rem;
 `;
 
 function NavBar() {
   return (
     <Nav>
       <LogoImage src="/council-logo.png" />
+      <MenuList>
+        <MenuListItem>분야별 청원</MenuListItem>
+        <MenuListItem>추천순 청원</MenuListItem>
+        <MenuListItem>답변된 청원</MenuListItem>
+      </MenuList>
 
     </Nav>
   );
