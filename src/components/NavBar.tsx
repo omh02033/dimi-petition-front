@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import colors from 'assets/colors';
+
 const Nav = styled.nav`
   display: flex;
   flex-direction: row;
@@ -26,7 +28,7 @@ const MenuList = styled.ul`
 
 const MenuListItem = styled.li`
   padding: 0.7rem 1.5rem;
-  border-bottom: 2px solid #ff0090;
+  border-bottom: 2px solid ${colors.main};
   font-size: 1.1rem;
 
   margin-right: 2rem;
