@@ -8,6 +8,7 @@ const Nav = styled.nav`
   flex-direction: row;
   justify-content: center;
 
+  padding: 0.5rem 0;
 `;
 
 const LogoImage = styled.img`
