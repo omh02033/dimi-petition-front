@@ -28,10 +28,19 @@ const MenuList = styled.ul`
 
 const MenuListItem = styled.li`
   padding: 0.7rem 1.5rem;
-  border-bottom: 2px solid ${colors.main};
   font-size: 1.1rem;
 
   margin-right: 2rem;
+
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+
+  cursor: pointer;
+
+  &:hover {
+    border-bottom: 2px solid ${colors.main};
+    color: ${colors.main};
+  }
 `;
 
 function NavBar() {
