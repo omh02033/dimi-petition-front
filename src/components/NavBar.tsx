@@ -35,7 +35,7 @@ const MenuListItem = styled.li`
 function NavBar() {
   return (
     <Nav>
-      <LogoImage src="/council-logo.png" />
+      <LogoImage src="/council-logo-small.svg" />
       <MenuList>
         <MenuListItem>분야별 청원</MenuListItem>
         <MenuListItem>추천순 청원</MenuListItem>
