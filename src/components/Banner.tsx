@@ -9,7 +9,7 @@ const Container = styled.div`
 
   background-image: url('/school.png');
   background-position: center;
-  box-shadow: inset 0 0 0 2000px rgba(255, 0, 150, 0.3);
+  box-shadow: inset 0 0 0 2000px rgba(255, 0, 150, 0.2);
 
   display: flex;
   flex-direction: column;

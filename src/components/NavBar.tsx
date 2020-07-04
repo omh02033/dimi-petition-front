@@ -10,7 +10,7 @@ const Nav = styled.nav`
   justify-content: center;
   align-items: center;
 
-  padding: 1rem 0;
+  padding: 0;
   margin: 0 auto;
 
   grid-template-columns: 100px 1fr 120px;
@@ -66,7 +66,7 @@ const MenuList = styled.ul`
 `;
 
 const MenuListItem = styled.li`
-  padding: 0.7rem 1.5rem;
+  padding: 1rem 1.5rem;
   font-size: 1.1rem;
 
   text-align: center;
