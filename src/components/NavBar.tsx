@@ -29,6 +29,7 @@ const Nav = styled.nav`
   @media ${devices.tablet} {
     grid-template-columns: 100px 1fr;
     grid-template-rows: 1fr 90px;
+    grid-gap: 1rem;
 
     padding: 1.5rem 0;
     width: 90%;
