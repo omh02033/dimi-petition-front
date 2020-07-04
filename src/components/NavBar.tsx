@@ -28,7 +28,7 @@ const Nav = styled.nav`
 
   @media ${devices.tablet} {
     grid-template-columns: 100px 1fr;
-    grid-template-rows: 1fr 100px;
+    grid-template-rows: 1fr 90px;
 
     padding: 1.5rem 0;
     width: 90%;
@@ -70,6 +70,7 @@ const MenuListItem = styled.li`
 
   text-align: center;
   word-break: keep-all;
+  overflow: hidden;
 
   &:not(:last-child) {
     margin-right: 2rem;
@@ -79,13 +80,13 @@ const MenuListItem = styled.li`
     }
   }
 
-  border-bottom: 2px solid transparent;
+  border-bottom: 3px solid transparent;
   transition: all 0.2s;
 
   cursor: pointer;
 
   &.current {
-    border-bottom: 2px solid ${colors.main};
+    border-bottom: 3px solid ${colors.main};
     color: ${colors.main};
   }
   
