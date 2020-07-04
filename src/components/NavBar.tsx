@@ -7,13 +7,19 @@ const Nav = styled.nav`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
 
   padding: 0.5rem 0;
+
+  width: 70%;
+  margin: 0 auto;
 `;
 
 const LogoImage = styled.img`
   height: 2.3rem;
-  margin: auto 8rem auto 0;
+  margin: auto 0;
+
+  flex: 1;
 `;
 
 const MenuList = styled.ul`
@@ -21,10 +27,12 @@ const MenuList = styled.ul`
 
   display: flex;
   flex-direction: row;
-  align-items: center;
 
   margin: 0;
   padding: 0;
+
+  flex: 2;
+  margin: 0 auto;
 `;
 
 const MenuListItem = styled.li`
@@ -38,10 +46,15 @@ const MenuListItem = styled.li`
 
   cursor: pointer;
 
-  &:hover {
+  &.current {
     border-bottom: 2px solid ${colors.main};
     color: ${colors.main};
   }
+`;
+
+const Profile = styled.div`
+  flex: 1;
+  text-align: center;
 `;
 
 function NavBar() {
@@ -49,11 +62,13 @@ function NavBar() {
     <Nav>
       <LogoImage src="/council-logo-small.svg" />
       <MenuList>
-        <MenuListItem>분야별 청원</MenuListItem>
+        <MenuListItem className="current">분야별 청원</MenuListItem>
         <MenuListItem>추천순 청원</MenuListItem>
         <MenuListItem>답변된 청원</MenuListItem>
       </MenuList>
-
+      <Profile>
+        1376 홍길동
+      </Profile>
     </Nav>
   );
 }
