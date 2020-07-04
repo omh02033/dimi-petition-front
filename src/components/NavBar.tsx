@@ -31,8 +31,7 @@ const Nav = styled.nav`
     grid-template-rows: 1fr 90px;
     grid-gap: 1rem;
 
-    padding: 1.5rem 0;
-    width: 90%;
+    padding: 1.5rem 0 0 0;
   }
 `;
 
