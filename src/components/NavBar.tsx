@@ -11,7 +11,7 @@ const Nav = styled.nav`
 
   padding: 0.5rem 0;
 
-  width: 70%;
+  width: 50%;
   margin: 0 auto;
 `;
 
@@ -19,27 +19,28 @@ const LogoImage = styled.img`
   height: 2.3rem;
   margin: auto 0;
 
-  flex: 1;
+  cursor: pointer;
 `;
 
 const MenuList = styled.ul`
+  flex: 1;
   list-style-type: none;
 
   display: flex;
   flex-direction: row;
+  justify-content: center;
 
   margin: 0;
   padding: 0;
-
-  flex: 2;
-  margin: 0 auto;
 `;
 
 const MenuListItem = styled.li`
   padding: 0.7rem 1.5rem;
   font-size: 1.1rem;
 
-  margin-right: 2rem;
+  &:not(:last-child) {
+    margin-right: 2rem;
+  }
 
   border-bottom: 2px solid transparent;
   transition: all 0.2s;
@@ -53,7 +54,6 @@ const MenuListItem = styled.li`
 `;
 
 const Profile = styled.div`
-  flex: 1;
   text-align: center;
 `;
 
