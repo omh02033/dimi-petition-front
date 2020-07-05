@@ -1,0 +1,39 @@
+.pagination {
+  padding: 0;
+  margin: 1rem 0;
+  display: flex;
+  width: 100%;
+  list-style-type: none;
+
+  li {
+    a {
+      display: block;
+      padding: 0.5rem 1rem;
+      outline: none;
+    }
+
+    cursor: pointer;
+
+    color: #d9d9d9;
+    border: 2px solid #d9d9d9;
+    border-radius: 3px;
+
+    &:not(:last-child) {
+      margin-right: 0.5rem;
+    }
+
+    &:first-child {
+      margin-right: auto;
+    }
+
+    &:last-child {
+      margin-left: auto;
+    }
+
+    &.selected {
+      background-color: #ff0090;
+      border: 2px solid transparent;
+      color: white;
+    }
+  }
+}

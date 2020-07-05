@@ -6,7 +6,7 @@ import colors from 'assets/colors';
 
 const Container = styled.div`
   margin-top: 2rem;
-  margin-bottom: 7rem;
+  margin-bottom: 5rem;
 
   display: flex;
   flex-direction: column;
@@ -35,7 +35,7 @@ const StepItem = styled.li`
   flex-direction: column;
   align-items: center;
 
-  margin: 1rem;
+  margin: 0.5rem;
 `;
 
 const StepImage = styled.img`
