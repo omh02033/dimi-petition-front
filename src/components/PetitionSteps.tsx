@@ -25,6 +25,7 @@ const StepsList = styled.ol`
 
   list-style-type: none;
   padding: 0;
+  margin: 2rem 0 3.5rem 0;
 `;
 
 const StepItem = styled.li`
@@ -48,6 +49,17 @@ const StepTitle = styled.h2`
   font-size: 1.1rem;
 `;
 
+const RegisterButton = styled.button`
+  border: none;
+  border-radius: 5px;
+  background-color: ${colors.main};
+  color: white;
+  font-size: 1.1rem;
+  padding: 0.6rem 4rem;
+
+  cursor: pointer;
+`;
+
 function PetitionSteps() {
   const stepTitles = ["청원 작성", "청원 동의", "청원 접수", "의견 전달", "청원 답변"]
   return (
@@ -64,7 +76,7 @@ function PetitionSteps() {
           ))
         }
       </StepsList>
-
+      <RegisterButton>지금 청원하기</RegisterButton>
     </Container>
   );
 
