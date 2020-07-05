@@ -7,6 +7,7 @@ import NavBar from 'components/NavBar';
 import Banner from 'components/Banner';
 import PetitionStatus from 'components/PetitionStatus';
 import PetitionSteps from 'components/PetitionSteps';
+import PetitionList from 'components/PetitionList';
 import Footer from 'components/Footer';
 
 const Container = styled.main`
@@ -30,6 +31,7 @@ function Home() {
       <Container>
         <PetitionStatus />
         <PetitionSteps />
+        <PetitionList title="진행중인 청원" />
       </Container>
       <Footer />
     </main>

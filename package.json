@@ -12,6 +12,7 @@
     "@types/react-dom": "^16.9.0",
     "@types/react-paginate": "^6.2.1",
     "@types/styled-components": "^5.1.0",
+    "dayjs": "^1.8.29",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-icons": "^3.10.0",
