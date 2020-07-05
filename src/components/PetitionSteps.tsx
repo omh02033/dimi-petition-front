@@ -69,7 +69,7 @@ function PetitionSteps() {
       <StepsList>
         {
           stepTitles.map((title, i) => (
-            <StepItem>
+            <StepItem key={i}>
               <StepImage width="150" height="150" alt={title} />
               <StepNumber>0{i + 1}</StepNumber>
               <StepTitle>{title}</StepTitle>
