@@ -31,7 +31,7 @@ function Home() {
       <Container>
         <PetitionStatus />
         <PetitionSteps />
-        <PetitionList title="진행중인 청원" />
+        <PetitionList title="진행중인 청원" perPage={5} />
       </Container>
       <Footer />
     </main>

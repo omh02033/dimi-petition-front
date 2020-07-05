@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
+
 import colors from 'assets/colors';
 
 const Container = styled.div`
   margin-top: 2rem;
-  margin-bottom: 8rem;
+  margin-bottom: 7rem;
 
   display: flex;
   flex-direction: column;
