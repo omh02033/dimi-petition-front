@@ -20,11 +20,11 @@ const Container = styled.div`
 
 const Status = styled.div`
   display: grid;
-  grid-template-columns: 70px 1fr;
+  grid-template-columns: 68px 130px;
   grid-template-rows: 30px 30px;
   align-items: center;
 
-  margin: 1rem 2.4rem;
+  margin: 1rem 2rem;
 `;
 
 const Icon = styled.div`
