@@ -35,7 +35,7 @@ const StepItem = styled.li`
   flex-direction: column;
   align-items: center;
 
-  margin: 0.5rem;
+  margin: 0.75rem;
 `;
 
 const StepImage = styled.img`
@@ -71,7 +71,7 @@ function PetitionSteps() {
         {
           stepTitles.map((title, i) => (
             <StepItem key={i}>
-              <StepImage width="150" height="150" alt={title} />
+              <StepImage width="120" height="120" alt={title} />
               <StepNumber>0{i + 1}</StepNumber>
               <StepTitle>{title}</StepTitle>
             </StepItem>
