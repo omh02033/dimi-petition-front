@@ -36,4 +36,14 @@
       color: white;
     }
   }
+
+  @media (max-width: 767px) {
+    li {
+      display: none;
+
+      &.selected, &:first-child, &:last-child {
+        display: block;
+      }
+    }
+  }
 }

@@ -4,6 +4,7 @@ import ReactPaginate from 'react-paginate';
 
 import dayjs from 'dayjs';
 import colors from 'assets/colors';
+import devices from 'assets/devices';
 
 import './PetitionList.scss';
 
@@ -42,12 +43,14 @@ const TableHeader = styled.th`
     width: 120px;
   }
 
-  &:nth-child(3) {
+  &:nth-child(3), &:nth-child(4) {
     width: 100px;
   }
 
-  &:nth-child(4) {
-    width: 100px;
+  @media ${devices.tablet} {
+    &:nth-child(1), &:nth-child(3) {
+      display: none;
+    }
   }
 `;
 
@@ -56,6 +59,12 @@ const TableCell = styled.td`
   text-align: center;
 
   padding: 1rem 0;
+
+  @media ${devices.tablet} {
+    &:nth-child(1), &:nth-child(3) {
+      display: none;
+    }
+  }
 `;
 
 function PetitionList({ title, perPage }: PetitionListProps) {
@@ -117,6 +126,7 @@ function PetitionList({ title, perPage }: PetitionListProps) {
         marginPagesDisplayed={2}
         pageRangeDisplayed={1}
         onPageChange={handlePageClick}
+        initialPage={5}
         previousLabel="< PREV"
         nextLabel="NEXT >"
       />
