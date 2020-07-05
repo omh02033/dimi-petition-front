@@ -32,6 +32,8 @@ function Home() {
         <PetitionStatus />
         <PetitionSteps />
         <PetitionList title="진행중인 청원" perPage={5} />
+        <PetitionList title="답변 대기 중인 청원" perPage={5} />
+        <PetitionList title="만료된 청원" perPage={5} />
       </Container>
       <Footer />
     </main>
