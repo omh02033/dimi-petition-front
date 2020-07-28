@@ -10,6 +10,7 @@ import Banner from 'components/Banner';
 import Footer from 'components/Footer';
 
 import Home from 'pages/Home';
+import Category from 'pages/Category';
 
 const Container = styled.main`
   margin: 0 auto;
@@ -33,6 +34,7 @@ const Root = () => (
       <Container>
         <Switch>
           <Route path="/" exact component={Home} />
+          <Route path="/category" exact component={Category} />
         </Switch>
       </Container>
     </main>
