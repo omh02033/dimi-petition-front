@@ -39,7 +39,9 @@ const StepItem = styled.li`
 `;
 
 const StepImage = styled.img`
-  border: 1px solid ${colors.main};
+  height: 80px;
+  width: 80px;
+  padding: 20px;
 `;
 
 const StepNumber = styled.div`
@@ -71,7 +73,7 @@ function PetitionSteps() {
         {
           stepTitles.map((title, i) => (
             <StepItem key={i}>
-              <StepImage width="120" height="120" alt={title} />
+              <StepImage width="120" height="120" alt={title} src={"/steps/" + (i + 1) + ".svg"} />
               <StepNumber>0{i + 1}</StepNumber>
               <StepTitle>{title}</StepTitle>
             </StepItem>
