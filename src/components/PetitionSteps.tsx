@@ -35,17 +35,17 @@ const StepItem = styled.li`
   flex-direction: column;
   align-items: center;
 
-  margin: 0.75rem;
+  margin: 1rem;
 `;
 
 const StepImage = styled.img`
-  height: 80px;
-  width: 80px;
+  height: 60px;
+  width: 60px;
   padding: 20px;
 `;
 
 const StepNumber = styled.div`
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 `;
 
 const StepTitle = styled.h2`
