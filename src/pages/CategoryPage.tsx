@@ -3,7 +3,7 @@ import React from 'react';
 import PetitionStatus from 'components/PetitionStatus';
 import PetitionList from 'components/PetitionList';
 
-const Category = () => (
+const CategoryPage = () => (
   <>
     <PetitionStatus />
     <PetitionList title="진행중인 청원" perPage={5} />
@@ -11,4 +11,4 @@ const Category = () => (
   </>
 );
 
-export default Category;
+export default CategoryPage;
