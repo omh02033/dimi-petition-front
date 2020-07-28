@@ -1,10 +1,11 @@
 import React from 'react';
-import Home from 'pages/Home';
+
+import Root from './routers';
 
 function App() {
   return (
     <div className="App">
-      <Home />
+      <Root />
     </div>
   );
 }
