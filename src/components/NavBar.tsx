@@ -91,7 +91,10 @@ const MenuListItem = styled.li`
     border-bottom: 3px solid ${colors.main};
     color: ${colors.main};
   }
-  
+
+  &:hover {
+    color: ${colors.main};
+  }
 
   @media ${devices.tablet} {
     padding: 0.5rem 1rem;
