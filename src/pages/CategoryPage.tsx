@@ -9,7 +9,7 @@ const CategoryPage = () => (
   <>
     <PetitionStatus />
 
-    <ComponentTitle>분야별 청원 답변 보기</ComponentTitle>
+    <ComponentTitle>청원 분야별 보기</ComponentTitle>
     <CategorySelect />
 
     <PetitionList title="진행중인 청원" perPage={8} />
