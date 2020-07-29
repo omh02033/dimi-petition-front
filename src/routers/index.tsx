@@ -11,6 +11,7 @@ import Footer from 'components/Footer';
 
 import Home from 'pages/Home';
 import CategoryPage from 'pages/CategoryPage';
+import PopularityPage from 'pages/PopularityPage';
 
 const Container = styled.main`
   display: flex;
@@ -39,6 +40,7 @@ const Root = () => (
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/category" exact component={CategoryPage} />
+          <Route path="/popularity" exact component={PopularityPage} />
         </Switch>
       </Container>
     </main>
