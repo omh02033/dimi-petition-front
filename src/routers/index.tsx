@@ -13,6 +13,10 @@ import Home from 'pages/Home';
 import CategoryPage from 'pages/CategoryPage';
 
 const Container = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   margin: 0 auto;
   width: 50%;
 

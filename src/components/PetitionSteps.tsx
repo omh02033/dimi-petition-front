@@ -1,22 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
-
 import colors from 'assets/colors';
 
+import ComponentTitle from 'components/ComponentTitle';
+
 const Container = styled.div`
-  margin-top: 2rem;
   margin-bottom: 5rem;
 
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-const Title = styled.h1`
-  font-size: 1.5rem; 
-  border-top: 3px solid ${colors.main};
-  padding-top: 1rem;
 `;
 
 const StepsList = styled.ol`
@@ -68,7 +62,10 @@ function PetitionSteps() {
   const stepTitles = ["청원 작성", "청원 동의", "청원 접수", "의견 전달", "청원 답변"]
   return (
     <Container>
-      <Title>청원 방법</Title>
+      <ComponentTitle>
+        청원 방법
+      </ComponentTitle>
+
       <StepsList>
         {
           stepTitles.map((title, i) => (

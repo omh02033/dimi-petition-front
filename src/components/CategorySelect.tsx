@@ -12,7 +12,7 @@ const List = styled.ul`
   justify-content: center;
 
   width: 75%;
-  margin: 0 auto;
+  margin: 3.5rem auto 3rem auto;
 
   @media ${devices.tablet} {
     width: 100%;
