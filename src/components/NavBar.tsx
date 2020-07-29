@@ -90,6 +90,10 @@ const MenuListItem = styled.li`
 
   &.current {
     border-bottom: 3px solid ${colors.main};
+
+    a {
+      color: ${colors.main};
+    }
   }
 `;
 
@@ -100,10 +104,6 @@ const MenuItemLink = styled(Link)`
   color: ${colors.textMain};
   text-decoration: none;
   transition: color 0.2s;
-
-  &.current {
-    color: ${colors.main};
-  }
 
   &:hover {
     color: ${colors.main};
@@ -145,7 +145,6 @@ function NavBar() {
               >
                 <MenuItemLink
                   to={item.location}
-                  className={isCurrent ? "current" : ""}
                 >
                   {item.title}
                 </MenuItemLink>
