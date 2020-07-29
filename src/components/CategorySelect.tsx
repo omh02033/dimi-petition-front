@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import devices from 'assets/devices';
+import colors from 'assets/colors';
 
 const List = styled.ul`
   padding: 0;
@@ -27,6 +28,17 @@ const ItemContainer = styled.li`
 
 const Item = styled.div`
   text-align: center;
+  cursor: pointer;
+
+  &.selected {
+    img {
+      filter: invert(29%) sepia(98%) saturate(7493%) hue-rotate(318deg) brightness(100%) contrast(108%);
+    }
+
+    div {
+      color: ${colors.main};
+    }
+  }
 `;
 
 const ItemIcon = styled.img`
@@ -52,6 +64,8 @@ const ItemTitle = styled.div`
 `;
 
 const CategorySelect = () => {
+  const [selectIndex, setSelectIndex] = useState(0);
+
   const itemList = [
     { title: "전체", imageSrc: "/category/general.svg" },
     { title: "안전", imageSrc: "/category/safety.svg" },
@@ -60,12 +74,19 @@ const CategorySelect = () => {
     { title: "기숙사", imageSrc: "/category/dormitory.svg" },
   ]
 
+  const onClickItem = (i: number) => {
+    setSelectIndex(i);
+  }
+
   return (
     <List>
       {
-        itemList.map((item) => (
+        itemList.map((item, i) => (
           <ItemContainer key={item.title}>
-            <Item>
+            <Item
+              className={selectIndex === i ? "selected" : ""}
+              onClick={() => onClickItem(i)}
+            >
               <ItemIcon src={item.imageSrc} />
               <ItemTitle>{item.title}</ItemTitle>
             </Item>
