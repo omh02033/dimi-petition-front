@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { useLocation } from 'react-router-dom';
+
 import colors from 'assets/colors';
 import devices from 'assets/devices';
 
@@ -107,13 +109,29 @@ const Profile = styled.div`
 `;
 
 function NavBar() {
+  const location = useLocation();
+  const itemList = [
+    { title: "분야별 청원", location: "/category" },
+    { title: "추천순 청원", location: "/popularity" },
+    { title: "답변된 청원", location: "/answered" },
+  ];
+
+  console.log(location.pathname);
+
   return (
     <Nav>
       <LogoImage src="/council-logo-small.svg" />
       <MenuList>
-        <MenuListItem className="current">분야별 청원</MenuListItem>
-        <MenuListItem>추천순 청원</MenuListItem>
-        <MenuListItem>답변된 청원</MenuListItem>
+        {
+          itemList.map((item) =>
+            <MenuListItem
+              key={item.title}
+              className={location.pathname === item.location ? "current" : ""}
+            >
+              {item.title}
+            </MenuListItem>
+          )
+        }
       </MenuList>
       <Profile>
         1376 홍길동
