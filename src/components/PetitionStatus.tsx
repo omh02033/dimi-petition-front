@@ -12,7 +12,7 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: center;
 
-  margin: 1rem 0;
+  margin: 2rem 0;
   @media ${devices.tablet} {
     flex-direction: column;
   }

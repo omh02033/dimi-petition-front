@@ -128,8 +128,6 @@ function NavBar() {
     { title: "답변된 청원", location: "/answered" },
   ];
 
-  console.log(location.pathname);
-
   return (
     <Nav>
       <Link to="/">
