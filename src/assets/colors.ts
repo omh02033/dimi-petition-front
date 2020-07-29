@@ -1,3 +1,4 @@
 export default {
-  main: '#FF0090'
+  main: '#FF0090',
+  textMain: '#212529'
 };

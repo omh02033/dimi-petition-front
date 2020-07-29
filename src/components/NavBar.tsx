@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import colors from 'assets/colors';
 import devices from 'assets/devices';
@@ -67,8 +67,9 @@ const MenuList = styled.ul`
 `;
 
 const MenuListItem = styled.li`
-  padding: 1rem 1.5rem;
   font-size: 1.1rem;
+  height: 3.5rem;
+  width: 8rem;
 
   text-align: center;
   word-break: keep-all;
@@ -89,15 +90,23 @@ const MenuListItem = styled.li`
 
   &.current {
     border-bottom: 3px solid ${colors.main};
+  }
+`;
+
+const MenuItemLink = styled(Link)`
+  display: block;
+  line-height: 3.5rem;
+
+  color: ${colors.textMain};
+  text-decoration: none;
+  transition: color 0.2s;
+
+  &.current {
     color: ${colors.main};
   }
 
   &:hover {
     color: ${colors.main};
-  }
-
-  @media ${devices.tablet} {
-    padding: 0.5rem 1rem;
   }
 `;
 
@@ -123,17 +132,28 @@ function NavBar() {
 
   return (
     <Nav>
-      <LogoImage src="/council-logo-small.svg" />
+      <Link to="/">
+        <LogoImage src="/council-logo-small.svg" />
+      </Link>
+
       <MenuList>
         {
-          itemList.map((item) =>
-            <MenuListItem
-              key={item.title}
-              className={location.pathname === item.location ? "current" : ""}
-            >
-              {item.title}
-            </MenuListItem>
-          )
+          itemList.map((item) => {
+            const isCurrent = location.pathname === item.location;
+            return (
+              <MenuListItem
+                key={item.title}
+                className={isCurrent ? "current" : ""}
+              >
+                <MenuItemLink
+                  to={item.location}
+                  className={isCurrent ? "current" : ""}
+                >
+                  {item.title}
+                </MenuItemLink>
+              </MenuListItem>
+            );
+          })
         }
       </MenuList>
       <Profile>
