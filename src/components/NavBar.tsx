@@ -123,9 +123,9 @@ const Profile = styled.div`
 function NavBar() {
   const location = useLocation();
   const itemList = [
-    { title: "분야별 청원", location: "/category" },
-    { title: "추천순 청원", location: "/popularity" },
-    { title: "답변된 청원", location: "/answered" },
+    { title: "분야별 청원", location: "/category/" },
+    { title: "추천순 청원", location: "/popularity/" },
+    { title: "답변된 청원", location: "/answered/" },
   ];
 
   return (
