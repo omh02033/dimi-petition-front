@@ -4,6 +4,12 @@ import styled from 'styled-components';
 import devices from 'assets/devices';
 import colors from 'assets/colors';
 
+import Category from 'data/Category';
+
+interface CategorySelectProps {
+  onChangeSelect?: (category: Category | null) => void;
+}
+
 const List = styled.ul`
   padding: 0;
   list-style-type: none;
@@ -63,19 +69,23 @@ const ItemTitle = styled.div`
   }
 `;
 
-const CategorySelect = () => {
+const CategorySelect = ({ onChangeSelect }: CategorySelectProps) => {
   const [selectIndex, setSelectIndex] = useState(0);
 
   const itemList = [
-    { title: "전체", imageSrc: "/category/general.svg" },
-    { title: "안전", imageSrc: "/category/safety.svg" },
-    { title: "인권", imageSrc: "/category/human-rights.svg" },
-    { title: "생활", imageSrc: "/category/life.svg" },
-    { title: "기숙사", imageSrc: "/category/dormitory.svg" },
+    { title: "전체", imageSrc: "/category/general.svg", category: null },
+    { title: "안전", imageSrc: "/category/safety.svg", category: Category.Safety },
+    { title: "인권", imageSrc: "/category/human-rights.svg", category: Category.HumanRights },
+    { title: "생활", imageSrc: "/category/life.svg", category: Category.Life },
+    { title: "기숙사", imageSrc: "/category/dormitory.svg", category: Category.Dormitory },
   ]
 
   const onClickItem = (i: number) => {
     setSelectIndex(i);
+
+    if (onChangeSelect !== undefined) {
+      onChangeSelect(itemList[i].category);
+    }
   }
 
   return (

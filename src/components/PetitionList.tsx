@@ -14,7 +14,7 @@ import './PetitionList.scss';
 interface PetitionListProps {
   title: String;
   perPage: number;
-  categoryFilter?: Category;
+  categoryFilter: Category | null;
 }
 
 const Container = styled.div`
@@ -142,6 +142,10 @@ function PetitionList({ title, perPage, categoryFilter }: PetitionListProps) {
       />
     </Container>
   )
+}
+
+PetitionList.defaultProps = {
+  categoryFilter: null
 }
 
 export default PetitionList;

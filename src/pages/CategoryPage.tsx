@@ -5,8 +5,6 @@ import PetitionStatus from 'components/PetitionStatus';
 import PetitionList from 'components/PetitionList';
 import ComponentTitle from 'components/ComponentTitle';
 
-import Category from 'data/Category';
-
 const CategoryPage = () => (
   <>
     <PetitionStatus />
