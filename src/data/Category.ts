@@ -1,5 +1,4 @@
 enum Category {
-  General,
   Safety,
   HumanRights,
   Life,
@@ -8,8 +7,6 @@ enum Category {
 
 export function categoryToString(category: Category) {
   switch (category) {
-    case Category.General:
-      return "일반";
     case Category.Safety:
       return "안전";
     case Category.HumanRights:
