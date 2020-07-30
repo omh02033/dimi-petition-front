@@ -12,8 +12,9 @@ import Category, { categoryToString } from 'data/Category';
 import './PetitionList.scss';
 
 interface PetitionListProps {
-  title: String,
-  perPage: number
+  title: String;
+  perPage: number;
+  categoryFilter?: Category;
 }
 
 const Container = styled.div`
@@ -72,10 +73,10 @@ const TableCell = styled.td`
   }
 `;
 
-function PetitionList({ title, perPage }: PetitionListProps) {
+function PetitionList({ title, perPage, categoryFilter }: PetitionListProps) {
   const [offset, setOffset] = useState(0);
 
-  let data: Array<PetitionData> = [
+  let data: PetitionData[] = [
     { category: Category.Life, title: "왜 외투 착용시 꼭 웃옷을 입어야하나요?", date: dayjs(), likes: 234 },
     { category: Category.Safety, title: "블랙아이스 때문에 병원에 입원했습니다.", date: dayjs(), likes: 234 },
     { category: Category.Life, title: "교사는 인권 침해를 해도 눈감아주나요?", date: dayjs(), likes: 234 },
@@ -92,6 +93,10 @@ function PetitionList({ title, perPage }: PetitionListProps) {
   data.push(...data);
   data.push(...data);
   data.push(...data);
+
+  if (categoryFilter != null) {
+    data = data.filter((item) => item.category === categoryFilter);
+  }
 
   const pageCount = Math.ceil(data.length / perPage);
 
