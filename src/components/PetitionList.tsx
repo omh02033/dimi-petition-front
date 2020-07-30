@@ -6,6 +6,9 @@ import dayjs from 'dayjs';
 import colors from 'assets/colors';
 import devices from 'assets/devices';
 
+import PetitionData from 'data/PetitionData';
+import Category, { categoryToString } from 'data/Category';
+
 import './PetitionList.scss';
 
 interface PetitionListProps {
@@ -72,18 +75,18 @@ const TableCell = styled.td`
 function PetitionList({ title, perPage }: PetitionListProps) {
   const [offset, setOffset] = useState(0);
 
-  let data = [
-    { category: "생활", title: "왜 외투 착용시 꼭 웃옷을 입어야하나요?", date: dayjs(), count: 234 },
-    { category: "안전/환경", title: "블랙아이스 때문에 병원에 입원했습니다.", date: dayjs(), count: 234 },
-    { category: "인권", title: "교사는 인권 침해를 해도 눈감아주나요?", date: dayjs(), count: 234 },
-    { category: "생활", title: "한밤의 시식회, 기숙사 냉장고가 뷔페인가요?", date: dayjs(), count: 234 },
-    { category: "생활", title: "왜 방학식 2주 뒤에 학교에 오는건가요?", date: dayjs(), count: 234 },
-    { category: "인권", title: "교사는 인권 침해를 해도 눈감아주나요?", date: dayjs(), count: 234 },
-    { category: "생활", title: "왜 방학식 2주 뒤에 학교에 오는건가요?", date: dayjs(), count: 234 },
-    { category: "인권", title: "교사는 인권 침해를 해도 눈감아주나요?", date: dayjs(), count: 234 },
-    { category: "생활", title: "한밤의 시식회, 기숙사 냉장고가 뷔페인가요?", date: dayjs(), count: 234 },
-    { category: "생활", title: "한밤의 시식회, 기숙사 냉장고가 뷔페인가요?", date: dayjs(), count: 234 },
-    { category: "생활", title: "왜 방학식 2주 뒤에 학교에 오는건가요?", date: dayjs(), count: 234 },
+  let data: Array<PetitionData> = [
+    { category: Category.Life, title: "왜 외투 착용시 꼭 웃옷을 입어야하나요?", date: dayjs(), likes: 234 },
+    { category: Category.Safety, title: "블랙아이스 때문에 병원에 입원했습니다.", date: dayjs(), likes: 234 },
+    { category: Category.Life, title: "교사는 인권 침해를 해도 눈감아주나요?", date: dayjs(), likes: 234 },
+    { category: Category.Life, title: "한밤의 시식회, 기숙사 냉장고가 뷔페인가요?", date: dayjs(), likes: 234 },
+    { category: Category.Life, title: "왜 방학식 2주 뒤에 학교에 오는건가요?", date: dayjs(), likes: 234 },
+    { category: Category.HumanRights, title: "교사는 인권 침해를 해도 눈감아주나요?", date: dayjs(), likes: 234 },
+    { category: Category.Life, title: "왜 방학식 2주 뒤에 학교에 오는건가요?", date: dayjs(), likes: 234 },
+    { category: Category.HumanRights, title: "교사는 인권 침해를 해도 눈감아주나요?", date: dayjs(), likes: 234 },
+    { category: Category.Life, title: "한밤의 시식회, 기숙사 냉장고가 뷔페인가요?", date: dayjs(), likes: 234 },
+    { category: Category.Life, title: "한밤의 시식회, 기숙사 냉장고가 뷔페인가요?", date: dayjs(), likes: 234 },
+    { category: Category.Life, title: "왜 방학식 2주 뒤에 학교에 오는건가요?", date: dayjs(), likes: 234 },
   ];
 
   data.push(...data);
@@ -110,12 +113,12 @@ function PetitionList({ title, perPage }: PetitionListProps) {
         </thead>
         <tbody>
           {
-            data.slice(offset, offset + perPage).map(({ category, title, date, count }, index) => (
+            data.slice(offset, offset + perPage).map(({ category, title, date, likes }, index) => (
               <TableRow key={index}>
-                <TableCell style={{ color: colors.main }}>{category}</TableCell>
+                <TableCell style={{ color: colors.main }}>{categoryToString(category)}</TableCell>
                 <TableCell>{title}</TableCell>
                 <TableCell>{date.format('YY.MM.DD')}</TableCell>
-                <TableCell style={{ color: colors.main }}>{count}명</TableCell>
+                <TableCell style={{ color: colors.main }}>{likes}명</TableCell>
               </TableRow>
             ))
           }
