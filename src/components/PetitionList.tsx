@@ -105,10 +105,7 @@ function PetitionList({ title, perPage, categoryFilter }: PetitionListProps) {
     setCurrentPage(data.selected);
   }
 
-  useEffect(() => {
-    console.log('wow');
-    setCurrentPage(0);
-  }, [categoryFilter]);
+  useEffect(() => setCurrentPage(0), [categoryFilter]);
 
   return (
     <Container>
