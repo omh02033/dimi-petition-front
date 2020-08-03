@@ -136,7 +136,7 @@ function PetitionList({ title, perPage, categoryFilter }: PetitionListProps) {
         marginPagesDisplayed={2}
         pageRangeDisplayed={1}
         onPageChange={handlePageClick}
-        initialPage={5}
+        initialPage={0}
         previousLabel="< PREV"
         nextLabel="NEXT >"
       />
