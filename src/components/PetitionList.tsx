@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ReactPaginate from 'react-paginate';
 
@@ -73,36 +73,42 @@ const TableCell = styled.td`
   }
 `;
 
+let sampleData: PetitionData[] = [
+  { category: Category.Life, title: "왜 외투 착용시 꼭 웃옷을 입어야하나요?", date: dayjs(), likes: 234 },
+  { category: Category.Safety, title: "블랙아이스 때문에 병원에 입원했습니다.", date: dayjs(), likes: 234 },
+  { category: Category.Life, title: "교사는 인권 침해를 해도 눈감아주나요?", date: dayjs(), likes: 234 },
+  { category: Category.Life, title: "한밤의 시식회, 기숙사 냉장고가 뷔페인가요?", date: dayjs(), likes: 234 },
+  { category: Category.Life, title: "왜 방학식 2주 뒤에 학교에 오는건가요?", date: dayjs(), likes: 234 },
+  { category: Category.HumanRights, title: "교사는 인권 침해를 해도 눈감아주나요?", date: dayjs(), likes: 234 },
+  { category: Category.Life, title: "왜 방학식 2주 뒤에 학교에 오는건가요?", date: dayjs(), likes: 234 },
+  { category: Category.HumanRights, title: "교사는 인권 침해를 해도 눈감아주나요?", date: dayjs(), likes: 234 },
+  { category: Category.Life, title: "한밤의 시식회, 기숙사 냉장고가 뷔페인가요?", date: dayjs(), likes: 234 },
+  { category: Category.Life, title: "한밤의 시식회, 기숙사 냉장고가 뷔페인가요?", date: dayjs(), likes: 234 },
+  { category: Category.Life, title: "왜 방학식 2주 뒤에 학교에 오는건가요?", date: dayjs(), likes: 234 },
+];
+
+sampleData.push(...sampleData);
+sampleData.push(...sampleData);
+sampleData.push(...sampleData);
+
 function PetitionList({ title, perPage, categoryFilter }: PetitionListProps) {
-  const [offset, setOffset] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
 
-  let data: PetitionData[] = [
-    { category: Category.Life, title: "왜 외투 착용시 꼭 웃옷을 입어야하나요?", date: dayjs(), likes: 234 },
-    { category: Category.Safety, title: "블랙아이스 때문에 병원에 입원했습니다.", date: dayjs(), likes: 234 },
-    { category: Category.Life, title: "교사는 인권 침해를 해도 눈감아주나요?", date: dayjs(), likes: 234 },
-    { category: Category.Life, title: "한밤의 시식회, 기숙사 냉장고가 뷔페인가요?", date: dayjs(), likes: 234 },
-    { category: Category.Life, title: "왜 방학식 2주 뒤에 학교에 오는건가요?", date: dayjs(), likes: 234 },
-    { category: Category.HumanRights, title: "교사는 인권 침해를 해도 눈감아주나요?", date: dayjs(), likes: 234 },
-    { category: Category.Life, title: "왜 방학식 2주 뒤에 학교에 오는건가요?", date: dayjs(), likes: 234 },
-    { category: Category.HumanRights, title: "교사는 인권 침해를 해도 눈감아주나요?", date: dayjs(), likes: 234 },
-    { category: Category.Life, title: "한밤의 시식회, 기숙사 냉장고가 뷔페인가요?", date: dayjs(), likes: 234 },
-    { category: Category.Life, title: "한밤의 시식회, 기숙사 냉장고가 뷔페인가요?", date: dayjs(), likes: 234 },
-    { category: Category.Life, title: "왜 방학식 2주 뒤에 학교에 오는건가요?", date: dayjs(), likes: 234 },
-  ];
-
-  data.push(...data);
-  data.push(...data);
-  data.push(...data);
-
+  let data = sampleData;
   if (categoryFilter != null) {
-    data = data.filter((item) => item.category === categoryFilter);
+    data = sampleData.filter((item) => item.category === categoryFilter);
   }
 
   const pageCount = Math.ceil(data.length / perPage);
 
   const handlePageClick = (data: any) => {
-    setOffset(data.selected * perPage);
+    setCurrentPage(data.selected);
   }
+
+  useEffect(() => {
+    console.log('wow');
+    setCurrentPage(0);
+  }, [categoryFilter]);
 
   return (
     <Container>
@@ -118,7 +124,7 @@ function PetitionList({ title, perPage, categoryFilter }: PetitionListProps) {
         </thead>
         <tbody>
           {
-            data.slice(offset, offset + perPage).map(({ category, title, date, likes }, index) => (
+            data.slice(currentPage * perPage, (currentPage + 1) * perPage).map(({ category, title, date, likes }, index) => (
               <TableRow key={index}>
                 <TableCell style={{ color: colors.main }}>{categoryToString(category)}</TableCell>
                 <TableCell>{title}</TableCell>
@@ -136,7 +142,7 @@ function PetitionList({ title, perPage, categoryFilter }: PetitionListProps) {
         marginPagesDisplayed={2}
         pageRangeDisplayed={1}
         onPageChange={handlePageClick}
-        initialPage={0}
+        forcePage={currentPage}
         previousLabel="< PREV"
         nextLabel="NEXT >"
       />
