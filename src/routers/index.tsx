@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, useLocation } from 'react-router-dom';
 
 import styled from 'styled-components';
 
@@ -13,6 +13,7 @@ import Home from 'pages/Home';
 import CategoryPage from 'pages/CategoryPage';
 import PopularityPage from 'pages/PopularityPage';
 import AnsweredPage from 'pages/AnsweredPage';
+import LoginPage from 'pages/LoginPage';
 
 const Container = styled.main`
   display: flex;
@@ -31,10 +32,21 @@ const Container = styled.main`
   }
 `;
 
+const HideIfLogin = ({ children }: any) => {
+  const location = useLocation();
+  if (location.pathname === '/login/') {
+    return null;
+  }
+
+  return children;
+}
+
 const Root = () => (
   <BrowserRouter>
-    <NavBar />
-    <Banner />
+    <HideIfLogin>
+      <NavBar />
+      <Banner />
+    </HideIfLogin>
 
     <main>
       <Container>
@@ -43,11 +55,14 @@ const Root = () => (
           <Route path="/category" exact component={CategoryPage} />
           <Route path="/popularity" exact component={PopularityPage} />
           <Route path="/answered" exact component={AnsweredPage} />
+          <Route path="/login" exact component={LoginPage} />
         </Switch>
       </Container>
     </main>
 
-    <Footer />
+    <HideIfLogin>
+      <Footer />
+    </HideIfLogin>
   </BrowserRouter>
 )
 
