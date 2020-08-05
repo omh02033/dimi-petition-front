@@ -48,17 +48,15 @@ const Root = () => (
       <Banner />
     </HideIfLogin>
 
-    <main>
-      <Container>
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/category" exact component={CategoryPage} />
-          <Route path="/popularity" exact component={PopularityPage} />
-          <Route path="/answered" exact component={AnsweredPage} />
-          <Route path="/login" exact component={LoginPage} />
-        </Switch>
-      </Container>
-    </main>
+    <Container>
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/category" exact component={CategoryPage} />
+        <Route path="/popularity" exact component={PopularityPage} />
+        <Route path="/answered" exact component={AnsweredPage} />
+        <Route path="/login" exact component={LoginPage} />
+      </Switch>
+    </Container>
 
     <HideIfLogin>
       <Footer />
