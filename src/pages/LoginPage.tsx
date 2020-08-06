@@ -13,8 +13,7 @@ const Banner = styled.section`
   background-image: url('/school.png');
   background-position: center;
   background-size: cover;
-  box-shadow: inset 0 0 0 2000px rgba(255, 0, 150, 0.3);
-
+  box-shadow: inset 0 0 0 2000px rgba(255, 0, 150, 0.4);
 
   height: 100%;
   width: 100%;
