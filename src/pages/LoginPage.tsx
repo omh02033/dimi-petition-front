@@ -10,7 +10,7 @@ const Container = styled.div`
 const Banner = styled.section`
   flex: 1;
 
-  background-image: url('/school.png');
+  background-image: url('/school-full.png');
   background-position: center;
   background-size: cover;
   box-shadow: inset 0 0 0 2000px rgba(255, 0, 150, 0.4);
