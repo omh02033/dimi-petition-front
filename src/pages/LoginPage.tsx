@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 import LoginForm from 'components/LoginForm';
 
-import colors from 'assets/colors';
 import devices from 'assets/devices';
 
 const Container = styled.div`
