@@ -59,7 +59,7 @@ const LoginForm = () => (
 
     <div className="pretty p-default p-curve">
       <input type="checkbox" />
-      <div className="state p-danger-o">
+      <div className="state p-primary-o">
         <label>Remember me</label>
       </div>
     </div>
