@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import colors from 'assets/colors';
+import devices from 'assets/devices';
 
 import 'assets/styles/LoginForm.scss';
 
@@ -10,6 +11,10 @@ const Form = styled.form`
   flex-direction: column;
 
   width: 50%;
+
+  @media ${devices.mobileL} {
+    width: 70%;
+  }
 `;
 
 const Label = styled.label`

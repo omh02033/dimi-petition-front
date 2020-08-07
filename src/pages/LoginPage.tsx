@@ -3,6 +3,9 @@ import styled from 'styled-components';
 
 import LoginForm from 'components/LoginForm';
 
+import colors from 'assets/colors';
+import devices from 'assets/devices';
+
 const Container = styled.div`
   display: flex;
   height: 100vh;
@@ -24,6 +27,10 @@ const Banner = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  @media ${devices.laptop} {
+    display: none;
+  }
 `;
 
 const BannerTitle = styled.h1`
@@ -45,6 +52,32 @@ const BannerDescription = styled.p`
   color: white;
 `;
 
+const Logo = styled.div` 
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 0.5rem;
+  transform:translateX(-50%);
+
+  @media ${devices.laptop} {
+    display: flex;
+  }
+
+  @media only screen and (max-height: 440px) {
+    display: none;
+  }
+`;
+
+const LogoImage = styled.img`
+  width: 2.5rem;
+`;
+
+const LogoTitle = styled.h1`
+  font-weight: normal;
+  font-size: 1.2rem;
+  margin-left: 0.6rem;
+`;
+
 const LoginSection = styled.section`
   flex: 1;
 
@@ -63,6 +96,11 @@ const LoginPage = () => (
       <BannerSubtitle>디미고 온라인 건의함 서비스</BannerSubtitle>
       <BannerDescription>지금 바로 학교를 변화시켜보세요.</BannerDescription>
     </Banner>
+
+    <Logo>
+      <LogoImage src="/council-logo-small.svg" alt="학생회 로고" />
+      <LogoTitle>디미청원</LogoTitle>
+    </Logo>
 
     <LoginSection>
       <LoginForm />
