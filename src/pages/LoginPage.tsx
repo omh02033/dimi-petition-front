@@ -72,7 +72,7 @@ const LoginLabel = styled.label`
 
 const LoginTextInput = styled.input` 
   border: #D9D9D9 solid 1px;
-  border-radius: 2px;
+  border-radius: 5px;
   font-size: 1.2rem;
   padding: 0.7rem 0.7rem;
   margin-top: 0.5rem;
