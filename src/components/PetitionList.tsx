@@ -9,7 +9,7 @@ import devices from 'assets/devices';
 import PetitionData from 'data/PetitionData';
 import Category, { categoryToString } from 'data/Category';
 
-import './PetitionList.scss';
+import '../assets/styles/PetitionList.scss';
 
 interface PetitionListProps {
   title: String;
