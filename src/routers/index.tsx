@@ -5,9 +5,9 @@ import styled from 'styled-components';
 
 import devices from 'assets/devices';
 
-import NavBar from 'components/NavBar';
-import Banner from 'components/Banner';
-import Footer from 'components/Footer';
+import NavBar from 'components/layouts/NavBar';
+import Banner from 'components/layouts/Banner';
+import Footer from 'components/layouts/Footer';
 
 import Home from 'pages/Home';
 import CategoryPage from 'pages/CategoryPage';
