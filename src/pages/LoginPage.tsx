@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import colors from 'assets/colors';
+
 const Container = styled.div`
   display: flex;
   height: 100vh;
@@ -45,6 +47,37 @@ const BannerDescription = styled.p`
 
 const LoginSection = styled.section`
   flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const LoginForm = styled.form`
+  display: flex;
+  flex-direction: column;
+
+  width: 50%;
+`;
+
+const LoginLabel = styled.label`
+  display: flex;
+  flex-direction: column;
+  
+  margin-bottom: 1.2rem;
+
+  color: ${colors.textMain};
+`;
+
+const LoginTextInput = styled.input` 
+  border: #D9D9D9 solid 1px;
+  border-radius: 2px;
+  font-size: 1.2rem;
+  padding: 0.7rem 0.7rem;
+  margin-top: 0.5rem;
+
+  outline: none;
 `;
 
 const LoginPage = () => (
@@ -57,6 +90,17 @@ const LoginPage = () => (
     </Banner>
 
     <LoginSection>
+      <LoginForm>
+        <LoginLabel>
+          Dimigo ID
+          <LoginTextInput type="text" />
+        </LoginLabel>
+
+        <LoginLabel>
+          Dimigo Password
+          <LoginTextInput type="password" />
+        </LoginLabel>
+      </LoginForm>
     </LoginSection>
   </Container>
 );
