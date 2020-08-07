@@ -25,10 +25,24 @@ const TextInput = styled.input`
   border: #D9D9D9 solid 1px;
   border-radius: 5px;
   font-size: 1.2rem;
-  padding: 0.7rem 0.7rem;
+  padding: 0.7rem;
   margin-top: 0.5rem;
 
   outline: none;
+`;
+
+const Submit = styled.input`
+  padding: 0.7rem 0;
+
+  border-radius: 5px;
+  border: none;
+
+  background-color: ${colors.main};
+  color: white;
+  font-size: 1.1rem;
+  cursor: pointer;
+
+  margin-top: 3rem;
 `;
 
 const LoginForm = () => (
@@ -49,6 +63,8 @@ const LoginForm = () => (
         <label>Remember me</label>
       </div>
     </div>
+
+    <Submit type="submit" value="로그인" />
   </Form>
 );
 
