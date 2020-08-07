@@ -14,6 +14,7 @@ import CategoryPage from 'pages/CategoryPage';
 import PopularityPage from 'pages/PopularityPage';
 import AnsweredPage from 'pages/AnsweredPage';
 import LoginPage from 'pages/LoginPage';
+import RulesPage from 'pages/RulesPage';
 
 const Container = styled.main`
   display: flex;
@@ -55,6 +56,7 @@ const Root = () => (
         <Route path="/popularity" exact component={PopularityPage} />
         <Route path="/answered" exact component={AnsweredPage} />
         <Route path="/login" exact component={LoginPage} />
+        <Route path="/rules" exact component={RulesPage} />
       </Switch>
     </Container>
 
