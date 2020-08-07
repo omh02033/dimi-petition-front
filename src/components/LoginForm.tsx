@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 import colors from 'assets/colors';
 
+import 'assets/styles/LoginForm.scss';
+
 const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -40,6 +42,13 @@ const LoginForm = () => (
       Dimigo Password
       <TextInput type="password" />
     </Label>
+
+    <div className="pretty p-default p-curve">
+      <input type="checkbox" />
+      <div className="state p-danger-o">
+        <label>Remember me</label>
+      </div>
+    </div>
   </Form>
 );
 
