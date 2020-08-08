@@ -17,7 +17,7 @@ interface PetitionListProps {
   categoryFilter: Category | null;
 }
 
-const Container = styled.div`
+const Container = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;

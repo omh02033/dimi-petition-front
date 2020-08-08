@@ -5,7 +5,7 @@ import colors from 'assets/colors';
 
 import ComponentTitle from 'components/ComponentTitle';
 
-const Container = styled.div`
+const Container = styled.article`
   margin-bottom: 5rem;
 
   display: flex;

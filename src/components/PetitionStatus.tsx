@@ -6,7 +6,7 @@ import devices from 'assets/devices';
 
 import { FiAlertCircle, FiClock, FiCheckCircle } from 'react-icons/fi';
 
-const Container = styled.div`
+const Container = styled.article`
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -18,7 +18,7 @@ const Container = styled.div`
   }
 `;
 
-const Status = styled.div`
+const Status = styled.section`
   display: grid;
   grid-template-columns: 68px 130px;
   grid-template-rows: 30px 30px;
@@ -35,7 +35,8 @@ const Icon = styled.div`
   margin-top: 10px;
 `;
 
-const Title = styled.div`
+const Title = styled.h1`
+  font-weight: normal;
   font-size: 1.3rem;
 `;
 
@@ -52,7 +53,7 @@ function PetitionStatus() {
           <FiAlertCircle />
         </Icon>
         <Title>등록된 청원</Title>
-        <Number>10,500</Number>
+        <Number>10,500개</Number>
       </Status>
 
       <Status>
@@ -60,7 +61,7 @@ function PetitionStatus() {
           <FiClock />
         </Icon>
         <Title>진행 중인 청원</Title>
-        <Number>10,500</Number>
+        <Number>10,500개</Number>
       </Status>
 
       <Status>
@@ -68,7 +69,7 @@ function PetitionStatus() {
           <FiCheckCircle />
         </Icon>
         <Title>답변된 청원</Title>
-        <Number>10,500</Number>
+        <Number>10,500개</Number>
       </Status>
     </Container>
   );

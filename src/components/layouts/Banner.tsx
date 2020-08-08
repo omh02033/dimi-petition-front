@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import devices from 'assets/devices';
 
-const Container = styled.div`
+const Container = styled.section`
   width: 100%;
   height: 450px;
 
