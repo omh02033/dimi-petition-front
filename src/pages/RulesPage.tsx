@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 
 import ComponentTitle from 'components/ComponentTitle';
@@ -23,6 +23,9 @@ const RulesPage = () => {
     { title: "답변 전달 기준", content: "청원 작성 후 외부에 공개되기 시작한 시간으로부터 7일 내에 기준 만족 시 동의 70개 이상인 경우 기준 만족, 동의하지 않습니다 개수가 동의합니다 개수의 반을 넘었을 경우 이 점도 반영하여 전달합니다." },
     { title: "답변 전달 사항", content: "교장선생님께 청원 내용 전달되며, 기준을 만족한 청원이 생긴 익일 아침시간을 기준으로 합니다. 답변은 학생회 페이지 사용 + 디미청원 사이트 공지되며 요약본과 전문을 합쳐서 올립니다." },
   ];
+
+  const [checkedList, setCheckedList] = useState<Array<boolean | null>>(Array(agreeData.length).fill(null));
+
   return (
     <>
       <TitleContainer>
@@ -35,7 +38,15 @@ const RulesPage = () => {
         {
           agreeData.map((data, i) => (
             <li>
-              <RuleBox title={data.title} content={data.content} groupName={"agree" + i} />
+              <RuleBox 
+                title={data.title} 
+                content={data.content} 
+                groupName={"agree" + i} 
+                isAgree={checkedList[i]}
+                onChangeSelect={(isAgree) => {
+                  setCheckedList(checkedList.map((item, index) => (index === i ? isAgree : item)))
+                }}
+              />
             </li>
           ))
         }

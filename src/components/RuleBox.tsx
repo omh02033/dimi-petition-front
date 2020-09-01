@@ -7,6 +7,8 @@ interface RuleBoxProps {
   title: string;
   content: string;
   groupName: string;
+  isAgree: boolean | null;
+  onChangeSelect: (isAgree: boolean) => void; 
 }
 
 const Container = styled.section`
@@ -30,10 +32,10 @@ const InputContainer = styled.div`
 `;
 
 const AgreeText = styled.p`
-  margin: 0 1rem 3px auto;
+  margin: 0 1rem 0 auto;
 `;
 
-const RuleBox = ({ title, content, groupName }: RuleBoxProps) => (
+const RuleBox = ({ title, content, groupName, onChangeSelect, isAgree }: RuleBoxProps) => (
   <Container>
     <Title>{title}</Title>
     <Content>{content}</Content>
@@ -41,13 +43,13 @@ const RuleBox = ({ title, content, groupName }: RuleBoxProps) => (
     <InputContainer>
       <AgreeText>동의하십니까?</AgreeText>
       <div className="pretty p-default p-round">
-        <input type="radio" name={groupName} />
+        <input type="radio" name={groupName} checked={isAgree === true} onChange={() => onChangeSelect(true)}/>
         <div className="state p-primary-o">
-          <label>예</label>
+          <label >예</label>
         </div>
       </div>
       <div className="pretty p-default p-round">
-        <input type="radio" name={groupName} />
+        <input type="radio" name={groupName} checked={isAgree === false} onChange={() => onChangeSelect(false)}/>
         <div className="state p-primary-o">
           <label>아니요</label>
         </div>
