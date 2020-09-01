@@ -32,6 +32,17 @@ const AgreeAll = styled.div`
 const AgreeAllText = styled.p`
 `;
 
+const WarningBox = styled.div`
+  margin-top: 1.5rem;
+
+  background-color: #ECECEC;
+  width: 100%;
+  border-radius: 2px;
+  text-align: center;
+  padding: 1rem 2rem;
+  box-sizing: border-box;
+`;
+
 const RulesPage = () => {
   const agreeData = [
     { title: "디미청원 운영규칙", content: "디미청원은 사상과 표현의 다양성을 존중합니다. 동시에 타인의 권리를 침해하거나 명예를 훼손하는 내용은 제한합니다. 자극적이고 혐오스러운 내용, 비속어, 폭력적 내용, 특정 대상을 비하하거나 차별을 조장하는 내용, 개인정보 유출을 비롯해 타인의 권리를 침해하는 내용, 반복되는 내용, 허위사실 등은 삭제 및 학생부에 회부될 수 있습니다." },
@@ -79,7 +90,7 @@ const RulesPage = () => {
               <label>모두 동의</label>
             </div>
           </div>
-          <div className="pretty p-default p-round">
+          <div className="pretty p-default p-round" style={{marginRight: 0}}>
             <input type="radio" name="agree-all" checked={!allAgreed} onChange={() => setCheckedList(Array(agreeData.length).fill(null))}/>
             <div className="state p-primary-o">
               <label>동의하지 않음</label>
@@ -87,6 +98,12 @@ const RulesPage = () => {
           </div>
         </div>
       </AgreeAll>
+
+      <WarningBox>
+        위 안내글을 모두 숙지했으며,<br/>
+        청원으로 인해 일어난 문제에 대한 처벌을 받는 것에 동의합니다.<br/>
+        청원으로 인한 피해를 모두 보상할 것에 동의합니다.
+      </WarningBox>
     </>
   )
 };
