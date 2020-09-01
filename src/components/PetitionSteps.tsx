@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import colors from 'assets/colors';
-
 import ComponentTitle from 'components/ComponentTitle';
+import {PrimaryButton} from 'assets/styles/Buttons';
 
 const Container = styled.article`
   margin-bottom: 5rem;
@@ -47,15 +46,8 @@ const StepTitle = styled.h2`
   font-size: 1.1rem;
 `;
 
-const RegisterButton = styled.button`
-  border: none;
-  border-radius: 5px;
-  background-color: ${colors.main};
-  color: white;
-  font-size: 1.1rem;
+const RegisterButton = styled(PrimaryButton)`
   padding: 0.6rem 4rem;
-
-  cursor: pointer;
 `;
 
 function PetitionSteps() {
@@ -77,7 +69,7 @@ function PetitionSteps() {
           ))
         }
       </StepsList>
-      <RegisterButton>지금 청원하기</RegisterButton>
+      <RegisterButton type="button" value="지금 청원하기"/>
     </Container>
   );
 

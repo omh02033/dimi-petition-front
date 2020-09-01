@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import colors from 'assets/colors';
 import devices from 'assets/devices';
+import {PrimaryButton} from 'assets/styles/Buttons';
 
 import 'assets/styles/LoginForm.scss';
 
@@ -36,17 +37,7 @@ const TextInput = styled.input`
   outline: none;
 `;
 
-const Submit = styled.input`
-  padding: 0.7rem 0;
-
-  border-radius: 5px;
-  border: none;
-
-  background-color: ${colors.main};
-  color: white;
-  font-size: 1.1rem;
-  cursor: pointer;
-
+const Submit = styled(PrimaryButton)`
   margin-top: 3rem;
 `;
 
