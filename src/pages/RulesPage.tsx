@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import ComponentTitle from 'components/ComponentTitle';
 import RuleBox from 'components/RuleBox';
+import { PrimaryButton, SecondaryButton } from 'assets/styles/Buttons';
 
 
 const TitleContainer = styled.div`
@@ -44,7 +45,26 @@ const WarningBox = styled.div`
 `;
 
 const SubmitBox = styled.div`
+  width: 100%;
   border-top: 2px solid black; 
+
+  margin-top: 2rem;
+  padding: 2rem 0 5rem 0;
+
+  display: flex;
+  justify-content: center;
+`;
+
+const SubmitAgree = styled(PrimaryButton)`
+  width: 9rem;
+  padding: 0.9rem 0;
+`;
+
+const SubmitCancel = styled(SecondaryButton)`
+  width: 9rem;
+  padding: 0.9rem 0;
+
+  margin-right: 1rem;
 `;
 
 const RulesPage = () => {
@@ -71,10 +91,10 @@ const RulesPage = () => {
         {
           agreeData.map((data, i) => (
             <li>
-              <RuleBox 
-                title={data.title} 
-                content={data.content} 
-                groupName={"agree" + i} 
+              <RuleBox
+                title={data.title}
+                content={data.content}
+                groupName={"agree" + i}
                 isAgree={checkedList[i]}
                 onChangeSelect={(isAgree) => {
                   setCheckedList(checkedList.map((item, index) => (index === i ? isAgree : item)))
@@ -89,13 +109,13 @@ const RulesPage = () => {
         <AgreeAllText>시행규칙에 모두 동의하십니까?</AgreeAllText>
         <div>
           <div className="pretty p-default p-round">
-            <input type="radio" name="agree-all" checked={allAgreed} onChange={() => setCheckedList(Array(agreeData.length).fill(true))}/>
+            <input type="radio" name="agree-all" checked={allAgreed} onChange={() => setCheckedList(Array(agreeData.length).fill(true))} />
             <div className="state p-primary-o">
               <label>모두 동의</label>
             </div>
           </div>
-          <div className="pretty p-default p-round" style={{marginRight: 0}}>
-            <input type="radio" name="agree-all" checked={!allAgreed} onChange={() => setCheckedList(Array(agreeData.length).fill(null))}/>
+          <div className="pretty p-default p-round" style={{ marginRight: 0 }}>
+            <input type="radio" name="agree-all" checked={!allAgreed} onChange={() => setCheckedList(Array(agreeData.length).fill(null))} />
             <div className="state p-primary-o">
               <label>동의하지 않음</label>
             </div>
@@ -104,12 +124,14 @@ const RulesPage = () => {
       </AgreeAll>
 
       <WarningBox>
-        위 안내글을 모두 숙지했으며,<br/>
-        청원으로 인해 일어난 문제에 대한 처벌을 받는 것에 동의합니다.<br/>
+        위 안내글을 모두 숙지했으며,<br />
+        청원으로 인해 일어난 문제에 대한 처벌을 받는 것에 동의합니다.<br />
         청원으로 인한 피해를 모두 보상할 것에 동의합니다.
       </WarningBox>
 
       <SubmitBox>
+        <SubmitCancel type="button" value="취소"></SubmitCancel>
+        <SubmitAgree type="submit" value="동의"></SubmitAgree>
       </SubmitBox>
     </>
   )

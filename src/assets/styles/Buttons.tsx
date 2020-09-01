@@ -11,9 +11,12 @@ export const PrimaryButton = styled.input`
   color: white;
   font-size: 1.1rem;
   cursor: pointer;
+
+  text-align: center;
 `;
 
 export const SecondaryButton = styled(PrimaryButton)`
   border: 1px solid #B8B8B8;
   color: #B8B8B8;
+  background-color: white;
 `;
