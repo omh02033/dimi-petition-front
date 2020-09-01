@@ -35,7 +35,7 @@ const Container = styled.main`
 
 const HideIfLogin = ({ children }: any) => {
   const location = useLocation();
-  if (location.pathname === '/login/') {
+  if (location.pathname.startsWith('/login')) {
     return null;
   }
 
