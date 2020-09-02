@@ -55,20 +55,20 @@ const SubmitBox = styled.div`
 
   display: flex;
   justify-content: center;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
 `;
 
 const SubmitAgree = styled(PrimaryButton)`
-  width: 9rem;
+  width: 8.5rem;
   padding: 0.9rem 0;
 `;
 
 const SubmitCancel = styled(SecondaryButton)`
-  width: 9rem;
+  width: 8.5rem;
   padding: 0.9rem 0;
 
-  margin-right: 1rem;
+  margin-right: 0.5rem;
 `;
 
 const ErrorMessage = styled.p`
