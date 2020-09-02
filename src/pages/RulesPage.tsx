@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import ComponentTitle from 'components/ComponentTitle';
@@ -78,6 +79,11 @@ const RulesPage = () => {
 
   const [checkedList, setCheckedList] = useState<Array<boolean | null>>(Array(agreeData.length).fill(null));
   const allAgreed = checkedList.every((x) => x);
+  const history = useHistory();
+  const onCancel = () => {
+    history.push('/');
+    window.scrollTo(0, 0);
+  };
 
   return (
     <>
@@ -130,7 +136,7 @@ const RulesPage = () => {
       </WarningBox>
 
       <SubmitBox>
-        <SubmitCancel type="button" value="취소"></SubmitCancel>
+        <SubmitCancel type="button" value="취소" onClick={onCancel}></SubmitCancel>
         <SubmitAgree type="submit" value="동의"></SubmitAgree>
       </SubmitBox>
     </>
