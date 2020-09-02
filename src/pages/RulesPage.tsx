@@ -45,6 +45,7 @@ const WarningBox = styled.div`
   box-sizing: border-box;
 `;
 
+
 const SubmitBox = styled.div`
   width: 100%;
   border-top: 2px solid black; 
@@ -54,6 +55,8 @@ const SubmitBox = styled.div`
 
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const SubmitAgree = styled(PrimaryButton)`
@@ -68,6 +71,11 @@ const SubmitCancel = styled(SecondaryButton)`
   margin-right: 1rem;
 `;
 
+const ErrorMessage = styled.p`
+  color: red;
+  font-size: 1.1rem;
+`;
+
 const RulesPage = () => {
   const agreeData = [
     { title: "디미청원 운영규칙", content: "디미청원은 사상과 표현의 다양성을 존중합니다. 동시에 타인의 권리를 침해하거나 명예를 훼손하는 내용은 제한합니다. 자극적이고 혐오스러운 내용, 비속어, 폭력적 내용, 특정 대상을 비하하거나 차별을 조장하는 내용, 개인정보 유출을 비롯해 타인의 권리를 침해하는 내용, 반복되는 내용, 허위사실 등은 삭제 및 학생부에 회부될 수 있습니다." },
@@ -78,11 +86,21 @@ const RulesPage = () => {
   ];
 
   const [checkedList, setCheckedList] = useState<Array<boolean | null>>(Array(agreeData.length).fill(null));
+  const [isError, setIsError] = useState(false);
   const allAgreed = checkedList.every((x) => x);
   const history = useHistory();
+
   const onCancel = () => {
     history.push('/');
     window.scrollTo(0, 0);
+  };
+
+  const onAgree = () => {
+    if (allAgreed) {
+      // 페이지 넘어감
+    } else {
+      setIsError(true);
+    }
   };
 
   return (
@@ -136,9 +154,18 @@ const RulesPage = () => {
       </WarningBox>
 
       <SubmitBox>
-        <SubmitCancel type="button" value="취소" onClick={onCancel}></SubmitCancel>
-        <SubmitAgree type="submit" value="동의"></SubmitAgree>
+        <div>
+          <SubmitCancel type="button" value="취소" onClick={onCancel}></SubmitCancel>
+          <SubmitAgree type="submit" value="동의" onClick={onAgree}></SubmitAgree>
+        </div>
+
+        {isError &&
+          <ErrorMessage>
+            시행 규칙에 모두 동의해주세요.
+          </ErrorMessage>
+        }
       </SubmitBox>
+
     </>
   )
 };
