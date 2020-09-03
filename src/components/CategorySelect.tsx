@@ -10,19 +10,21 @@ interface CategorySelectProps {
   onChangeSelect?: (category: Category | null) => void;
 }
 
+export const SelectContainer = styled.div`
+  width: 30rem;
+  margin: 3.5rem auto 3rem auto;
+
+  @media ${devices.mobileL} {
+    width: 100%;
+  }
+`;
+
 const List = styled.ul`
   padding: 0;
   list-style-type: none;
 
   display: flex;
   justify-content: center;
-
-  width: 75%;
-  margin: 3.5rem auto 3rem auto;
-
-  @media ${devices.tablet} {
-    width: 100%;
-  }
 `;
 
 const ItemContainer = styled.li`
