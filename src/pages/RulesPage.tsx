@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import ComponentTitle from 'components/ComponentTitle';
 import RuleBox from 'components/RuleBox';
-import { PrimaryButton, SecondaryButton } from 'assets/styles/BasicComponent';
+import ButtonPair from 'components/ButtonPair';
 
 
 const TitleContainer = styled.div`
@@ -57,18 +57,6 @@ const SubmitBox = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-`;
-
-const SubmitAgree = styled(PrimaryButton)`
-  width: 8.5rem;
-  padding: 0.9rem 0;
-`;
-
-const SubmitCancel = styled(SecondaryButton)`
-  width: 8.5rem;
-  padding: 0.9rem 0;
-
-  margin-right: 0.5rem;
 `;
 
 const ErrorMessage = styled.p`
@@ -154,10 +142,12 @@ const RulesPage = () => {
       </WarningBox>
 
       <SubmitBox>
-        <div>
-          <SubmitCancel type="button" value="취소" onClick={onCancel}></SubmitCancel>
-          <SubmitAgree type="submit" value="동의" onClick={onAgree}></SubmitAgree>
-        </div>
+        <ButtonPair 
+          leftText="취소"
+          rightText="동의"
+          onClickLeft={onCancel} 
+          onClickRight={onAgree}
+        />
 
         {isError &&
           <ErrorMessage>
