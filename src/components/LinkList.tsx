@@ -82,6 +82,7 @@ const LinkList = ({initialLinks, onChangeLinks}: LinkListProps) => {
 
       <LinkContainer>
         <LinkInput 
+          type="url"
           value={linkInput} 
           onKeyPress={onKeyPress}
           onChange={(e) => setLinkInput(e.target.value)}
