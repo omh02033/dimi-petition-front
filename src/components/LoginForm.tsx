@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import colors from 'assets/colors';
 import devices from 'assets/devices';
-import {PrimaryButton} from 'assets/styles/Buttons';
+import {PrimaryButton} from 'assets/styles/BasicComponent';
 
 import 'assets/styles/LoginForm.scss';
 

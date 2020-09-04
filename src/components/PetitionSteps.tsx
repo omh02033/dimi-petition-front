@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import ComponentTitle from 'components/ComponentTitle';
-import {PrimaryButton} from 'assets/styles/Buttons';
+import {PrimaryButton} from 'assets/styles/BasicComponent';
 
 const Container = styled.article`
   margin-bottom: 5rem;

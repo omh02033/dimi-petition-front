@@ -7,7 +7,7 @@ import colors from 'assets/colors';
 import Category from 'data/Category';
 
 interface CategorySelectProps {
-  onChangeSelect?: (category: Category | null) => void;
+  onChangeSelect: (category: Category | null) => void;
 }
 
 export const SelectContainer = styled.div`

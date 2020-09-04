@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import ComponentTitle from 'components/ComponentTitle';
 import RuleBox from 'components/RuleBox';
-import { PrimaryButton, SecondaryButton } from 'assets/styles/Buttons';
+import { PrimaryButton, SecondaryButton } from 'assets/styles/BasicComponent';
 
 
 const TitleContainer = styled.div`
