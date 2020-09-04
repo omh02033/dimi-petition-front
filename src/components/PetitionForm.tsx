@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import {useHistory} from 'react-router-dom';
 import styled from 'styled-components';
 
 import {TextInput} from 'assets/styles/BasicComponent';
 import CategorySelect from 'components/CategorySelect';
 import LinkList from 'components/LinkList';
 import Category from 'data/Category';
+import ButtonPair from 'components/ButtonPair';
 
 const Form = styled.form`
   width: 100%;
@@ -33,7 +35,27 @@ const ContentInput = styled.textarea`
   resize: none;
 `;
 
+const SubmitContainer = styled.div`
+  border-top: 1px solid #D9D9D9;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 2rem 0 4rem 0;
+  padding-top: 2rem;
+`;
+
 const PetitionForm = () => {
+  const history = useHistory();
+
+  const onCancel = () => {
+    history.push('/');
+    window.scrollTo(0, 0);
+  };
+
+  const onSubmit = () => {};
+
   const [links, setLinks] = useState<Array<string>>([]);
   const [category, setCategory] = useState<Category | null>(null);
 
@@ -58,6 +80,15 @@ const PetitionForm = () => {
         <Label htmlFor="links">관련 링크</Label>
         <LinkList initialLinks={[]} onChangeLinks={setLinks}/>
       </Control>
+
+      <SubmitContainer>
+        <ButtonPair
+          leftText="작성 취소"
+          rightText="작성 완료"
+          onClickLeft={onCancel}
+          onClickRight={onSubmit}
+        />
+      </SubmitContainer>
     </Form>
   )
 };
