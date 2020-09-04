@@ -27,7 +27,7 @@ const LinkContainer = styled.div`
 const LinkInput = styled(TextInput)`
   flex: 1;
   margin-right: 0.7rem;
-  min-width: 13rem;
+  min-width: 11rem;
 `;
 
 
