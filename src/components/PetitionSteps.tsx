@@ -1,4 +1,5 @@
 import React from 'react';
+import {useHistory} from 'react-router-dom';
 import styled from 'styled-components';
 
 import ComponentTitle from 'components/ComponentTitle';
@@ -48,10 +49,18 @@ const StepTitle = styled.h2`
 
 const RegisterButton = styled(PrimaryButton)`
   padding: 0.6rem 4rem;
+  text-decoration: none;
 `;
 
 function PetitionSteps() {
+  const history = useHistory();
   const stepTitles = ["청원 작성", "청원 동의", "청원 접수", "의견 전달", "청원 답변"]
+
+  const onClick = () => {
+    window.scrollTo(0, 0);
+    history.push('/petition');
+  };
+
   return (
     <Container>
       <ComponentTitle>
@@ -69,7 +78,7 @@ function PetitionSteps() {
           ))
         }
       </StepsList>
-      <RegisterButton type="button" value="지금 청원하기"/>
+      <RegisterButton type="button" value="지금 청원하기" onClick={onClick}/>
     </Container>
   );
 
