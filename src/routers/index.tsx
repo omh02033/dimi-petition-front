@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import {RouteProps, Redirect, BrowserRouter, Switch, Route, useLocation} from 'react-router-dom';
+import {useCookies} from 'react-cookie';
+import {Redirect, BrowserRouter, Switch, Route, useLocation} from 'react-router-dom';
 
 import styled from 'styled-components';
 
@@ -46,20 +47,24 @@ const HideIfLogin = ({children}: any) => {
 
 const Root = () => {
   const [user, setUser] = useState<LoginData | null>(null);
-  const authenticated = user !== null;
+  const [cookies, setCookie] = useCookies(['auth']);
+  const authenticated = cookies.auth !== 'null' && cookies.auth !== undefined;
 
   const onLogin = (data: LoginData) => {
     console.log(data);
     setUser(data);
+    setCookie('auth', true, {maxAge: 1800});
   };
 
-  const AuthRoute = ({component: Component, ...rest}: any) => (
+  const AuthRoute = ({component: Component, ...rest}: any) => {
+    return (
       <Route {...rest} render={props => (
         authenticated ?
           <Component {...props} />
           : <Redirect to="/login" />
       )} />
-  );
+    );
+  };
 
   return (
     <BrowserRouter>

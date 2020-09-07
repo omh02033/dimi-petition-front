@@ -62,7 +62,9 @@ const LoginForm = ({onLogin}: LoginFormProps) => {
     e.preventDefault();
     const loginData = {username: id, password: password};
     const respond = await axios.post('/users/login', loginData);
-    if (respond.data.status === 200) onLogin(respond.data);
+    if (respond.data.status === 200) {
+      onLogin(respond.data);
+    }
     else console.error('로그인 실패');
   };
 
