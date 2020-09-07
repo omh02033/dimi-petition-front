@@ -58,7 +58,13 @@ const LoginForm = ({onLogin}: LoginFormProps) => {
     const loginData = {username: id, password: password};
     const respond = await axios.post('/users/login', loginData);
     if (respond.data.status === 200) {
-      const userData = {name: respond.data.name, gradeNumber: respond.data.grade, classNumber: respond.data.class};
+      const userData = {
+        name: respond.data.name,
+        gradeNumber: respond.data.grade, 
+        classNumber: respond.data.class,
+        photo: respond.data.photo
+      };
+
       onLogin(userData);
     }
     else console.error('로그인 실패');
@@ -68,12 +74,12 @@ const LoginForm = ({onLogin}: LoginFormProps) => {
     <Form onSubmit={onSubmit}>
       <Label>
         Dimigo ID
-        <TextInput type="text" value={id} onChange={(e) => setId(e.target.value)}/>
+        <TextInput type="text" value={id} onChange={(e) => setId(e.target.value)} />
       </Label>
 
       <Label>
         Dimigo Password
-        <TextInput type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+        <TextInput type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
       </Label>
 
       <div className="pretty p-default p-curve">

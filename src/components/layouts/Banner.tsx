@@ -45,8 +45,7 @@ const MainHeading = styled.h1`
   word-break: keep-all;
 `;
 
-function Banner() {
-  return (
+const Banner = () => (
     <Container>
       <TextContainer>
         <Description>학생청원솔루션</Description>
@@ -57,7 +56,6 @@ function Banner() {
         <Description>지금 바로 학교를 변화시켜보세요.</Description>
       </TextContainer>
     </Container>
-  );
-}
+);
 
 export default Banner;

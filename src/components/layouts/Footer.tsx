@@ -37,8 +37,7 @@ const Content = styled.p`
   font-size: 0.9rem;
 `;
 
-function Footer() {
-  return (
+const Footer = () => (
     <Container>
       <ContentContainer>
         <Title>한국디지털미디어고등학교 학생자치회 학생청원 홈페이지</Title>
@@ -56,7 +55,6 @@ function Footer() {
         </Content>
       </ContentContainer>
     </Container>
-  )
-}
+);
 
 export default Footer;

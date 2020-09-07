@@ -1,11 +1,15 @@
 import React from 'react';
+import axios from 'axios';
+import {useCookies} from 'react-cookie';
+import {Link, useLocation, useHistory} from 'react-router-dom';
 import styled from 'styled-components';
 
-import {Link, useLocation} from 'react-router-dom';
+import {FiLogOut} from 'react-icons/fi';
 
 import colors from 'assets/colors';
 import devices from 'assets/devices';
 import UserData from 'data/UserData';
+
 
 interface NavBarProps {
   userData: UserData;
@@ -20,7 +24,7 @@ const Nav = styled.nav`
   padding: 0;
   margin: 0 auto;
 
-  grid-template-columns: 100px 1fr 120px;
+  grid-template-columns: 100px 1fr 160px;
   grid-template-rows: 1fr;
 
   width: 50%;
@@ -116,8 +120,13 @@ const MenuItemLink = styled(Link)`
 `;
 
 const Profile = styled.div`
-  text-align: right;
+  display: flex;
+  align-items: center;
+
+  margin-left: auto;
   font-weight: bold;
+  text-align: right;
+  color: ${colors.textMain};
 
   @media ${devices.tablet} {
     grid-column: 2;
@@ -125,13 +134,43 @@ const Profile = styled.div`
   }
 `;
 
+const UserImage = styled.img`
+  border-radius: 50%;
+  border: 1px solid #D9D9D9;
+
+  object-fit: cover;
+  width: 40px;
+  height: 40px;
+`;
+
+const LogoutButton = styled.button`
+  cursor: pointer;
+  margin-left: 1rem;
+  background: none;
+  border: none;
+  outline: none;
+`;
+
+const LogoutIcon = styled(FiLogOut)`
+  color: #868e96;
+  font-size: 1.4rem;
+  margin-top: 3px;
+`;
+
 const NavBar = ({userData}: NavBarProps) => {
   const location = useLocation();
+  const [, , removeCookie] = useCookies();
   const itemList = [
     {title: "분야별 청원", location: "/category/"},
     {title: "추천순 청원", location: "/popularity/"},
     {title: "답변된 청원", location: "/answered/"},
   ];
+
+  const onLogout = () => {
+    axios.post('/users/logout');
+    removeCookie('auth');
+    window.location.reload(false);
+  };
 
   return (
     <Nav>
@@ -159,7 +198,10 @@ const NavBar = ({userData}: NavBarProps) => {
         }
       </MenuList>
       <Profile>
-        {userData.gradeNumber}학년 {userData.classNumber}반 {userData.name}
+        <UserImage src={"https://api.dimigo.hs.kr/user_photo/" + userData.photo} />
+        <LogoutButton onClick={onLogout}>
+          <LogoutIcon />
+        </LogoutButton>
       </Profile>
     </Nav>
   );
