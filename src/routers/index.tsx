@@ -17,7 +17,7 @@ import AnsweredPage from 'pages/AnsweredPage';
 import LoginPage from 'pages/LoginPage';
 import RulesPage from 'pages/RulesPage';
 import PetitionPage from 'pages/PetitionPage';
-import {LoginData} from 'components/LoginForm';
+import UserData from 'data/UserData';
 
 const Container = styled.main`
   display: flex;
@@ -46,14 +46,13 @@ const HideIfLogin = ({children}: any) => {
 }
 
 const Root = () => {
-  const [user, setUser] = useState<LoginData | null>(null);
   const [cookies, setCookie] = useCookies(['auth']);
   const authenticated = cookies.auth !== 'null' && cookies.auth !== undefined;
+  const userData = authenticated ? cookies.auth : null;
 
-  const onLogin = (data: LoginData) => {
+  const onLogin = (data: UserData) => {
     console.log(data);
-    setUser(data);
-    setCookie('auth', true, {maxAge: 1800});
+    setCookie('auth', data, {maxAge: 1800});
   };
 
   const AuthRoute = ({component: Component, ...rest}: any) => {
@@ -69,7 +68,7 @@ const Root = () => {
   return (
     <BrowserRouter>
       <HideIfLogin>
-        <NavBar />
+        <NavBar userData={userData}/>
         <Banner />
       </HideIfLogin>
 

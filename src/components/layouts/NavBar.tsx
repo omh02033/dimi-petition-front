@@ -1,10 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Link, useLocation } from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 
 import colors from 'assets/colors';
 import devices from 'assets/devices';
+import UserData from 'data/UserData';
+
+interface NavBarProps {
+  userData: UserData | null;
+};
 
 const Nav = styled.nav`
   display: grid;
@@ -120,12 +125,12 @@ const Profile = styled.div`
   }
 `;
 
-function NavBar() {
+const NavBar = ({userData}: NavBarProps) => {
   const location = useLocation();
   const itemList = [
-    { title: "분야별 청원", location: "/category/" },
-    { title: "추천순 청원", location: "/popularity/" },
-    { title: "답변된 청원", location: "/answered/" },
+    {title: "분야별 청원", location: "/category/"},
+    {title: "추천순 청원", location: "/popularity/"},
+    {title: "답변된 청원", location: "/answered/"},
   ];
 
   return (
@@ -153,9 +158,11 @@ function NavBar() {
           })
         }
       </MenuList>
-      <Profile>
-        1376 홍길동
-      </Profile>
+      {userData !== null &&
+        (<Profile>
+          {userData.gradeNumber}학년 {userData.classNumber}반 {userData.name}
+        </Profile>)
+      }
     </Nav>
   );
 }

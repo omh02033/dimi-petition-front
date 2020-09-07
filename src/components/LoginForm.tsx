@@ -5,18 +5,13 @@ import axios from 'axios';
 import colors from 'assets/colors';
 import devices from 'assets/devices';
 import {PrimaryButton} from 'assets/styles/BasicComponent';
+import UserData from 'data/UserData';
 
 import 'assets/styles/LoginForm.scss';
 
-export interface LoginData {
-  status: number;
-  name: string;
-  grade: number;
-  class: number;
-}
 
 export interface LoginFormProps {
-  onLogin: (data: LoginData) => void;
+  onLogin: (data: UserData) => void;
 };
 
 const Form = styled.form`
@@ -63,7 +58,8 @@ const LoginForm = ({onLogin}: LoginFormProps) => {
     const loginData = {username: id, password: password};
     const respond = await axios.post('/users/login', loginData);
     if (respond.data.status === 200) {
-      onLogin(respond.data);
+      const userData = {name: respond.data.name, gradeNumber: respond.data.grade, classNumber: respond.data.class};
+      onLogin(userData);
     }
     else console.error('로그인 실패');
   };
