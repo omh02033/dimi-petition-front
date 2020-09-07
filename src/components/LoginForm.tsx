@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 
+import Swal from 'sweetalert2';
+
 import colors from 'assets/colors';
 import devices from 'assets/devices';
 import {PrimaryButton} from 'assets/styles/BasicComponent';
@@ -60,14 +62,18 @@ const LoginForm = ({onLogin}: LoginFormProps) => {
     if (respond.data.status === 200) {
       const userData = {
         name: respond.data.name,
-        gradeNumber: respond.data.grade, 
+        gradeNumber: respond.data.grade,
         classNumber: respond.data.class,
         photo: respond.data.photo
       };
 
       onLogin(userData);
     }
-    else console.error('로그인 실패');
+    else Swal.fire({
+      icon: 'error',
+      title: '오류',
+      text: '아이디 또는 비밀번호가 올비르지 않습니다.',
+    });
   };
 
   return (

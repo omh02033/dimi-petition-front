@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import {useCookies} from 'react-cookie';
-import {Link, useLocation, useHistory} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import styled from 'styled-components';
 
 import {FiLogOut} from 'react-icons/fi';
