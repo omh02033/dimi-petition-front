@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import {Redirect} from 'react-router-dom';
 
-import LoginForm from 'components/LoginForm';
+import LoginForm, {LoginFormProps} from 'components/LoginForm';
 
 import devices from 'assets/devices';
 
@@ -87,24 +88,27 @@ const LoginSection = styled.section`
 `;
 
 
-const LoginPage = () => (
-  <Container>
-    <Banner>
-      <img src="/council-logo-white.svg" alt="학생회 로고" />
-      <BannerTitle>디미청원</BannerTitle>
-      <BannerSubtitle>디미고 온라인 건의함 서비스</BannerSubtitle>
-      <BannerDescription>지금 바로 학교를 변화시켜보세요.</BannerDescription>
-    </Banner>
+const LoginPage = ({onLogin, authenticated}: LoginFormProps & {authenticated: boolean}) => {
+  if (authenticated) return <Redirect to="/"/>
+  return (
+    <Container>
+      <Banner>
+        <img src="/council-logo-white.svg" alt="학생회 로고" />
+        <BannerTitle>디미청원</BannerTitle>
+        <BannerSubtitle>디미고 온라인 건의함 서비스</BannerSubtitle>
+        <BannerDescription>지금 바로 학교를 변화시켜보세요.</BannerDescription>
+      </Banner>
 
-    <Logo>
-      <LogoImage src="/council-logo-small.svg" alt="학생회 로고" />
-      <LogoTitle>디미청원</LogoTitle>
-    </Logo>
+      <Logo>
+        <LogoImage src="/council-logo-small.svg" alt="학생회 로고" />
+        <LogoTitle>디미청원</LogoTitle>
+      </Logo>
 
-    <LoginSection>
-      <LoginForm />
-    </LoginSection>
-  </Container>
-);
+      <LoginSection>
+        <LoginForm onLogin={onLogin} />
+      </LoginSection>
+    </Container>
+  );
+};
 
 export default LoginPage;

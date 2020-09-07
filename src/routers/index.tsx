@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter, Switch, Route, useLocation } from 'react-router-dom';
+import React, {useState} from 'react';
+import {RouteProps, Redirect, BrowserRouter, Switch, Route, useLocation} from 'react-router-dom';
 
 import styled from 'styled-components';
 
@@ -16,6 +16,7 @@ import AnsweredPage from 'pages/AnsweredPage';
 import LoginPage from 'pages/LoginPage';
 import RulesPage from 'pages/RulesPage';
 import PetitionPage from 'pages/PetitionPage';
+import {LoginData} from 'components/LoginForm';
 
 const Container = styled.main`
   display: flex;
@@ -34,7 +35,7 @@ const Container = styled.main`
   }
 `;
 
-const HideIfLogin = ({ children }: any) => {
+const HideIfLogin = ({children}: any) => {
   const location = useLocation();
   if (location.pathname.startsWith('/login')) {
     return null;
@@ -43,29 +44,48 @@ const HideIfLogin = ({ children }: any) => {
   return children;
 }
 
-const Root = () => (
-  <BrowserRouter>
-    <HideIfLogin>
-      <NavBar />
-      <Banner />
-    </HideIfLogin>
+const Root = () => {
+  const [user, setUser] = useState<LoginData | null>(null);
+  const authenticated = user !== null;
 
-    <Container>
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/category" exact component={CategoryPage} />
-        <Route path="/popularity" exact component={PopularityPage} />
-        <Route path="/answered" exact component={AnsweredPage} />
-        <Route path="/login" exact component={LoginPage} />
-        <Route path="/rules" exact component={RulesPage} />
-        <Route path="/petition" exact component={PetitionPage} />
-      </Switch>
-    </Container>
+  const onLogin = (data: LoginData) => {
+    console.log(data);
+    setUser(data);
+  };
 
-    <HideIfLogin>
-      <Footer />
-    </HideIfLogin>
-  </BrowserRouter>
-)
+  const AuthRoute = ({component: Component, ...rest}: any) => (
+      <Route {...rest} render={props => (
+        authenticated ?
+          <Component {...props} />
+          : <Redirect to="/login" />
+      )} />
+  );
+
+  return (
+    <BrowserRouter>
+      <HideIfLogin>
+        <NavBar />
+        <Banner />
+      </HideIfLogin>
+
+      <Container>
+        <Switch>
+          <Route path="/login" exact render={() => <LoginPage onLogin={onLogin} authenticated={authenticated} />} />
+
+          <AuthRoute path="/" exact component={Home} />
+          <AuthRoute path="/category" exact component={CategoryPage} />
+          <AuthRoute path="/popularity" exact component={PopularityPage} />
+          <AuthRoute path="/answered" exact component={AnsweredPage} />
+          <AuthRoute path="/rules" exact component={RulesPage} />
+          <AuthRoute path="/petition" exact component={PetitionPage} />
+        </Switch>
+      </Container>
+
+      <HideIfLogin>
+        <Footer />
+      </HideIfLogin>
+    </BrowserRouter>
+  );
+}
 
 export default Root;
