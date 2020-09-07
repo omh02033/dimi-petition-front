@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useCookies} from 'react-cookie';
 import {Redirect, BrowserRouter, Switch, Route, useLocation} from 'react-router-dom';
 
@@ -36,9 +36,9 @@ const Container = styled.main`
   }
 `;
 
-const HideIfLogin = ({children}: any) => {
+const HideIfLogin = ({children, authenticated}: any) => {
   const location = useLocation();
-  if (location.pathname.startsWith('/login')) {
+  if (location.pathname.startsWith('/login') || !authenticated) {
     return null;
   }
 
@@ -67,7 +67,7 @@ const Root = () => {
 
   return (
     <BrowserRouter>
-      <HideIfLogin>
+      <HideIfLogin authenticated={authenticated}>
         <NavBar userData={userData}/>
         <Banner />
       </HideIfLogin>

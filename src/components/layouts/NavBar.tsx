@@ -8,7 +8,7 @@ import devices from 'assets/devices';
 import UserData from 'data/UserData';
 
 interface NavBarProps {
-  userData: UserData | null;
+  userData: UserData;
 };
 
 const Nav = styled.nav`
@@ -158,11 +158,9 @@ const NavBar = ({userData}: NavBarProps) => {
           })
         }
       </MenuList>
-      {userData !== null &&
-        (<Profile>
-          {userData.gradeNumber}학년 {userData.classNumber}반 {userData.name}
-        </Profile>)
-      }
+      <Profile>
+        {userData.gradeNumber}학년 {userData.classNumber}반 {userData.name}
+      </Profile>
     </Nav>
   );
 }
