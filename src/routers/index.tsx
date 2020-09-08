@@ -84,7 +84,7 @@ const Root = () => {
         </Switch>
       </Container>
 
-      <HideIfLogin>
+      <HideIfLogin authenticated={authenticated}>
         <Footer />
       </HideIfLogin>
     </BrowserRouter>

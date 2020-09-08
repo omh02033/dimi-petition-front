@@ -12,6 +12,7 @@ const Container = styled.footer`
   align-items: center;
 
   padding: 2rem 0;
+  margin-top: 3rem;
   color: white;
 `;
 
