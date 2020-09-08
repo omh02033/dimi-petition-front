@@ -8,7 +8,7 @@ import ComponentTitle from 'components/ComponentTitle';
 import Category from 'data/Category';
 
 const CategoryPage = () => {
-  const [filter, setFilter] = useState<Category | null>(null);
+  const [filter, setFilter] = useState<Category>(Category.General);
 
   return (
     <>

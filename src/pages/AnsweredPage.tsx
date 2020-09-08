@@ -8,7 +8,7 @@ import ComponentTitle from 'components/ComponentTitle';
 import Category from 'data/Category';
 
 const PopularityPage = () => {
-  const [filter, setFilter] = useState<Category | null>(null);
+  const [filter, setFilter] = useState<Category>(Category.General);
 
   return (<>
     <PetitionStatus />

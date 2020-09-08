@@ -51,7 +51,6 @@ const Root = () => {
   const userData = authenticated ? cookies.auth : null;
 
   const onLogin = (data: UserData) => {
-    console.log(data);
     setCookie('auth', data, {maxAge: 1800});
   };
 

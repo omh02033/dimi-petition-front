@@ -2,7 +2,8 @@ enum Category {
   Safety,
   HumanRights,
   Life,
-  Dormitory
+  Dormitory,
+  General
 }
 
 export function categoryToString(category: Category) {
@@ -15,6 +16,8 @@ export function categoryToString(category: Category) {
       return "생활";
     case Category.Dormitory:
       return "기숙사";
+    case Category.General:
+      return "전체";
   }
 
 }

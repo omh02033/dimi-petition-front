@@ -14,7 +14,7 @@ import '../assets/styles/PetitionList.scss';
 interface PetitionListProps {
   title: String;
   perPage: number;
-  categoryFilter: Category | null;
+  categoryFilter: Category;
 }
 
 const Container = styled.section`
@@ -95,7 +95,7 @@ function PetitionList({ title, perPage, categoryFilter }: PetitionListProps) {
   const [currentPage, setCurrentPage] = useState(0);
 
   let data = sampleData;
-  if (categoryFilter != null) {
+  if (categoryFilter !== Category.General) {
     data = sampleData.filter((item) => item.category === categoryFilter);
   }
 
@@ -148,7 +148,7 @@ function PetitionList({ title, perPage, categoryFilter }: PetitionListProps) {
 }
 
 PetitionList.defaultProps = {
-  categoryFilter: null
+  categoryFilter: Category.General
 }
 
 export default PetitionList;

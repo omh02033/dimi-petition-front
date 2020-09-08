@@ -7,7 +7,7 @@ import colors from 'assets/colors';
 import Category from 'data/Category';
 
 interface CategorySelectProps {
-  onChangeSelect: (category: Category | null) => void;
+  onChangeSelect: (category: Category) => void;
 }
 
 export const SelectContainer = styled.div`
@@ -75,7 +75,7 @@ const CategorySelect = ({ onChangeSelect }: CategorySelectProps) => {
   const [selectIndex, setSelectIndex] = useState(0);
 
   const itemList = [
-    { title: "전체", imageSrc: "/category/general.svg", category: null },
+    { title: "전체", imageSrc: "/category/general.svg", category: Category.General },
     { title: "안전", imageSrc: "/category/safety.svg", category: Category.Safety },
     { title: "인권", imageSrc: "/category/human-rights.svg", category: Category.HumanRights },
     { title: "생활", imageSrc: "/category/life.svg", category: Category.Life },
