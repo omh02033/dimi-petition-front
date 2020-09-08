@@ -8,6 +8,7 @@ import * as serviceWorker from './serviceWorker';
 import './index.css';
 
 axios.defaults.baseURL = 'http://localhost:80';
+axios.defaults.withCredentials = true;
 
 ReactDOM.render(
   <React.StrictMode>

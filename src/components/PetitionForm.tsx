@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
+import axios from 'axios';
 import {useHistory} from 'react-router-dom';
 import styled from 'styled-components';
 
 import {TextInput} from 'assets/styles/BasicComponent';
 import CategorySelect from 'components/CategorySelect';
 import LinkList from 'components/LinkList';
-import Category from 'data/Category';
+import Category, {getCategoryId} from 'data/Category';
 import ButtonPair from 'components/ButtonPair';
 
 const Form = styled.form`
@@ -56,31 +57,53 @@ const PetitionForm = () => {
     window.scrollTo(0, 0);
   };
 
-  const onSubmit = () => {};
-
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
   const [links, setLinks] = useState<Array<string>>([]);
-  const [category, setCategory] = useState<Category | null>(null);
+  const [category, setCategory] = useState<Category>(Category.General);
+
+  const onSubmit = async () => {
+    const response = await axios.post("/petitions", {
+      title: title,
+      content: content,
+      relatedUrls: links,
+      category: getCategoryId(category)
+    });
+    console.log(response);
+  };
 
   return (
     <Form>
       <Control>
         <Label htmlFor="title">청원제목</Label>
-        <TitleInput placeholder="청원 제목을 입력하세요." type="text" id="title" />
+        <TitleInput
+          type="text"
+          placeholder="청원 제목을 입력하세요."
+          id="title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
       </Control>
 
       <Control>
         <Label>분야(카테고리)</Label>
-        <CategorySelect onChangeSelect={setCategory}/>
+        <CategorySelect onChangeSelect={setCategory} />
       </Control>
 
       <Control>
         <Label htmlFor="content">청원내용</Label>
-        <ContentInput placeholder="청원 내용을 입력하세요." id="content" rows={15}/>
+        <ContentInput
+          id="content"
+          placeholder="청원 내용을 입력하세요."
+          rows={15}
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+        />
       </Control>
 
       <Control>
         <Label htmlFor="links">관련 링크</Label>
-        <LinkList initialLinks={[]} onChangeLinks={setLinks}/>
+        <LinkList initialLinks={[]} onChangeLinks={setLinks} />
       </Control>
 
       <SubmitContainer>
