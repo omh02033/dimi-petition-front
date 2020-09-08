@@ -57,7 +57,8 @@ const Root = () => {
   }, [fetchPetition]);
 
   const onLogin = (data: UserData) => {
-    setCookie('auth', data, {maxAge: 1800});
+    setCookie('auth', data, {maxAge: 10});
+    fetchPetition();
   };
 
   const AuthRoute = ({component: Component, ...rest}: any) => {

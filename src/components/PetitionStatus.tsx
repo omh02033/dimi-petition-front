@@ -56,12 +56,14 @@ const PetitionStatus = () => {
   const [status, setStatus] = useState<StatusResponse | null>(null);
 
   useEffect(() => {
+    let isMounted = true;
     async function fetch() {
       const fetched = await axios.get('/petitions/summary');
-      setStatus(fetched.data.summary);
+      if (isMounted) setStatus(fetched.data.summary);
     }
 
     fetch();
+    return () => {isMounted = false;}
   }, []);
 
   return (
