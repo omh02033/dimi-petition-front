@@ -55,7 +55,7 @@ const LinkList = ({initialLinks, onChangeLinks}: LinkListProps) => {
       Swal.fire({
         icon: 'error',
         title: '오류',
-        text: '링크 형식이 잘못되었습니다. (http(s)://로 시작해야합니다)',
+        text: '링크 형식이 잘못되었습니다.',
       });
       return;
     }
@@ -95,6 +95,7 @@ const LinkList = ({initialLinks, onChangeLinks}: LinkListProps) => {
         <LinkInput
           type="url"
           value={linkInput}
+          placeholder="http(s)://... 로 시작해야 합니다."
           onKeyPress={onKeyPress}
           onChange={(e) => setLinkInput(e.target.value)}
         />
