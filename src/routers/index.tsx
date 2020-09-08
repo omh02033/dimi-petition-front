@@ -57,7 +57,7 @@ const Root = () => {
   }, [fetchPetition]);
 
   const onLogin = (data: UserData) => {
-    setCookie('auth', data, {maxAge: 10});
+    setCookie('auth', data, {maxAge: 43200});
     fetchPetition();
   };
 
