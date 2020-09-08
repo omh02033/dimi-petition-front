@@ -7,6 +7,7 @@ import devices from 'assets/devices';
 
 import Category from 'data/Category';
 import PetitionContext from 'contexts/PetitionContext';
+import PetitionData, {PetitionStatus} from 'data/PetitionData';
 
 import '../assets/styles/PetitionList.scss';
 
@@ -14,6 +15,8 @@ interface PetitionListProps {
   title: String;
   perPage: number;
   categoryFilter: Category;
+  statusFilter?: PetitionStatus;
+  preprocess?: (p: PetitionData[]) => PetitionData[];
 }
 
 const Container = styled.section`
@@ -72,13 +75,21 @@ const TableCell = styled.td`
   }
 `;
 
-function PetitionList({ title, perPage, categoryFilter }: PetitionListProps) {
+function PetitionList({ title, perPage, categoryFilter, statusFilter, preprocess }: PetitionListProps) {
   const [currentPage, setCurrentPage] = useState(0);
   const {petitionData} = useContext(PetitionContext);
 
   let data = petitionData;
   if (categoryFilter !== Category.General) {
     data = data.filter((item) => item.category === categoryFilter);
+  }
+
+  if (statusFilter) {
+    data = data.filter((item) => item.status === statusFilter);
+  }
+
+  if (preprocess) {
+    data = preprocess(data);
   }
 
   const pageCount = Math.ceil(data.length / perPage);

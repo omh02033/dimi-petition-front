@@ -7,7 +7,6 @@ import RuleBox from 'components/RuleBox';
 import ButtonPair from 'components/ButtonPair';
 import PetitionContext from 'contexts/PetitionContext';
 
-
 const TitleContainer = styled.div`
   padding: 3rem 0 2rem 0;
 `;

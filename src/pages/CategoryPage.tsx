@@ -6,6 +6,7 @@ import PetitionList from 'components/PetitionList';
 import ComponentTitle from 'components/ComponentTitle';
 
 import Category from 'data/Category';
+import {PetitionStatus as Status} from 'data/PetitionData';
 
 const CategoryPage = () => {
   const [filter, setFilter] = useState<Category>(Category.General);
@@ -19,8 +20,8 @@ const CategoryPage = () => {
         <CategorySelect onChangeSelect={(c) => setFilter(c)} />
       </SelectContainer>
 
-      <PetitionList title="진행중인 청원" perPage={8} categoryFilter={filter} />
-      <PetitionList title="답변 대기 중인 청원" perPage={5} categoryFilter={filter} />
+      <PetitionList title="진행중인 청원" perPage={8} categoryFilter={filter} statusFilter={Status.Progress}/>
+      <PetitionList title="답변 대기 중인 청원" perPage={5} categoryFilter={filter} statusFilter={Status.Waiting}/>
     </>
   );
 };

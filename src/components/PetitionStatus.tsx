@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import colors from 'assets/colors';
 import devices from 'assets/devices';
 
-import { FiAlertCircle, FiClock, FiCheckCircle } from 'react-icons/fi';
+import {FiAlertCircle, FiClock, FiCheckCircle} from 'react-icons/fi';
 
 const Container = styled.article`
   width: 100%;
@@ -46,8 +46,14 @@ const Number = styled.p`
   color: ${colors.main};
 `;
 
-const PetitionStatus= () => {
-  const [status, setStatus] = useState({p: 0, w: 0, a: 0});
+interface StatusResponse {
+  p: number;
+  w: number;
+  a: number;
+}
+
+const PetitionStatus = () => {
+  const [status, setStatus] = useState<StatusResponse | null>(null);
 
   useEffect(() => {
     async function fetch() {
@@ -65,7 +71,7 @@ const PetitionStatus= () => {
           <FiAlertCircle />
         </Icon>
         <Title>등록된 청원</Title>
-        <Number>{status.p + status.w + status.a}</Number>
+        <Number>{status && status.p + status.w + status.a}</Number>
       </Status>
 
       <Status>
@@ -73,7 +79,7 @@ const PetitionStatus= () => {
           <FiClock />
         </Icon>
         <Title>진행 중인 청원</Title>
-        <Number>{status.p}</Number>
+        <Number>{status && status.p}</Number>
       </Status>
 
       <Status>
@@ -81,7 +87,7 @@ const PetitionStatus= () => {
           <FiCheckCircle />
         </Icon>
         <Title>답변된 청원</Title>
-        <Number>{status.a}</Number>
+        <Number>{status && status.a}</Number>
       </Status>
     </Container>
   );
