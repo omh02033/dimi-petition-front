@@ -29,8 +29,10 @@ const Control = styled.div`
 const TitleInput = styled(TextInput)``;
 
 const ContentInput = styled.textarea`
-  border: 1px solid #D9D9D9;
+  font-family: 'Noto Sans KR', sans-serif;
   font-size: 1.1rem;
+
+  border: 1px solid #D9D9D9;
   padding: 0.8rem 0.8rem;
   resize: none;
 `;
