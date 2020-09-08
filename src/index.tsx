@@ -6,6 +6,7 @@ import {CookiesProvider} from 'react-cookie';
 import * as serviceWorker from './serviceWorker';
 
 import './index.css';
+import PetitionProvider from 'components/PetitionProvider';
 
 axios.defaults.baseURL = 'http://localhost:80';
 axios.defaults.withCredentials = true;
@@ -13,7 +14,9 @@ axios.defaults.withCredentials = true;
 ReactDOM.render(
   <React.StrictMode>
     <CookiesProvider>
-      <App />
+      <PetitionProvider>
+        <App />
+      </PetitionProvider>
     </CookiesProvider>
   </React.StrictMode>,
   document.getElementById('root')

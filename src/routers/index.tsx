@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import {useCookies} from 'react-cookie';
 import {Redirect, BrowserRouter, Switch, Route, useLocation} from 'react-router-dom';
 
@@ -18,6 +18,7 @@ import LoginPage from 'pages/LoginPage';
 import RulesPage from 'pages/RulesPage';
 import PetitionPage from 'pages/PetitionPage';
 import UserData from 'data/UserData';
+import PetitionContext from 'contexts/PetitionContext';
 
 const Container = styled.main`
   display: flex;
@@ -49,6 +50,11 @@ const Root = () => {
   const [cookies, setCookie] = useCookies(['auth']);
   const authenticated = cookies.auth !== 'null' && cookies.auth !== undefined;
   const userData = authenticated ? cookies.auth : null;
+  const {fetchPetition} = useContext(PetitionContext);
+
+  useEffect(() => {
+    fetchPetition();
+  }, [fetchPetition]);
 
   const onLogin = (data: UserData) => {
     setCookie('auth', data, {maxAge: 1800});

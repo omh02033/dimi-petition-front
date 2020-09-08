@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import axios from 'axios';
 import {useHistory} from 'react-router-dom';
 import styled from 'styled-components';
@@ -8,6 +8,7 @@ import CategorySelect from 'components/CategorySelect';
 import LinkList from 'components/LinkList';
 import Category, {getCategoryId} from 'data/Category';
 import ButtonPair from 'components/ButtonPair';
+import PetitionContext from 'contexts/PetitionContext';
 
 const Form = styled.form`
   width: 100%;
@@ -61,6 +62,7 @@ const PetitionForm = () => {
   const [content, setContent] = useState('');
   const [links, setLinks] = useState<Array<string>>([]);
   const [category, setCategory] = useState<Category>(Category.General);
+  const {fetchPetition} = useContext(PetitionContext);
 
   const onSubmit = async () => {
     const response = await axios.post("/petitions", {
@@ -69,6 +71,8 @@ const PetitionForm = () => {
       relatedUrls: links,
       category: getCategoryId(category)
     });
+
+    fetchPetition();
     console.log(response);
   };
 

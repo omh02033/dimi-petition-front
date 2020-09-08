@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import ReactPaginate from 'react-paginate';
 
-import dayjs from 'dayjs';
 import colors from 'assets/colors';
 import devices from 'assets/devices';
 
-import PetitionData from 'data/PetitionData';
-import Category, { categoryToString } from 'data/Category';
+import Category from 'data/Category';
+import PetitionContext from 'contexts/PetitionContext';
 
 import '../assets/styles/PetitionList.scss';
 
@@ -73,30 +72,13 @@ const TableCell = styled.td`
   }
 `;
 
-let sampleData: PetitionData[] = [
-  { category: Category.Life, title: "왜 외투 착용시 꼭 웃옷을 입어야하나요?", date: dayjs(), likes: 234 },
-  { category: Category.Safety, title: "블랙아이스 때문에 병원에 입원했습니다.", date: dayjs(), likes: 234 },
-  { category: Category.Life, title: "교사는 인권 침해를 해도 눈감아주나요?", date: dayjs(), likes: 234 },
-  { category: Category.Life, title: "한밤의 시식회, 기숙사 냉장고가 뷔페인가요?", date: dayjs(), likes: 234 },
-  { category: Category.Life, title: "왜 방학식 2주 뒤에 학교에 오는건가요?", date: dayjs(), likes: 234 },
-  { category: Category.HumanRights, title: "교사는 인권 침해를 해도 눈감아주나요?", date: dayjs(), likes: 234 },
-  { category: Category.Life, title: "왜 방학식 2주 뒤에 학교에 오는건가요?", date: dayjs(), likes: 234 },
-  { category: Category.HumanRights, title: "교사는 인권 침해를 해도 눈감아주나요?", date: dayjs(), likes: 234 },
-  { category: Category.Life, title: "한밤의 시식회, 기숙사 냉장고가 뷔페인가요?", date: dayjs(), likes: 234 },
-  { category: Category.Life, title: "한밤의 시식회, 기숙사 냉장고가 뷔페인가요?", date: dayjs(), likes: 234 },
-  { category: Category.Life, title: "왜 방학식 2주 뒤에 학교에 오는건가요?", date: dayjs(), likes: 234 },
-];
-
-sampleData.push(...sampleData);
-sampleData.push(...sampleData);
-sampleData.push(...sampleData);
-
 function PetitionList({ title, perPage, categoryFilter }: PetitionListProps) {
   const [currentPage, setCurrentPage] = useState(0);
+  const {petitionData} = useContext(PetitionContext);
 
-  let data = sampleData;
+  let data = petitionData;
   if (categoryFilter !== Category.General) {
-    data = sampleData.filter((item) => item.category === categoryFilter);
+    data = data.filter((item) => item.category === categoryFilter);
   }
 
   const pageCount = Math.ceil(data.length / perPage);
@@ -121,11 +103,11 @@ function PetitionList({ title, perPage, categoryFilter }: PetitionListProps) {
         </thead>
         <tbody>
           {
-            data.slice(currentPage * perPage, (currentPage + 1) * perPage).map(({ category, title, date, likes }, index) => (
+            data.slice(currentPage * perPage, (currentPage + 1) * perPage).map(({ category, title, createdAt, likes }, index) => (
               <TableRow key={index}>
-                <TableCell style={{ color: colors.main }}>{categoryToString(category)}</TableCell>
+                <TableCell style={{ color: colors.main }}>{category}</TableCell>
                 <TableCell>{title}</TableCell>
-                <TableCell>{date.format('YY.MM.DD')}</TableCell>
+                <TableCell>{createdAt.format('YY.MM.DD')}</TableCell>
                 <TableCell style={{ color: colors.main }}>{likes}명</TableCell>
               </TableRow>
             ))

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 
-import CategorySelect, { SelectContainer } from 'components/CategorySelect';
+import CategorySelect, {SelectContainer} from 'components/CategorySelect';
 import PetitionStatus from 'components/PetitionStatus';
 import PetitionList from 'components/PetitionList';
 import ComponentTitle from 'components/ComponentTitle';
