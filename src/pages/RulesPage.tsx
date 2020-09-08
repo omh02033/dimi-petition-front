@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import ComponentTitle from 'components/ComponentTitle';
 import RuleBox from 'components/RuleBox';
 import ButtonPair from 'components/ButtonPair';
+import PetitionContext from 'contexts/PetitionContext';
 
 
 const TitleContainer = styled.div`
@@ -77,6 +78,7 @@ const RulesPage = () => {
   const [isError, setIsError] = useState(false);
   const allAgreed = checkedList.every((x) => x);
   const history = useHistory();
+  const {agree} = useContext(PetitionContext);
 
   const onCancel = () => {
     history.push('/');
@@ -85,7 +87,9 @@ const RulesPage = () => {
 
   const onAgree = () => {
     if (allAgreed) {
-      // 페이지 넘어감
+      window.scrollTo(0, 0);
+      agree();
+      history.push('/petition');
     } else {
       setIsError(true);
     }
@@ -102,7 +106,7 @@ const RulesPage = () => {
       <RuleList>
         {
           agreeData.map((data, i) => (
-            <li>
+            <li key={i}>
               <RuleBox
                 title={data.title}
                 content={data.content}

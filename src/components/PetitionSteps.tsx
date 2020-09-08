@@ -58,7 +58,7 @@ function PetitionSteps() {
 
   const onClick = () => {
     window.scrollTo(0, 0);
-    history.push('/petition');
+    history.push('/rules');
   };
 
   return (

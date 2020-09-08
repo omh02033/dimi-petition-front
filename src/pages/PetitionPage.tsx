@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import {useHistory} from 'react-router-dom';
 import styled from 'styled-components';
 
 import ComponentTitle from 'components/ComponentTitle';
 import PetitionForm from 'components/PetitionForm';
+import PetitionContext from 'contexts/PetitionContext';
 
 const TitleContainer = styled.div`
   padding: 2.5rem 0;
@@ -24,6 +26,14 @@ const WarningItem = styled.li`
 `;
 
 const PetitionPage = () => {
+  const history = useHistory();
+  const {isAgreeRules} = useContext(PetitionContext);
+
+  if (!isAgreeRules) {
+    history.push('/rules');
+    return null;
+  }
+
   return (
     <>
       <TitleContainer>

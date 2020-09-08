@@ -14,7 +14,8 @@ const PetitionProvider = ({children}: any) => {
   };
 
   const fetchPetition = async () => {
-    const result = (await axios.get('/petitions/')).data.petitions;
+    const result = await axios.get('/petitions/');
+    if (result.data.status === 401) return;
     const resToPetition = ({_id, title, likesLength, createdAt, category, status}: any) => (
       {
         id: _id,
@@ -26,10 +27,9 @@ const PetitionProvider = ({children}: any) => {
       }
     );
 
-    console.log(result.map(resToPetition));
     setState(prev => ({
       ...prev,
-      petitionData: result.map(resToPetition)
+      petitionData: result.data.petitions.map(resToPetition)
     }));
   }
 
