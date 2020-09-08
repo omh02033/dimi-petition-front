@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
+import Swal from 'sweetalert2';
 
-import {TextInput, SecondaryButton } from 'assets/styles/BasicComponent';
+import {TextInput, SecondaryButton} from 'assets/styles/BasicComponent';
 import colors from 'assets/colors';
 
 interface LinkListProps {
-  initialLinks: Array<string>; 
+  initialLinks: Array<string>;
   onChangeLinks: (links: Array<string>) => void;
 };
 
@@ -49,6 +50,16 @@ const LinkList = ({initialLinks, onChangeLinks}: LinkListProps) => {
     const trimmed = linkInput.trim();
     if (trimmed === '') return;
 
+    const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/g;
+    if (!trimmed.match(urlRegex)) {
+      Swal.fire({
+        icon: 'error',
+        title: '오류',
+        text: '링크 형식이 잘못되었습니다. (http(s)://로 시작해야합니다)',
+      });
+      return;
+    }
+
     setLinks([...links, trimmed]);
     setLinkInput('');
 
@@ -72,8 +83,8 @@ const LinkList = ({initialLinks, onChangeLinks}: LinkListProps) => {
           links.map((url, i) => (
             <li key={i}>
               <LinkContainer>
-                <LinkInput value={url}  disabled/> 
-                <DeleteButton type="button" value="링크 삭제" onClick={() => onDelete(i)}/>
+                <LinkInput value={url} disabled />
+                <DeleteButton type="button" value="링크 삭제" onClick={() => onDelete(i)} />
               </LinkContainer>
             </li>
           ))
@@ -81,13 +92,13 @@ const LinkList = ({initialLinks, onChangeLinks}: LinkListProps) => {
       </Links>
 
       <LinkContainer>
-        <LinkInput 
+        <LinkInput
           type="url"
-          value={linkInput} 
+          value={linkInput}
           onKeyPress={onKeyPress}
           onChange={(e) => setLinkInput(e.target.value)}
         />
-        <AddButton type="button" value="링크 추가" onClick={onAdd}/>
+        <AddButton type="button" value="링크 추가" onClick={onAdd} />
       </LinkContainer>
     </Container>
   );
