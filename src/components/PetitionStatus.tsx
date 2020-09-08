@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 
 import colors from 'assets/colors';
@@ -45,7 +46,18 @@ const Number = styled.p`
   color: ${colors.main};
 `;
 
-function PetitionStatus() {
+const PetitionStatus= () => {
+  const [status, setStatus] = useState({p: 0, w: 0, a: 0});
+
+  useEffect(() => {
+    async function fetch() {
+      const fetched = await axios.get('/petitions/summary');
+      setStatus(fetched.data.summary);
+    }
+
+    fetch();
+  }, []);
+
   return (
     <Container>
       <Status>
@@ -53,7 +65,7 @@ function PetitionStatus() {
           <FiAlertCircle />
         </Icon>
         <Title>등록된 청원</Title>
-        <Number>10,500개</Number>
+        <Number>{status.p + status.w + status.a}</Number>
       </Status>
 
       <Status>
@@ -61,7 +73,7 @@ function PetitionStatus() {
           <FiClock />
         </Icon>
         <Title>진행 중인 청원</Title>
-        <Number>10,500개</Number>
+        <Number>{status.p}</Number>
       </Status>
 
       <Status>
@@ -69,7 +81,7 @@ function PetitionStatus() {
           <FiCheckCircle />
         </Icon>
         <Title>답변된 청원</Title>
-        <Number>10,500개</Number>
+        <Number>{status.a}</Number>
       </Status>
     </Container>
   );
