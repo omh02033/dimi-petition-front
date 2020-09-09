@@ -6,7 +6,7 @@ const PetitionContext = createContext({
   petitionData: Array<PetitionData>(),
   isAgreeRules: false,
   agree: () => {},
-  fetchPetition: () => {},
+  fetchPetition: async () => {},
 });
 
 export default PetitionContext;

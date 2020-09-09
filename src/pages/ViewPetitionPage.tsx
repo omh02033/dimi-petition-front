@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 import dayjs from "dayjs";
+import Swal from "sweetalert2";
 
 import ComponentTitle from "components/ComponentTitle";
-import PetitionData, { PetitionStatus } from "data/PetitionData";
+import PetitionData, { statusToString } from "data/PetitionData";
+import ButtonPair from "components/ButtonPair";
 import colors from "assets/colors";
+import PetitionContext from "contexts/PetitionContext";
 
 const TitleContainer = styled.div`
   padding: 3rem 0 2rem 0;
@@ -80,7 +84,7 @@ const ContentArea = styled.p`
 
   border: 1px solid #d9d9d9;
   padding: 1.5rem;
-  line-height: 1rem;
+  line-height: 2rem;
 `;
 
 const LinkList = styled.ul``;
@@ -92,48 +96,91 @@ const LinkItem = styled.li`
 const ViewPetitionPage = ({ match }: any) => {
   const { id } = match.params;
   const [petition, setPetition] = useState<PetitionData | null>(null);
+  const [agree, setAgree] = useState(false);
+  const { fetchPetition } = useContext(PetitionContext);
+  const history = useHistory();
 
-  useEffect(() => {
-    async function fetch() {
-      const response = await axios.get("/petitions/" + id);
-      const data = response.data.petition;
+  const fetch = useCallback(async () => {
+    const response = await axios.get("/petitions/" + id);
+    const data = response.data.petition;
 
-      setPetition({
-        id: id,
-        title: data.title,
-        content: data.content,
-        links: data.relatedUrls,
-        category: data.category,
-        status: data.status,
-        likes: data.likesLength,
-        createdAt: dayjs(data.createdAt),
-        until: dayjs(data.until),
-      });
-    }
+    setPetition({
+      id: id,
+      title: data.title,
+      content: data.content,
+      links: data.relatedUrls,
+      category: data.category,
+      status: data.status,
+      likes: data.likesLength,
+      createdAt: dayjs(data.createdAt),
+      until: dayjs(data.until),
+    });
 
-    fetch();
+    setAgree(data.me.like);
   }, [id]);
 
-  if (!petition) return null;
-  const statusToString = (status: PetitionStatus) => {
-    switch (status) {
-      case PetitionStatus.Progress:
-        return "청원 진행 중";
-      case PetitionStatus.Hided:
-        return "가려진 청원";
-      case PetitionStatus.Closed:
-        return "닫힌 청원";
-      case PetitionStatus.Waiting:
-        return "답변 대기 중";
-      case PetitionStatus.Deleted:
-        return "삭제된 청원";
-      case PetitionStatus.Reported:
-        return "신고 접수된 청원";
-      case PetitionStatus.Answered:
-        return "답변된 청원";
+  useEffect(() => {
+    console.log('effect');
+    fetch();
+  }, [fetch]);
+
+  const onDisagree = () => {
+    window.scrollTo(0, 0);
+    history.push("/");
+  };
+
+  const onAgree = async () => {
+    if (!agree) {
+      const result = await Swal.fire({
+        title: "확인",
+        text: "이 청원에 동의하시겠습니까?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: colors.main,
+        cancelButtonColor: "#d9d9d9",
+        confirmButtonText: "네",
+        cancelButtonText: "취소",
+      });
+
+      if (result.isConfirmed) {
+        await axios.post("/petitions/" + id + "/like");
+        await fetch();
+        await fetchPetition();
+        Swal.fire({
+          title: "성공",
+          text: "청원에 동의했습니다.",
+          icon: "success",
+        });
+
+      }
+    } else {
+      const result = await Swal.fire({
+        title: "확인",
+        text: "이 청원에 동의를 취소하시겠습니까?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: colors.main,
+        cancelButtonColor: "#d9d9d9",
+        confirmButtonText: "네",
+        cancelButtonText: "취소",
+      });
+
+      if (result.isConfirmed) {
+        await axios.delete("/petitions/" + id + "/like");
+        await fetch();
+        await fetchPetition();
+
+        Swal.fire({
+          title: "성공",
+          text: "청원 동의를 취소했습니다.",
+          icon: "info",
+        });
+
+      }
     }
   };
 
+  if (!petition) return null;
   const categoryName: any = petition.category;
   return (
     <>
@@ -177,6 +224,13 @@ const ViewPetitionPage = ({ match }: any) => {
           </LinkList>
         </Control>
       )}
+
+      <ButtonPair
+        onClickLeft={onDisagree}
+        onClickRight={onAgree}
+        leftText="취소"
+        rightText={agree ? "동의 취소" : "동의"}
+      />
     </>
   );
 };

@@ -166,8 +166,8 @@ const NavBar = ({ userData }: NavBarProps) => {
     { title: "답변된 청원", location: "/answered/" },
   ];
 
-  const onLogout = () => {
-    axios.post("/users/logout");
+  const onLogout = async () => {
+    await axios.post("/users/logout");
     removeCookie("auth");
     history.push("/login");
   };

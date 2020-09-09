@@ -15,7 +15,6 @@ const PetitionProvider = ({ children }: any) => {
 
   const fetchPetition = async () => {
     const result = await axios.get("/petitions/");
-    console.log(result);
     if (result.data.status === 401) return;
     const resToPetition = ({
       _id,
