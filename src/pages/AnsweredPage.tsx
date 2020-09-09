@@ -6,8 +6,9 @@ import PetitionList from 'components/PetitionList';
 import ComponentTitle from 'components/ComponentTitle';
 
 import Category from 'data/Category';
+import {PetitionStatus as Status} from 'data/PetitionData';
 
-const PopularityPage = () => {
+const AnsweredPage = () => {
   const [filter, setFilter] = useState<Category>(Category.General);
 
   return (<>
@@ -18,8 +19,8 @@ const PopularityPage = () => {
       <CategorySelect onChangeSelect={(c) => setFilter(c)} />
     </SelectContainer>
 
-    <PetitionList title="전체" perPage={10} categoryFilter={filter} />
+    <PetitionList title="전체" perPage={10} categoryFilter={filter} statusFilter={Status.Answered}/>
   </>);
 };
 
-export default PopularityPage;
+export default AnsweredPage;
