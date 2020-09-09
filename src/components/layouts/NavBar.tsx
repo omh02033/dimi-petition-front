@@ -1,19 +1,18 @@
-import React from 'react';
-import axios from 'axios';
-import {useCookies} from 'react-cookie';
-import {Link, useLocation} from 'react-router-dom';
-import styled from 'styled-components';
+import React from "react";
+import axios from "axios";
+import { useCookies } from "react-cookie";
+import { Link, useHistory, useLocation } from "react-router-dom";
+import styled from "styled-components";
 
-import {FiLogOut} from 'react-icons/fi';
+import { FiLogOut } from "react-icons/fi";
 
-import colors from 'assets/colors';
-import devices from 'assets/devices';
-import UserData from 'data/UserData';
-
+import colors from "assets/colors";
+import devices from "assets/devices";
+import UserData from "data/UserData";
 
 interface NavBarProps {
   userData: UserData;
-};
+}
 
 const Nav = styled.nav`
   display: grid;
@@ -136,7 +135,7 @@ const Profile = styled.div`
 
 const UserImage = styled.img`
   border-radius: 50%;
-  border: 1px solid #D9D9D9;
+  border: 1px solid #d9d9d9;
 
   object-fit: cover;
   width: 40px;
@@ -157,19 +156,20 @@ const LogoutIcon = styled(FiLogOut)`
   margin-top: 3px;
 `;
 
-const NavBar = ({userData}: NavBarProps) => {
+const NavBar = ({ userData }: NavBarProps) => {
+  const history = useHistory();
   const location = useLocation();
   const [, , removeCookie] = useCookies();
   const itemList = [
-    {title: "분야별 청원", location: "/category/"},
-    {title: "추천순 청원", location: "/popularity/"},
-    {title: "답변된 청원", location: "/answered/"},
+    { title: "분야별 청원", location: "/category/" },
+    { title: "추천순 청원", location: "/popularity/" },
+    { title: "답변된 청원", location: "/answered/" },
   ];
 
   const onLogout = () => {
-    axios.post('/users/logout');
-    removeCookie('auth');
-    window.location.reload(false);
+    axios.post("/users/logout");
+    removeCookie("auth");
+    history.push("/login");
   };
 
   return (
@@ -179,32 +179,28 @@ const NavBar = ({userData}: NavBarProps) => {
       </Link>
 
       <MenuList>
-        {
-          itemList.map((item) => {
-            const isCurrent = location.pathname === item.location;
-            return (
-              <MenuListItem
-                key={item.title}
-                className={isCurrent ? "current" : ""}
-              >
-                <MenuItemLink
-                  to={item.location}
-                >
-                  {item.title}
-                </MenuItemLink>
-              </MenuListItem>
-            );
-          })
-        }
+        {itemList.map((item) => {
+          const isCurrent = location.pathname === item.location;
+          return (
+            <MenuListItem
+              key={item.title}
+              className={isCurrent ? "current" : ""}
+            >
+              <MenuItemLink to={item.location}>{item.title}</MenuItemLink>
+            </MenuListItem>
+          );
+        })}
       </MenuList>
       <Profile>
-        <UserImage src={"https://api.dimigo.hs.kr/user_photo/" + userData.photo} />
+        <UserImage
+          src={"https://api.dimigo.hs.kr/user_photo/" + userData.photo}
+        />
         <LogoutButton onClick={onLogout}>
           <LogoutIcon />
         </LogoutButton>
       </Profile>
     </Nav>
   );
-}
+};
 
 export default NavBar;

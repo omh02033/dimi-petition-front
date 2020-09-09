@@ -1,11 +1,11 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
-import styled from 'styled-components';
-import dayjs from 'dayjs';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import styled from "styled-components";
+import dayjs from "dayjs";
 
-import ComponentTitle from 'components/ComponentTitle';
-import PetitionData, {PetitionStatus} from 'data/PetitionData';
-import colors from 'assets/colors';
+import ComponentTitle from "components/ComponentTitle";
+import PetitionData, { PetitionStatus } from "data/PetitionData";
+import colors from "assets/colors";
 
 const TitleContainer = styled.div`
   padding: 3rem 0 2rem 0;
@@ -36,7 +36,7 @@ const InfoList = styled.ul`
 
   box-sizing: border-box;
   list-style-type: none;
-  border: 1px solid #D9D9D9;
+  border: 1px solid #d9d9d9;
 `;
 
 const InfoItem = styled.li`
@@ -74,29 +74,28 @@ const Subtitle = styled.h2`
 `;
 
 const ContentArea = styled.p`
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   font-size: 1.1rem;
   white-space: pre-wrap;
 
-
-  border: 1px solid #D9D9D9;
-  padding: 0.8rem 0.8rem;
+  border: 1px solid #d9d9d9;
+  padding: 1.5rem;
+  line-height: 1rem;
 `;
 
-const LinkList = styled.ul`
-`;
+const LinkList = styled.ul``;
 
 const LinkItem = styled.li`
   font-size: 1.2rem;
 `;
 
-const ViewPetitionPage = ({match}: any) => {
-  const {id} = match.params;
+const ViewPetitionPage = ({ match }: any) => {
+  const { id } = match.params;
   const [petition, setPetition] = useState<PetitionData | null>(null);
 
   useEffect(() => {
     async function fetch() {
-      const response = await axios.get('/petitions/' + id);
+      const response = await axios.get("/petitions/" + id);
       const data = response.data.petition;
 
       setPetition({
@@ -108,7 +107,7 @@ const ViewPetitionPage = ({match}: any) => {
         status: data.status,
         likes: data.likesLength,
         createdAt: dayjs(data.createdAt),
-        until: dayjs(data.until)
+        until: dayjs(data.until),
       });
     }
 
@@ -133,19 +132,15 @@ const ViewPetitionPage = ({match}: any) => {
       case PetitionStatus.Answered:
         return "답변된 청원";
     }
-  }
+  };
 
   const categoryName: any = petition.category;
   return (
     <>
       <TitleContainer>
-        <ComponentTitle>
-          {statusToString(petition.status)}
-        </ComponentTitle>
+        <ComponentTitle>{statusToString(petition.status)}</ComponentTitle>
       </TitleContainer>
-      <PetitionTitle>
-        {petition.title}
-      </PetitionTitle>
+      <PetitionTitle>{petition.title}</PetitionTitle>
       <PetitionLikes>
         참여인원 : [ <Highlight>{petition.likes}</Highlight>명 ]
       </PetitionLikes>
@@ -164,32 +159,26 @@ const ViewPetitionPage = ({match}: any) => {
           <Highlight>{categoryName.name}</Highlight>
         </InfoItem>
       </InfoList>
-      
+
       <Control>
-        <Subtitle>
-          청원 내용
-        </Subtitle>
-        <ContentArea>
-          {petition.content}
-        </ContentArea>
+        <Subtitle>청원 내용</Subtitle>
+        <ContentArea>{petition.content}</ContentArea>
       </Control>
 
-      {petition.links!.length !== 0 &&
+      {petition.links!.length !== 0 && (
         <Control>
-          <Subtitle>
-            관련 링크
-          </Subtitle>
+          <Subtitle>관련 링크</Subtitle>
           <LinkList>
             {petition.links!.map((link, i) => (
               <LinkItem key={i}>
                 <a href={link}>{link}</a>
               </LinkItem>
-            ))
-            }
+            ))}
           </LinkList>
         </Control>
-      }
-    </>);
+      )}
+    </>
+  );
 };
 
 export default ViewPetitionPage;

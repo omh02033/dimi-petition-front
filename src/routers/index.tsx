@@ -1,25 +1,31 @@
-import React, {useContext, useEffect} from 'react';
-import {useCookies} from 'react-cookie';
-import {Redirect, BrowserRouter, Switch, Route, useLocation} from 'react-router-dom';
+import React, { useContext, useEffect } from "react";
+import { useCookies } from "react-cookie";
+import {
+  Redirect,
+  BrowserRouter,
+  Switch,
+  Route,
+  useLocation,
+} from "react-router-dom";
 
-import styled from 'styled-components';
+import styled from "styled-components";
 
-import devices from 'assets/devices';
+import devices from "assets/devices";
 
-import NavBar from 'components/layouts/NavBar';
-import Banner from 'components/layouts/Banner';
-import Footer from 'components/layouts/Footer';
+import NavBar from "components/layouts/NavBar";
+import Banner from "components/layouts/Banner";
+import Footer from "components/layouts/Footer";
 
-import Home from 'pages/Home';
-import CategoryPage from 'pages/CategoryPage';
-import PopularityPage from 'pages/PopularityPage';
-import AnsweredPage from 'pages/AnsweredPage';
-import LoginPage from 'pages/LoginPage';
-import RulesPage from 'pages/RulesPage';
-import PetitionPage from 'pages/PetitionPage';
-import ViewPetitionPage from 'pages/ViewPetitionPage';
-import UserData from 'data/UserData';
-import PetitionContext from 'contexts/PetitionContext';
+import Home from "pages/Home";
+import CategoryPage from "pages/CategoryPage";
+import PopularityPage from "pages/PopularityPage";
+import AnsweredPage from "pages/AnsweredPage";
+import LoginPage from "pages/LoginPage";
+import RulesPage from "pages/RulesPage";
+import PetitionPage from "pages/PetitionPage";
+import ViewPetitionPage from "pages/ViewPetitionPage";
+import UserData from "data/UserData";
+import PetitionContext from "contexts/PetitionContext";
 
 const Container = styled.main`
   display: flex;
@@ -38,50 +44,57 @@ const Container = styled.main`
   }
 `;
 
-const HideIfLogin = ({children, authenticated}: any) => {
+const HideIfLogin = ({ children, authenticated }: any) => {
   const location = useLocation();
-  if (location.pathname.startsWith('/login') || !authenticated) {
+  if (location.pathname.startsWith("/login") || !authenticated) {
     return null;
   }
 
   return children;
-}
+};
 
 const Root = () => {
-  const [cookies, setCookie] = useCookies(['auth']);
-  const authenticated = cookies.auth !== 'null' && cookies.auth !== undefined;
+  const [cookies, setCookie] = useCookies(["auth"]);
+  const authenticated = cookies.auth !== "null" && cookies.auth !== undefined;
   const userData = authenticated ? cookies.auth : null;
-  const {fetchPetition} = useContext(PetitionContext);
+  const { fetchPetition } = useContext(PetitionContext);
 
   useEffect(() => {
     fetchPetition();
   }, [fetchPetition]);
 
   const onLogin = (data: UserData) => {
-    setCookie('auth', data, {maxAge: 43200});
+    setCookie("auth", data, { maxAge: 43200 });
     fetchPetition();
   };
 
-  const AuthRoute = ({component: Component, ...rest}: any) => {
+  const AuthRoute = ({ component: Component, ...rest }: any) => {
     return (
-      <Route {...rest} render={props => (
-        authenticated ?
-          <Component {...props} />
-          : <Redirect to="/login" />
-      )} />
+      <Route
+        {...rest}
+        render={(props) =>
+          authenticated ? <Component {...props} /> : <Redirect to="/login" />
+        }
+      />
     );
   };
 
   return (
     <BrowserRouter>
       <HideIfLogin authenticated={authenticated}>
-        <NavBar userData={userData}/>
+        <NavBar userData={userData} />
         <Banner />
       </HideIfLogin>
 
       <Container>
         <Switch>
-          <Route path="/login" exact render={() => <LoginPage onLogin={onLogin} authenticated={authenticated} />} />
+          <Route
+            path="/login"
+            exact
+            render={() => (
+              <LoginPage onLogin={onLogin} authenticated={authenticated} />
+            )}
+          />
 
           <AuthRoute path="/" exact component={Home} />
           <AuthRoute path="/category" exact component={CategoryPage} />
@@ -98,6 +111,6 @@ const Root = () => {
       </HideIfLogin>
     </BrowserRouter>
   );
-}
+};
 
 export default Root;

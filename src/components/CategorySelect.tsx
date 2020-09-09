@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 
-import devices from 'assets/devices';
-import colors from 'assets/colors';
+import devices from "assets/devices";
+import colors from "assets/colors";
 
-import Category from 'data/Category';
+import Category from "data/Category";
 
 interface CategorySelectProps {
   onChangeSelect: (category: Category | null) => void;
@@ -41,7 +41,8 @@ const Item = styled.div`
 
   &.selected {
     img {
-      filter: invert(29%) sepia(98%) saturate(7493%) hue-rotate(318deg) brightness(100%) contrast(108%);
+      filter: invert(29%) sepia(98%) saturate(7493%) hue-rotate(318deg)
+        brightness(100%) contrast(108%);
     }
 
     div {
@@ -63,7 +64,7 @@ const ItemIcon = styled.img`
 const ItemTitle = styled.div`
   margin-top: 0.7rem;
   font-size: 1.1rem;
-  color: #B8B8B8;
+  color: #b8b8b8;
 
   word-break: keep-all;
 
@@ -78,18 +79,37 @@ interface CategoryInfo {
   category: Category | null;
 }
 
-const CategorySelect = ({onChangeSelect, includeGeneral}: CategorySelectProps) => {
+const CategorySelect = ({
+  onChangeSelect,
+  includeGeneral,
+}: CategorySelectProps) => {
   const [selectIndex, setSelectIndex] = useState(0);
 
   const itemList: CategoryInfo[] = [
-    {title: "안전", imageSrc: "/category/safety.svg", category: Category.Safety},
-    {title: "인권", imageSrc: "/category/human-rights.svg", category: Category.HumanRights},
-    {title: "생활", imageSrc: "/category/life.svg", category: Category.Life},
-    {title: "기숙사", imageSrc: "/category/dormitory.svg", category: Category.Dormitory},
-  ]
+    {
+      title: "안전",
+      imageSrc: "/category/safety.svg",
+      category: Category.Safety,
+    },
+    {
+      title: "인권",
+      imageSrc: "/category/human-rights.svg",
+      category: Category.HumanRights,
+    },
+    { title: "생활", imageSrc: "/category/life.svg", category: Category.Life },
+    {
+      title: "기숙사",
+      imageSrc: "/category/dormitory.svg",
+      category: Category.Dormitory,
+    },
+  ];
 
   if (includeGeneral) {
-    itemList.unshift({title: "전체", imageSrc: "/category/general.svg", category: null});
+    itemList.unshift({
+      title: "전체",
+      imageSrc: "/category/general.svg",
+      category: null,
+    });
   }
 
   const onClickItem = (i: number) => {
@@ -98,29 +118,27 @@ const CategorySelect = ({onChangeSelect, includeGeneral}: CategorySelectProps) =
     if (onChangeSelect !== undefined) {
       onChangeSelect(itemList[i].category);
     }
-  }
+  };
 
   return (
     <List>
-      {
-        itemList.map((item, i) => (
-          <ItemContainer key={item.title}>
-            <Item
-              className={selectIndex === i ? "selected" : ""}
-              onClick={() => onClickItem(i)}
-            >
-              <ItemIcon src={item.imageSrc} />
-              <ItemTitle>{item.title}</ItemTitle>
-            </Item>
-          </ItemContainer>
-        ))
-      }
+      {itemList.map((item, i) => (
+        <ItemContainer key={item.title}>
+          <Item
+            className={selectIndex === i ? "selected" : ""}
+            onClick={() => onClickItem(i)}
+          >
+            <ItemIcon src={item.imageSrc} />
+            <ItemTitle>{item.title}</ItemTitle>
+          </Item>
+        </ItemContainer>
+      ))}
     </List>
   );
 };
 
 CategorySelect.defaultProps = {
   includeGeneral: true,
-}
+};
 
 export default CategorySelect;

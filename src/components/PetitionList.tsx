@@ -1,15 +1,16 @@
-import React, { useState, useEffect, useContext } from 'react';
-import styled from 'styled-components';
-import ReactPaginate from 'react-paginate';
+import React, { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import ReactPaginate from "react-paginate";
 
-import colors from 'assets/colors';
-import devices from 'assets/devices';
+import colors from "assets/colors";
+import devices from "assets/devices";
 
-import Category from 'data/Category';
-import PetitionContext from 'contexts/PetitionContext';
-import PetitionData, {PetitionStatus} from 'data/PetitionData';
+import Category from "data/Category";
+import PetitionContext from "contexts/PetitionContext";
+import PetitionData, { PetitionStatus } from "data/PetitionData";
 
-import '../assets/styles/PetitionList.scss';
+import "../assets/styles/PetitionList.scss";
 
 interface PetitionListProps {
   title: String;
@@ -52,12 +53,14 @@ const TableHeader = styled.th`
     width: 120px;
   }
 
-  &:nth-child(3), &:nth-child(4) {
+  &:nth-child(3),
+  &:nth-child(4) {
     width: 100px;
   }
 
   @media ${devices.tablet} {
-    &:nth-child(1), &:nth-child(3) {
+    &:nth-child(1),
+    &:nth-child(3) {
       display: none;
     }
   }
@@ -70,15 +73,27 @@ const TableCell = styled.td`
   padding: 1rem 0;
 
   @media ${devices.tablet} {
-    &:nth-child(1), &:nth-child(3) {
+    &:nth-child(1),
+    &:nth-child(3) {
       display: none;
     }
   }
 `;
 
-function PetitionList({ title, perPage, categoryFilter, statusFilter, preprocess }: PetitionListProps) {
+const PetitionLink = styled(Link)`
+  text-decoration: none;
+  color: ${colors.textMain};
+`;
+
+function PetitionList({
+  title,
+  perPage,
+  categoryFilter,
+  statusFilter,
+  preprocess,
+}: PetitionListProps) {
   const [currentPage, setCurrentPage] = useState(0);
-  const {petitionData} = useContext(PetitionContext);
+  const { petitionData } = useContext(PetitionContext);
 
   let data = petitionData;
   if (categoryFilter !== null) {
@@ -97,7 +112,7 @@ function PetitionList({ title, perPage, categoryFilter, statusFilter, preprocess
 
   const handlePageClick = (data: any) => {
     setCurrentPage(data.selected);
-  }
+  };
 
   useEffect(() => setCurrentPage(0), [categoryFilter]);
 
@@ -114,18 +129,19 @@ function PetitionList({ title, perPage, categoryFilter, statusFilter, preprocess
           </TableRow>
         </thead>
         <tbody>
-          {
-            data.slice(currentPage * perPage, (currentPage + 1) * perPage).map(({ category, title, createdAt, likes }, index) => (
+          {data
+            .slice(currentPage * perPage, (currentPage + 1) * perPage)
+            .map(({ id, category, title, createdAt, likes }, index) => (
               <TableRow key={index}>
                 <TableCell style={{ color: colors.main }}>{category}</TableCell>
-                <TableCell>{title}</TableCell>
-                <TableCell>{createdAt.format('YY.MM.DD')}</TableCell>
+                <TableCell>
+                  <PetitionLink to={"/petition/" + id}>{title}</PetitionLink>
+                </TableCell>
+                <TableCell>{createdAt.format("YY.MM.DD")}</TableCell>
                 <TableCell style={{ color: colors.main }}>{likes}명</TableCell>
               </TableRow>
-            ))
-          }
+            ))}
         </tbody>
-
       </Table>
       <ReactPaginate
         containerClassName="pagination"
@@ -138,11 +154,11 @@ function PetitionList({ title, perPage, categoryFilter, statusFilter, preprocess
         nextLabel="NEXT >"
       />
     </Container>
-  )
+  );
 }
 
 PetitionList.defaultProps = {
-  categoryFilter: null
-}
+  categoryFilter: null,
+};
 
 export default PetitionList;

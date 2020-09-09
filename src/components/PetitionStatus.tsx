@@ -1,11 +1,11 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
-import styled from 'styled-components';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import styled from "styled-components";
 
-import colors from 'assets/colors';
-import devices from 'assets/devices';
+import colors from "assets/colors";
+import devices from "assets/devices";
 
-import {FiAlertCircle, FiClock, FiCheckCircle} from 'react-icons/fi';
+import { FiAlertCircle, FiClock, FiCheckCircle } from "react-icons/fi";
 
 const Container = styled.article`
   width: 100%;
@@ -58,12 +58,14 @@ const PetitionStatus = () => {
   useEffect(() => {
     let isMounted = true;
     async function fetch() {
-      const fetched = await axios.get('/petitions/summary');
+      const fetched = await axios.get("/petitions/summary");
       if (isMounted) setStatus(fetched.data.summary);
     }
 
     fetch();
-    return () => {isMounted = false;}
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return (
@@ -93,6 +95,6 @@ const PetitionStatus = () => {
       </Status>
     </Container>
   );
-}
+};
 
 export default PetitionStatus;

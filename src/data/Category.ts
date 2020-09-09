@@ -2,7 +2,7 @@ enum Category {
   Safety = "안전",
   HumanRights = "인권",
   Life = "생활",
-  Dormitory = "기숙사"
+  Dormitory = "기숙사",
 }
 
 export function getCategoryId(category: Category) {

@@ -1,21 +1,19 @@
-import React, {useState} from 'react';
-import styled from 'styled-components';
-import Swal from 'sweetalert2';
+import React, { useState } from "react";
+import styled from "styled-components";
+import Swal from "sweetalert2";
 
-import {TextInput, SecondaryButton} from 'assets/styles/BasicComponent';
-import colors from 'assets/colors';
+import { TextInput, SecondaryButton } from "assets/styles/BasicComponent";
+import colors from "assets/colors";
 
 interface LinkListProps {
   initialLinks: Array<string>;
   onChangeLinks: (links: Array<string>) => void;
-};
+}
 
-const Container = styled.div`
-  
-`;
+const Container = styled.div``;
 
 const Links = styled.ul`
-  padding: 0;  
+  padding: 0;
   margin: 0;
   list-style-type: none;
 `;
@@ -31,7 +29,6 @@ const LinkInput = styled(TextInput)`
   min-width: 11rem;
 `;
 
-
 const DeleteButton = styled(SecondaryButton)`
   width: 10rem;
 `;
@@ -42,27 +39,27 @@ const AddButton = styled(SecondaryButton)`
   border-color: ${colors.main};
 `;
 
-const LinkList = ({initialLinks, onChangeLinks}: LinkListProps) => {
+const LinkList = ({ initialLinks, onChangeLinks }: LinkListProps) => {
   const [links, setLinks] = useState(initialLinks);
-  const [linkInput, setLinkInput] = useState('');
+  const [linkInput, setLinkInput] = useState("");
 
   const onAdd = () => {
     const trimmed = linkInput.trim();
-    if (trimmed === '') return;
+    if (trimmed === "") return;
 
     const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/g;
     if (!trimmed.match(urlRegex)) {
       Swal.fire({
-        icon: 'error',
-        title: '오류',
-        text: '링크 형식이 잘못되었습니다.',
+        icon: "error",
+        title: "오류",
+        text: "링크 형식이 잘못되었습니다.",
       });
       return;
     }
 
     const newLinks = [...links, trimmed];
     setLinks(newLinks);
-    setLinkInput('');
+    setLinkInput("");
 
     onChangeLinks(newLinks);
   };
@@ -74,22 +71,24 @@ const LinkList = ({initialLinks, onChangeLinks}: LinkListProps) => {
   };
 
   const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') onAdd();
-  }
+    if (e.key === "Enter") onAdd();
+  };
 
   return (
     <Container>
       <Links>
-        {
-          links.map((url, i) => (
-            <li key={i}>
-              <LinkContainer>
-                <LinkInput value={url} disabled />
-                <DeleteButton type="button" value="링크 삭제" onClick={() => onDelete(i)} />
-              </LinkContainer>
-            </li>
-          ))
-        }
+        {links.map((url, i) => (
+          <li key={i}>
+            <LinkContainer>
+              <LinkInput value={url} disabled />
+              <DeleteButton
+                type="button"
+                value="링크 삭제"
+                onClick={() => onDelete(i)}
+              />
+            </LinkContainer>
+          </li>
+        ))}
       </Links>
 
       <LinkContainer>

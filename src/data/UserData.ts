@@ -3,4 +3,4 @@ export default interface UserData {
   gradeNumber: number;
   classNumber: number;
   photo: string;
-};
+}

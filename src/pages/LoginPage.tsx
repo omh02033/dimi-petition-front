@@ -1,10 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-import {Redirect} from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
+import { Redirect } from "react-router-dom";
 
-import LoginForm, {LoginFormProps} from 'components/LoginForm';
+import LoginForm, { LoginFormProps } from "components/LoginForm";
 
-import devices from 'assets/devices';
+import devices from "assets/devices";
 
 const Container = styled.div`
   display: flex;
@@ -15,7 +15,7 @@ const Container = styled.div`
 const Banner = styled.section`
   flex: 1;
 
-  background-image: url('/school-full.png');
+  background-image: url("/school-full.png");
   background-position: center;
   background-size: cover;
   box-shadow: inset 0 0 0 2000px rgba(255, 0, 150, 0.6);
@@ -52,12 +52,12 @@ const BannerDescription = styled.p`
   color: white;
 `;
 
-const Logo = styled.div` 
+const Logo = styled.div`
   display: none;
   position: absolute;
   left: 50%;
   top: 0.5rem;
-  transform:translateX(-50%);
+  transform: translateX(-50%);
 
   @media ${devices.laptop} {
     display: flex;
@@ -87,9 +87,11 @@ const LoginSection = styled.section`
   justify-content: center;
 `;
 
-
-const LoginPage = ({onLogin, authenticated}: LoginFormProps & {authenticated: boolean}) => {
-  if (authenticated) return <Redirect to="/"/>
+const LoginPage = ({
+  onLogin,
+  authenticated,
+}: LoginFormProps & { authenticated: boolean }) => {
+  if (authenticated) return <Redirect to="/" />;
   return (
     <Container>
       <Banner>

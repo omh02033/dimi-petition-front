@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import Root from './routers';
+import Root from "./routers";
 
 function App() {
   return (

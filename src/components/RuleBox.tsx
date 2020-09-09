@@ -1,14 +1,14 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import colors from 'assets/colors';
+import colors from "assets/colors";
 
 interface RuleBoxProps {
   title: string;
   content: string;
   groupName: string;
   isAgree: boolean | null;
-  onChangeSelect: (isAgree: boolean) => void; 
+  onChangeSelect: (isAgree: boolean) => void;
 }
 
 const Container = styled.section`
@@ -21,7 +21,7 @@ const Title = styled.h2`
 `;
 
 const Content = styled.p`
-  border: 2px solid #D9D9D9;
+  border: 2px solid #d9d9d9;
   padding: 1rem;
   color: ${colors.textMain};
 `;
@@ -35,7 +35,13 @@ const AgreeText = styled.p`
   margin: 0 1rem 0 auto;
 `;
 
-const RuleBox = ({ title, content, groupName, onChangeSelect, isAgree }: RuleBoxProps) => (
+const RuleBox = ({
+  title,
+  content,
+  groupName,
+  onChangeSelect,
+  isAgree,
+}: RuleBoxProps) => (
   <Container>
     <Title>{title}</Title>
     <Content>{content}</Content>
@@ -43,13 +49,23 @@ const RuleBox = ({ title, content, groupName, onChangeSelect, isAgree }: RuleBox
     <InputContainer>
       <AgreeText>동의하십니까?</AgreeText>
       <div className="pretty p-default p-round">
-        <input type="radio" name={groupName} checked={isAgree === true} onChange={() => onChangeSelect(true)}/>
+        <input
+          type="radio"
+          name={groupName}
+          checked={isAgree === true}
+          onChange={() => onChangeSelect(true)}
+        />
         <div className="state p-primary-o">
-          <label >예</label>
+          <label>예</label>
         </div>
       </div>
       <div className="pretty p-default p-round">
-        <input type="radio" name={groupName} checked={isAgree === false} onChange={() => onChangeSelect(false)}/>
+        <input
+          type="radio"
+          name={groupName}
+          checked={isAgree === false}
+          onChange={() => onChangeSelect(false)}
+        />
         <div className="state p-primary-o">
           <label>아니요</label>
         </div>

@@ -1,9 +1,9 @@
-import React from 'react';
-import {useHistory} from 'react-router-dom';
-import styled from 'styled-components';
+import React from "react";
+import { useHistory } from "react-router-dom";
+import styled from "styled-components";
 
-import ComponentTitle from 'components/ComponentTitle';
-import {PrimaryButton} from 'assets/styles/BasicComponent';
+import ComponentTitle from "components/ComponentTitle";
+import { PrimaryButton } from "assets/styles/BasicComponent";
 
 const Container = styled.article`
   margin-bottom: 5rem;
@@ -54,34 +54,40 @@ const RegisterButton = styled(PrimaryButton)`
 
 function PetitionSteps() {
   const history = useHistory();
-  const stepTitles = ["청원 작성", "청원 동의", "청원 접수", "의견 전달", "청원 답변"]
+  const stepTitles = [
+    "청원 작성",
+    "청원 동의",
+    "청원 접수",
+    "의견 전달",
+    "청원 답변",
+  ];
 
   const onClick = () => {
     window.scrollTo(0, 0);
-    history.push('/rules');
+    history.push("/rules");
   };
 
   return (
     <Container>
-      <ComponentTitle>
-        청원 방법
-      </ComponentTitle>
+      <ComponentTitle>청원 방법</ComponentTitle>
 
       <StepsList>
-        {
-          stepTitles.map((title, i) => (
-            <StepItem key={i}>
-              <StepImage width="120" height="120" alt={title} src={"/steps/" + (i + 1) + ".svg"} />
-              <StepNumber>0{i + 1}</StepNumber>
-              <StepTitle>{title}</StepTitle>
-            </StepItem>
-          ))
-        }
+        {stepTitles.map((title, i) => (
+          <StepItem key={i}>
+            <StepImage
+              width="120"
+              height="120"
+              alt={title}
+              src={"/steps/" + (i + 1) + ".svg"}
+            />
+            <StepNumber>0{i + 1}</StepNumber>
+            <StepTitle>{title}</StepTitle>
+          </StepItem>
+        ))}
       </StepsList>
-      <RegisterButton type="button" value="지금 청원하기" onClick={onClick}/>
+      <RegisterButton type="button" value="지금 청원하기" onClick={onClick} />
     </Container>
   );
-
 }
 
 export default PetitionSteps;

@@ -1,45 +1,50 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import dayjs from "dayjs";
-import axios from 'axios';
+import axios from "axios";
 
 import PetitionContext from "../contexts/PetitionContext";
 import PetitionData from "data/PetitionData";
 
-const PetitionProvider = ({children}: any) => {
+const PetitionProvider = ({ children }: any) => {
   const agree = () => {
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
-      isAgreeRules: true
+      isAgreeRules: true,
     }));
   };
 
   const fetchPetition = async () => {
-    const result = await axios.get('/petitions/');
+    const result = await axios.get("/petitions/");
     console.log(result);
     if (result.data.status === 401) return;
-    const resToPetition = ({_id, title, likesLength, createdAt, category, status}: any) => (
-      {
-        id: _id,
-        title,
-        likes: likesLength,
-        createdAt: dayjs(createdAt),
-        category: category.name,
-        status: status
-      }
-    );
+    const resToPetition = ({
+      _id,
+      title,
+      likesLength,
+      createdAt,
+      category,
+      status,
+    }: any) => ({
+      id: _id,
+      title,
+      likes: likesLength,
+      createdAt: dayjs(createdAt),
+      category: category.name,
+      status: status,
+    });
 
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
-      petitionData: result.data.petitions.map(resToPetition)
+      petitionData: result.data.petitions.map(resToPetition),
     }));
-  }
+  };
 
   const initialState = {
     isAgreeRules: false,
     petitionData: Array<PetitionData>(),
     agree,
-    fetchPetition
-  }
+    fetchPetition,
+  };
 
   const [state, setState] = useState(initialState);
 
@@ -48,6 +53,6 @@ const PetitionProvider = ({children}: any) => {
       {children}
     </PetitionContext.Provider>
   );
-}
+};
 
 export default PetitionProvider;

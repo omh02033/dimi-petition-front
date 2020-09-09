@@ -1,15 +1,15 @@
-import { Dayjs } from 'dayjs';
+import { Dayjs } from "dayjs";
 
-import Category from './Category';
+import Category from "./Category";
 
 export enum PetitionStatus {
-  Progress = 'p',
-  Waiting = 'w',
-  Answered = 'a',
-  Closed = 'c',
-  Deleted = 'd',
-  Reported = 'r',
-  Hided = 'h',
+  Progress = "p",
+  Waiting = "w",
+  Answered = "a",
+  Closed = "c",
+  Deleted = "d",
+  Reported = "r",
+  Hided = "h",
 }
 
 interface PetitionData {

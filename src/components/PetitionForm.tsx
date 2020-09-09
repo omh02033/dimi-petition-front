@@ -1,15 +1,15 @@
-import React, {useState, useContext} from 'react';
-import Swal from 'sweetalert2';
-import axios from 'axios';
-import {useHistory} from 'react-router-dom';
-import styled from 'styled-components';
+import React, { useState, useContext } from "react";
+import Swal from "sweetalert2";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
+import styled from "styled-components";
 
-import {TextInput} from 'assets/styles/BasicComponent';
-import CategorySelect from 'components/CategorySelect';
-import LinkList from 'components/LinkList';
-import Category, {getCategoryId} from 'data/Category';
-import ButtonPair from 'components/ButtonPair';
-import PetitionContext from 'contexts/PetitionContext';
+import { TextInput } from "assets/styles/BasicComponent";
+import CategorySelect from "components/CategorySelect";
+import LinkList from "components/LinkList";
+import Category, { getCategoryId } from "data/Category";
+import ButtonPair from "components/ButtonPair";
+import PetitionContext from "contexts/PetitionContext";
 
 const Form = styled.form`
   width: 100%;
@@ -32,16 +32,16 @@ const Control = styled.div`
 const TitleInput = styled(TextInput)``;
 
 const ContentInput = styled.textarea`
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   font-size: 1.1rem;
 
-  border: 1px solid #D9D9D9;
+  border: 1px solid #d9d9d9;
   padding: 0.8rem 0.8rem;
   resize: none;
 `;
 
 const SubmitContainer = styled.div`
-  border-top: 1px solid #D9D9D9;
+  border-top: 1px solid #d9d9d9;
 
   display: flex;
   align-items: center;
@@ -55,29 +55,29 @@ const PetitionForm = () => {
   const history = useHistory();
 
   const onCancel = () => {
-    history.push('/');
+    history.push("/");
     window.scrollTo(0, 0);
   };
 
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
   const [links, setLinks] = useState<string[]>([]);
   const [category, setCategory] = useState<Category>(Category.Life);
-  const {fetchPetition} = useContext(PetitionContext);
+  const { fetchPetition } = useContext(PetitionContext);
 
   const onSubmit = async () => {
-    if (title.trim() === '') {
+    if (title.trim() === "") {
       Swal.fire({
-        icon: 'error',
-        title: '오류',
-        text: '청원 제목이 비어있습니다.',
+        icon: "error",
+        title: "오류",
+        text: "청원 제목이 비어있습니다.",
       });
       return;
-    } else if (content.trim() === '') {
+    } else if (content.trim() === "") {
       Swal.fire({
-        icon: 'error',
-        title: '오류',
-        text: '청원 내용이 비어있습니다.',
+        icon: "error",
+        title: "오류",
+        text: "청원 내용이 비어있습니다.",
       });
       return;
     }
@@ -86,25 +86,24 @@ const PetitionForm = () => {
       title: title,
       content: content,
       relatedUrls: links,
-      category: getCategoryId(category)
+      category: getCategoryId(category),
     });
 
     fetchPetition();
 
     if (response.data.status === 200) {
       Swal.fire({
-        icon: 'success',
-        title: '성공',
-        text: '청원을 등록하였습니다.',
+        icon: "success",
+        title: "성공",
+        text: "청원을 등록하였습니다.",
       });
     } else {
       Swal.fire({
-        icon: 'error',
-        title: '오류',
-        text: '청원 등록에 오류가 발생하였습니다.',
+        icon: "error",
+        title: "오류",
+        text: "청원 등록에 오류가 발생하였습니다.",
       });
     }
-
   };
 
   return (
@@ -122,7 +121,10 @@ const PetitionForm = () => {
 
       <Control>
         <Label>분야(카테고리)</Label>
-        <CategorySelect onChangeSelect={(c) => setCategory(c!)} includeGeneral={false} />
+        <CategorySelect
+          onChangeSelect={(c) => setCategory(c!)}
+          includeGeneral={false}
+        />
       </Control>
 
       <Control>
@@ -150,7 +152,7 @@ const PetitionForm = () => {
         />
       </SubmitContainer>
     </Form>
-  )
+  );
 };
 
 export default PetitionForm;
