@@ -9,7 +9,7 @@ import Category from 'data/Category';
 import {PetitionStatus as Status} from 'data/PetitionData';
 
 const CategoryPage = () => {
-  const [filter, setFilter] = useState<Category>(Category.General);
+  const [filter, setFilter] = useState<Category | null>(null);
 
   return (
     <>
@@ -17,7 +17,7 @@ const CategoryPage = () => {
 
       <ComponentTitle>청원 분야별 보기</ComponentTitle>
       <SelectContainer>
-        <CategorySelect onChangeSelect={(c) => setFilter(c)} />
+        <CategorySelect onChangeSelect={setFilter} />
       </SelectContainer>
 
       <PetitionList title="진행중인 청원" perPage={8} categoryFilter={filter} statusFilter={Status.Progress}/>

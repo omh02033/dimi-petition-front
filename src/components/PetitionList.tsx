@@ -14,7 +14,7 @@ import '../assets/styles/PetitionList.scss';
 interface PetitionListProps {
   title: String;
   perPage: number;
-  categoryFilter: Category;
+  categoryFilter: Category | null;
   statusFilter?: PetitionStatus;
   preprocess?: (p: PetitionData[]) => PetitionData[];
 }
@@ -81,7 +81,7 @@ function PetitionList({ title, perPage, categoryFilter, statusFilter, preprocess
   const {petitionData} = useContext(PetitionContext);
 
   let data = petitionData;
-  if (categoryFilter !== Category.General) {
+  if (categoryFilter !== null) {
     data = data.filter((item) => item.category === categoryFilter);
   }
 
@@ -142,7 +142,7 @@ function PetitionList({ title, perPage, categoryFilter, statusFilter, preprocess
 }
 
 PetitionList.defaultProps = {
-  categoryFilter: Category.General
+  categoryFilter: null
 }
 
 export default PetitionList;

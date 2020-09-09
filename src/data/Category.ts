@@ -2,8 +2,7 @@ enum Category {
   Safety = "안전",
   HumanRights = "인권",
   Life = "생활",
-  Dormitory = "기숙사",
-  General = "전체"
+  Dormitory = "기숙사"
 }
 
 export function getCategoryId(category: Category) {
@@ -16,8 +15,6 @@ export function getCategoryId(category: Category) {
       return "5f564ec35ba38a46d0cd84c5";
     case Category.Dormitory:
       return "5f564ec75ba38a46d0cd84c6";
-    case Category.General:
-      return "5f564ea95ba38a46d0cd84c2";
   }
 }
 

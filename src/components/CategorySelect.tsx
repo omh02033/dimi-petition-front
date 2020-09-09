@@ -7,7 +7,7 @@ import colors from 'assets/colors';
 import Category from 'data/Category';
 
 interface CategorySelectProps {
-  onChangeSelect: (category: Category) => void;
+  onChangeSelect: (category: Category | null) => void;
   includeGeneral: boolean;
 }
 
@@ -72,10 +72,16 @@ const ItemTitle = styled.div`
   }
 `;
 
+interface CategoryInfo {
+  title: string;
+  imageSrc: string;
+  category: Category | null;
+}
+
 const CategorySelect = ({onChangeSelect, includeGeneral}: CategorySelectProps) => {
   const [selectIndex, setSelectIndex] = useState(0);
 
-  const itemList = [
+  const itemList: CategoryInfo[] = [
     {title: "안전", imageSrc: "/category/safety.svg", category: Category.Safety},
     {title: "인권", imageSrc: "/category/human-rights.svg", category: Category.HumanRights},
     {title: "생활", imageSrc: "/category/life.svg", category: Category.Life},
@@ -83,7 +89,7 @@ const CategorySelect = ({onChangeSelect, includeGeneral}: CategorySelectProps) =
   ]
 
   if (includeGeneral) {
-    itemList.unshift({title: "전체", imageSrc: "/category/general.svg", category: Category.General});
+    itemList.unshift({title: "전체", imageSrc: "/category/general.svg", category: null});
   }
 
   const onClickItem = (i: number) => {

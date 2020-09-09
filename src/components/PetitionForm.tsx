@@ -61,7 +61,7 @@ const PetitionForm = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [links, setLinks] = useState<Array<string>>([]);
-  const [category, setCategory] = useState<Category>(Category.General);
+  const [category, setCategory] = useState<Category>(Category.Life);
   const {fetchPetition} = useContext(PetitionContext);
 
   const onSubmit = async () => {
@@ -91,7 +91,7 @@ const PetitionForm = () => {
 
       <Control>
         <Label>분야(카테고리)</Label>
-        <CategorySelect onChangeSelect={setCategory} includeGeneral={false} />
+        <CategorySelect onChangeSelect={(c) => setCategory(c!)} includeGeneral={false} />
       </Control>
 
       <Control>

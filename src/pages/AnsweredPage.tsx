@@ -9,7 +9,7 @@ import Category from 'data/Category';
 import {PetitionStatus as Status} from 'data/PetitionData';
 
 const AnsweredPage = () => {
-  const [filter, setFilter] = useState<Category>(Category.General);
+  const [filter, setFilter] = useState<Category | null>(null);
 
   return (<>
     <PetitionStatus />

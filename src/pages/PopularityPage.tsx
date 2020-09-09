@@ -9,7 +9,7 @@ import Category from 'data/Category';
 import PetitionData, {PetitionStatus as Status} from 'data/PetitionData';
 
 const PopularityPage = () => {
-  const [filter, setFilter] = useState<Category>(Category.General);
+  const [filter, setFilter] = useState<Category | null>(null);
   const sortByLike = (ps: PetitionData[]) => (ps.sort((a, b) => b.likes - a.likes));
 
   return (<>
@@ -17,7 +17,7 @@ const PopularityPage = () => {
 
     <ComponentTitle>청원 추천순 보기</ComponentTitle>
     <SelectContainer>
-      <CategorySelect onChangeSelect={(c) => setFilter(c)} />
+      <CategorySelect onChangeSelect={setFilter} />
     </SelectContainer>
 
     <PetitionList 
