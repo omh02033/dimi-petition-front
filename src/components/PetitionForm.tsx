@@ -90,6 +90,21 @@ const PetitionForm = () => {
     });
 
     fetchPetition();
+
+    if (response.data.status === 200) {
+      Swal.fire({
+        icon: 'success',
+        title: '성공',
+        text: '청원을 등록하였습니다.',
+      });
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: '오류',
+        text: '청원 등록에 오류가 발생하였습니다.',
+      });
+    }
+
   };
 
   return (
