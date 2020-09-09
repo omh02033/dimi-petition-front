@@ -91,7 +91,7 @@ const PetitionForm = () => {
 
       <Control>
         <Label>분야(카테고리)</Label>
-        <CategorySelect onChangeSelect={setCategory} />
+        <CategorySelect onChangeSelect={setCategory} includeGeneral={false} />
       </Control>
 
       <Control>

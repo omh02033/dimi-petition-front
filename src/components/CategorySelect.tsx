@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 
 import devices from 'assets/devices';
@@ -8,6 +8,7 @@ import Category from 'data/Category';
 
 interface CategorySelectProps {
   onChangeSelect: (category: Category) => void;
+  includeGeneral: boolean;
 }
 
 export const SelectContainer = styled.div`
@@ -71,16 +72,19 @@ const ItemTitle = styled.div`
   }
 `;
 
-const CategorySelect = ({ onChangeSelect }: CategorySelectProps) => {
+const CategorySelect = ({onChangeSelect, includeGeneral}: CategorySelectProps) => {
   const [selectIndex, setSelectIndex] = useState(0);
 
   const itemList = [
-    { title: "전체", imageSrc: "/category/general.svg", category: Category.General },
-    { title: "안전", imageSrc: "/category/safety.svg", category: Category.Safety },
-    { title: "인권", imageSrc: "/category/human-rights.svg", category: Category.HumanRights },
-    { title: "생활", imageSrc: "/category/life.svg", category: Category.Life },
-    { title: "기숙사", imageSrc: "/category/dormitory.svg", category: Category.Dormitory },
+    {title: "안전", imageSrc: "/category/safety.svg", category: Category.Safety},
+    {title: "인권", imageSrc: "/category/human-rights.svg", category: Category.HumanRights},
+    {title: "생활", imageSrc: "/category/life.svg", category: Category.Life},
+    {title: "기숙사", imageSrc: "/category/dormitory.svg", category: Category.Dormitory},
   ]
+
+  if (includeGeneral) {
+    itemList.unshift({title: "전체", imageSrc: "/category/general.svg", category: Category.General});
+  }
 
   const onClickItem = (i: number) => {
     setSelectIndex(i);
@@ -108,5 +112,9 @@ const CategorySelect = ({ onChangeSelect }: CategorySelectProps) => {
     </List>
   );
 };
+
+CategorySelect.defaultProps = {
+  includeGeneral: true,
+}
 
 export default CategorySelect;
