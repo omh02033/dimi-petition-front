@@ -61,7 +61,7 @@ const PetitionForm = () => {
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [links, setLinks] = useState<Array<string>>([]);
+  const [links, setLinks] = useState<string[]>([]);
   const [category, setCategory] = useState<Category>(Category.Life);
   const {fetchPetition} = useContext(PetitionContext);
 

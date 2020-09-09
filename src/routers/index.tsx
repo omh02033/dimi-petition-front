@@ -17,6 +17,7 @@ import AnsweredPage from 'pages/AnsweredPage';
 import LoginPage from 'pages/LoginPage';
 import RulesPage from 'pages/RulesPage';
 import PetitionPage from 'pages/PetitionPage';
+import ViewPetitionPage from 'pages/ViewPetitionPage';
 import UserData from 'data/UserData';
 import PetitionContext from 'contexts/PetitionContext';
 
@@ -87,6 +88,7 @@ const Root = () => {
           <AuthRoute path="/popularity" exact component={PopularityPage} />
           <AuthRoute path="/answered" exact component={AnsweredPage} />
           <AuthRoute path="/rules" exact component={RulesPage} />
+          <AuthRoute path="/petition/:id" exact component={ViewPetitionPage} />
           <AuthRoute path="/petition" exact component={PetitionPage} />
         </Switch>
       </Container>

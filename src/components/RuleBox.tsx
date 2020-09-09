@@ -12,7 +12,7 @@ interface RuleBoxProps {
 }
 
 const Container = styled.section`
-  margin: 0.5rem 0;
+  margin: 2rem 0;
 `;
 
 const Title = styled.h2`

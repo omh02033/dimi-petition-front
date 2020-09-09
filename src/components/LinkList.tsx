@@ -60,10 +60,11 @@ const LinkList = ({initialLinks, onChangeLinks}: LinkListProps) => {
       return;
     }
 
-    setLinks([...links, trimmed]);
+    const newLinks = [...links, trimmed];
+    setLinks(newLinks);
     setLinkInput('');
 
-    onChangeLinks(links);
+    onChangeLinks(newLinks);
   };
 
   const onDelete = (index: number) => {

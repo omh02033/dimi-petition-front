@@ -16,7 +16,10 @@ interface PetitionData {
   id: number;
   category: Category;
   title: string;
+  content?: string;
+  links?: string[];
   createdAt: Dayjs;
+  until?: Dayjs;
   likes: number;
   status: PetitionStatus;
 }
