@@ -1,4 +1,5 @@
 import React, {useState, useContext} from 'react';
+import Swal from 'sweetalert2';
 import axios from 'axios';
 import {useHistory} from 'react-router-dom';
 import styled from 'styled-components';
@@ -65,6 +66,22 @@ const PetitionForm = () => {
   const {fetchPetition} = useContext(PetitionContext);
 
   const onSubmit = async () => {
+    if (title.trim() === '') {
+      Swal.fire({
+        icon: 'error',
+        title: '오류',
+        text: '청원 제목이 비어있습니다.',
+      });
+      return;
+    } else if (content.trim() === '') {
+      Swal.fire({
+        icon: 'error',
+        title: '오류',
+        text: '청원 내용이 비어있습니다.',
+      });
+      return;
+    }
+
     const response = await axios.post("/petitions", {
       title: title,
       content: content,
@@ -73,7 +90,6 @@ const PetitionForm = () => {
     });
 
     fetchPetition();
-    console.log(response);
   };
 
   return (
