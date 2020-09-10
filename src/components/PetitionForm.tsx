@@ -87,13 +87,13 @@ const PetitionForm = () => {
       category: getCategoryId(category),
     });
 
-    console.log(response);
     if (response.data.status === 200) {
-      Swal.fire({
+      await Swal.fire({
         icon: "success",
         title: "성공",
         text: "청원을 등록하였습니다.",
       });
+      history.push('/petition/' + response.data._id);
     } else {
       Swal.fire({
         icon: "error",

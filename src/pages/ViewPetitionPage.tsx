@@ -118,7 +118,6 @@ const ViewPetitionPage = ({ match }: any) => {
   }, [id]);
 
   useEffect(() => {
-    console.log('effect');
     fetch();
   }, [fetch]);
 
