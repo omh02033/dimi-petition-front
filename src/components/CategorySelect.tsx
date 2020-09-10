@@ -96,7 +96,11 @@ const CategorySelect = ({
       imageSrc: "/category/human-rights.svg",
       category: Category.HumanRights,
     },
-    { title: "생활", imageSrc: "/category/life.svg", category: Category.Life },
+    {
+      title: "생활",
+      imageSrc: "/category/life.svg",
+      category: Category.Life,
+    },
     {
       title: "기숙사",
       imageSrc: "/category/dormitory.svg",

@@ -61,7 +61,7 @@ const PetitionForm = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [links, setLinks] = useState<string[]>([]);
-  const [category, setCategory] = useState<Category>(Category.Life);
+  const [category, setCategory] = useState<Category>(Category.Safety);
 
   const onSubmit = async () => {
     if (title.trim() === "") {
