@@ -3,20 +3,27 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import axios from "axios";
 import { CookiesProvider } from "react-cookie";
-import * as serviceWorker from "./serviceWorker";
 
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import ReduxThunk from 'redux-thunk';
+
+import rootReducer from './modules';
 import "./index.css";
-import PetitionProvider from "components/PetitionProvider";
+
+import * as serviceWorker from "./serviceWorker";
 
 axios.defaults.baseURL = "http://localhost:80";
 axios.defaults.withCredentials = true;
 
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk)); 
+
 ReactDOM.render(
   <React.StrictMode>
     <CookiesProvider>
-      <PetitionProvider>
+      <Provider store={store}>
         <App />
-      </PetitionProvider>
+      </Provider>
     </CookiesProvider>
   </React.StrictMode>,
   document.getElementById("root")

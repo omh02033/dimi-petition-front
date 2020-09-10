@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ReactPaginate from "react-paginate";
@@ -7,7 +7,6 @@ import colors from "assets/colors";
 import devices from "assets/devices";
 
 import Category from "data/Category";
-import PetitionContext from "contexts/PetitionContext";
 import PetitionData, { PetitionStatus } from "data/PetitionData";
 
 import "../assets/styles/PetitionList.scss";
@@ -18,6 +17,7 @@ interface PetitionListProps {
   categoryFilter: Category | null;
   statusFilter?: PetitionStatus;
   preprocess?: (p: PetitionData[]) => PetitionData[];
+  petitionData: PetitionData[];
 }
 
 const Container = styled.section`
@@ -91,9 +91,9 @@ function PetitionList({
   categoryFilter,
   statusFilter,
   preprocess,
+  petitionData,
 }: PetitionListProps) {
   const [currentPage, setCurrentPage] = useState(0);
-  const { petitionData } = useContext(PetitionContext);
 
   let data = petitionData;
   if (categoryFilter !== null) {

@@ -2,7 +2,7 @@ import React from "react";
 
 import PetitionStatus from "components/PetitionStatus";
 import PetitionSteps from "components/PetitionSteps";
-import PetitionList from "components/PetitionList";
+import PetitionListContainer from "components/PetitionListContainer";
 import { PetitionStatus as Status } from "data/PetitionData";
 
 const Home = () => {
@@ -10,17 +10,17 @@ const Home = () => {
     <>
       <PetitionStatus />
       <PetitionSteps />
-      <PetitionList
+      <PetitionListContainer
         title="진행중인 청원"
         perPage={5}
         statusFilter={Status.Progress}
       />
-      <PetitionList
+      <PetitionListContainer
         title="답변 대기 중인 청원"
         perPage={5}
         statusFilter={Status.Waiting}
       />
-      <PetitionList
+      <PetitionListContainer
         title="만료된 청원"
         perPage={5}
         statusFilter={Status.Answered}

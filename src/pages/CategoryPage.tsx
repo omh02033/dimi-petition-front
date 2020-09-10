@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import CategorySelect, { SelectContainer } from "components/CategorySelect";
 import PetitionStatus from "components/PetitionStatus";
-import PetitionList from "components/PetitionList";
+import PetitionListContainer from "components/PetitionListContainer";
 import ComponentTitle from "components/ComponentTitle";
 
 import Category from "data/Category";
@@ -20,13 +20,13 @@ const CategoryPage = () => {
         <CategorySelect onChangeSelect={setFilter} />
       </SelectContainer>
 
-      <PetitionList
+      <PetitionListContainer
         title="진행중인 청원"
         perPage={8}
         categoryFilter={filter}
         statusFilter={Status.Progress}
       />
-      <PetitionList
+      <PetitionListContainer
         title="답변 대기 중인 청원"
         perPage={5}
         categoryFilter={filter}

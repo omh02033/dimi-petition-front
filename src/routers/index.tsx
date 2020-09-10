@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import { useCookies } from "react-cookie";
 import {
   Redirect,
@@ -21,11 +21,10 @@ import CategoryPage from "pages/CategoryPage";
 import PopularityPage from "pages/PopularityPage";
 import AnsweredPage from "pages/AnsweredPage";
 import LoginPage from "pages/LoginPage";
-import RulesPage from "pages/RulesPage";
-import PetitionPage from "pages/PetitionPage";
+import RulesPageContainer from "pages/RulesPageContainer";
+import PetitionPageContainer from "pages/PetitionPageContainer";
 import ViewPetitionPage from "pages/ViewPetitionPage";
 import UserData from "data/UserData";
-import PetitionContext from "contexts/PetitionContext";
 
 const Container = styled.main`
   display: flex;
@@ -57,15 +56,9 @@ const Root = () => {
   const [cookies, setCookie] = useCookies(["auth"]);
   const authenticated = cookies.auth !== "null" && cookies.auth !== undefined;
   const userData = authenticated ? cookies.auth : null;
-  const { fetchPetition } = useContext(PetitionContext);
-
-  useEffect(() => {
-    fetchPetition();
-  }, [fetchPetition]);
 
   const onLogin = (data: UserData) => {
     setCookie("auth", data, { maxAge: 43200 });
-    fetchPetition();
   };
 
   const AuthRoute = ({ component: Component, ...rest }: any) => {
@@ -100,9 +93,9 @@ const Root = () => {
           <AuthRoute path="/category" exact component={CategoryPage} />
           <AuthRoute path="/popularity" exact component={PopularityPage} />
           <AuthRoute path="/answered" exact component={AnsweredPage} />
-          <AuthRoute path="/rules" exact component={RulesPage} />
+          <AuthRoute path="/rules" exact component={RulesPageContainer} />
           <AuthRoute path="/petition/:id" exact component={ViewPetitionPage} />
-          <AuthRoute path="/petition" exact component={PetitionPage} />
+          <AuthRoute path="/petition" exact component={PetitionPageContainer} />
         </Switch>
       </Container>
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useContext } from "react";
+import React, { useState, useEffect, useCallback} from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
@@ -9,7 +9,6 @@ import ComponentTitle from "components/ComponentTitle";
 import PetitionData, { statusToString } from "data/PetitionData";
 import ButtonPair from "components/ButtonPair";
 import colors from "assets/colors";
-import PetitionContext from "contexts/PetitionContext";
 
 const TitleContainer = styled.div`
   padding: 3rem 0 2rem 0;
@@ -97,7 +96,6 @@ const ViewPetitionPage = ({ match }: any) => {
   const { id } = match.params;
   const [petition, setPetition] = useState<PetitionData | null>(null);
   const [agree, setAgree] = useState(false);
-  const { fetchPetition } = useContext(PetitionContext);
   const history = useHistory();
 
   const fetch = useCallback(async () => {
@@ -145,7 +143,6 @@ const ViewPetitionPage = ({ match }: any) => {
       if (result.isConfirmed) {
         await axios.post("/petitions/" + id + "/like");
         await fetch();
-        await fetchPetition();
         Swal.fire({
           title: "성공",
           text: "청원에 동의했습니다.",
@@ -168,7 +165,6 @@ const ViewPetitionPage = ({ match }: any) => {
       if (result.isConfirmed) {
         await axios.delete("/petitions/" + id + "/like");
         await fetch();
-        await fetchPetition();
 
         Swal.fire({
           title: "성공",

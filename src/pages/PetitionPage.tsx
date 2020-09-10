@@ -1,10 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 import ComponentTitle from "components/ComponentTitle";
 import PetitionForm from "components/PetitionForm";
-import PetitionContext from "contexts/PetitionContext";
+
+interface PetitionPageProps {
+  isAgree: boolean;
+};
 
 const TitleContainer = styled.div`
   padding: 2.5rem 0;
@@ -25,11 +28,10 @@ const WarningItem = styled.li`
   margin: 0.5rem 0;
 `;
 
-const PetitionPage = () => {
+const PetitionPage = ({isAgree}: PetitionPageProps) => {
   const history = useHistory();
-  const { isAgreeRules } = useContext(PetitionContext);
 
-  if (!isAgreeRules) {
+  if (!isAgree) {
     history.push("/rules");
     return null;
   }

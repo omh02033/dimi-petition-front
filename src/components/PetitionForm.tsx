@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
@@ -9,7 +9,6 @@ import CategorySelect from "components/CategorySelect";
 import LinkList from "components/LinkList";
 import Category, { getCategoryId } from "data/Category";
 import ButtonPair from "components/ButtonPair";
-import PetitionContext from "contexts/PetitionContext";
 
 const Form = styled.form`
   width: 100%;
@@ -63,7 +62,6 @@ const PetitionForm = () => {
   const [content, setContent] = useState("");
   const [links, setLinks] = useState<string[]>([]);
   const [category, setCategory] = useState<Category>(Category.Life);
-  const { fetchPetition } = useContext(PetitionContext);
 
   const onSubmit = async () => {
     if (title.trim() === "") {
@@ -89,8 +87,7 @@ const PetitionForm = () => {
       category: getCategoryId(category),
     });
 
-    fetchPetition();
-
+    console.log(response);
     if (response.data.status === 200) {
       Swal.fire({
         icon: "success",
