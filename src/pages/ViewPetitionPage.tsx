@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback} from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
@@ -86,16 +86,32 @@ const ContentArea = styled.p`
   line-height: 2rem;
 `;
 
+const ContentInput = styled.textarea`
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 1.1rem;
+
+  border: 1px solid #d9d9d9;
+  margin: 1rem 0;
+  padding: 0.8rem 0.8rem;
+  resize: none;
+`;
+
 const LinkList = styled.ul``;
 
 const LinkItem = styled.li`
   font-size: 1.2rem;
 `;
 
-const ViewPetitionPage = ({ match }: any) => {
+interface ViewPetitionPageProps {
+  match: any;
+  isManager: boolean;
+}
+
+const ViewPetitionPage = ({ match, isManager }: ViewPetitionPageProps) => {
   const { id } = match.params;
   const [petition, setPetition] = useState<PetitionData | null>(null);
   const [agree, setAgree] = useState(false);
+  const [answerContent, setAnswerContent] = useState("");
   const history = useHistory();
 
   const fetch = useCallback(async () => {
@@ -121,7 +137,9 @@ const ViewPetitionPage = ({ match }: any) => {
     fetch();
   }, [fetch]);
 
-  const onDisagree = () => {
+  if (!petition) return null;
+
+  const onCancel = () => {
     window.scrollTo(0, 0);
     history.push("/");
   };
@@ -147,7 +165,6 @@ const ViewPetitionPage = ({ match }: any) => {
           text: "청원에 동의했습니다.",
           icon: "success",
         });
-
       }
     } else {
       const result = await Swal.fire({
@@ -170,12 +187,62 @@ const ViewPetitionPage = ({ match }: any) => {
           text: "청원 동의를 취소했습니다.",
           icon: "info",
         });
-
       }
     }
   };
 
-  if (!petition) return null;
+  const onAnswer = async () => {
+    const result = await Swal.fire({
+      title: "확인",
+      text: "이 청원에 답변하시겠습니까?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: colors.main,
+      cancelButtonColor: "#d9d9d9",
+      confirmButtonText: "네",
+      cancelButtonText: "취소",
+    });
+
+    if (result.isConfirmed) {
+      const answerTitle = "'" + petition.title + "' 에 대한 답변입니다.";
+      const result = await axios.post("/petitions/" + id + "/answer", {
+        title: answerTitle,
+        content: answerContent,
+      });
+
+      console.log(result);
+      if (result.data.status === 200) {
+        await Swal.fire({
+          title: "성공",
+          text: "청원 답변이 완료되었습니다.",
+          icon: "success",
+          confirmButtonColor: colors.main,
+          confirmButtonText: "확인",
+        });
+
+        window.location.reload(false);
+      } else {
+        let errorMessage;
+        switch (result.data.status) {
+          case 423:
+            errorMessage = "답변 대기 중인 청원이 아닙니다.";
+            break;
+          default:
+            errorMessage = "답변에 오류가 발생했습니다.";
+            break;
+        }
+
+        Swal.fire({
+          title: "실패",
+          text: errorMessage,
+          icon: "error",
+          confirmButtonColor: colors.main,
+          confirmButtonText: "확인",
+        });
+      }
+    }
+  };
+
   const categoryName: any = petition.category;
   return (
     <>
@@ -220,12 +287,32 @@ const ViewPetitionPage = ({ match }: any) => {
         </Control>
       )}
 
-      <ButtonPair
-        onClickLeft={onDisagree}
-        onClickRight={onAgree}
-        leftText="취소"
-        rightText={agree ? "동의 취소" : "동의"}
-      />
+      {isManager && (
+        <Control>
+          <Subtitle>답변 내용</Subtitle>
+          <ContentInput
+            placeholder="청원 답변을 입력하세요."
+            rows={15}
+            value={answerContent}
+            onChange={(e) => setAnswerContent(e.target.value)}
+          />
+        </Control>
+      )}
+      {isManager ? (
+        <ButtonPair
+          onClickLeft={onCancel}
+          onClickRight={onAnswer}
+          leftText="취소"
+          rightText="답변하기"
+        />
+      ) : (
+        <ButtonPair
+          onClickLeft={onCancel}
+          onClickRight={onAgree}
+          leftText="취소"
+          rightText={agree ? "동의 취소" : "동의"}
+        />
+      )}
     </>
   );
 };

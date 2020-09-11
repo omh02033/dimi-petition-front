@@ -95,13 +95,6 @@ const LoginForm = ({ onLogin }: LoginFormProps) => {
         />
       </Label>
 
-      <div className="pretty p-default p-curve">
-        <input type="checkbox" />
-        <div className="state p-primary-o">
-          <label>Remember me</label>
-        </div>
-      </div>
-
       <Submit type="submit" value="로그인" />
     </Form>
   );

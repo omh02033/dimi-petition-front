@@ -189,7 +189,9 @@ const NavBar = ({ userData }: NavBarProps) => {
   const onLogout = async () => {
     await axios.post("/users/logout");
     removeCookie("auth");
+
     history.push("/login");
+    window.location.reload(false);
   };
 
   return (

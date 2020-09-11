@@ -55,7 +55,7 @@ const HideIfLogin = ({ children, authenticated }: any) => {
 const Root = () => {
   const [cookies, setCookie] = useCookies(["auth"]);
   const authenticated = cookies.auth !== "null" && cookies.auth !== undefined;
-  const userData = authenticated ? cookies.auth : null;
+  const userData: UserData | null = authenticated ? cookies.auth : null;
 
   const onLogin = (data: UserData) => {
     setCookie("auth", data, { maxAge: 43200 });
@@ -66,7 +66,7 @@ const Root = () => {
       <Route
         {...rest}
         render={(props) =>
-          authenticated ? <Component {...props} /> : <Redirect to="/login" />
+          authenticated ? <Component {...props} isManager={userData!.manager} /> : <Redirect to="/login" />
         }
       />
     );
@@ -75,7 +75,7 @@ const Root = () => {
   return (
     <BrowserRouter>
       <HideIfLogin authenticated={authenticated}>
-        <NavBar userData={userData} />
+        <NavBar userData={userData!} />
         <Banner />
       </HideIfLogin>
 
