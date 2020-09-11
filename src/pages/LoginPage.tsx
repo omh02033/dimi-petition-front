@@ -92,6 +92,7 @@ const LoginPage = ({
   authenticated,
 }: LoginFormProps & { authenticated: boolean }) => {
   if (authenticated) return <Redirect to="/" />;
+
   return (
     <Container>
       <Banner>

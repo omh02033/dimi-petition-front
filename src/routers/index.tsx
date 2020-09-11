@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { useCookies } from "react-cookie";
 import {
   Redirect,
@@ -6,6 +6,7 @@ import {
   Switch,
   Route,
   useLocation,
+  useHistory,
 } from "react-router-dom";
 
 import styled from "styled-components";
@@ -54,19 +55,28 @@ const HideIfLogin = ({ children, authenticated }: any) => {
 
 const Root = () => {
   const [cookies, setCookie] = useCookies(["auth"]);
-  const authenticated = cookies.auth !== "null" && cookies.auth !== undefined;
-  const userData: UserData | null = authenticated ? cookies.auth : null;
+  const [auth, setAuth] = useState(cookies.auth !== "null" && cookies.auth !== undefined);
+  const [userData, setUserData] = useState<UserData|null>(auth ? cookies.auth : null);
 
   const onLogin = (data: UserData) => {
     setCookie("auth", data, { maxAge: 43200 });
+    setUserData(data);
   };
+
+  useEffect(() => {
+    setAuth(cookies.auth !== "null" && cookies.auth !== undefined);
+  }, [cookies]);
 
   const AuthRoute = ({ component: Component, ...rest }: any) => {
     return (
       <Route
         {...rest}
         render={(props) =>
-          authenticated ? <Component {...props} isManager={userData!.manager} /> : <Redirect to="/login" />
+          auth ? (
+            <Component {...props} isManager={userData!.manager} />
+          ) : (
+            <Redirect to="/login" />
+          )
         }
       />
     );
@@ -74,7 +84,7 @@ const Root = () => {
 
   return (
     <BrowserRouter>
-      <HideIfLogin authenticated={authenticated}>
+      <HideIfLogin authenticated={auth}>
         <NavBar userData={userData!} />
         <Banner />
       </HideIfLogin>
@@ -84,9 +94,7 @@ const Root = () => {
           <Route
             path="/login"
             exact
-            render={() => (
-              <LoginPage onLogin={onLogin} authenticated={authenticated} />
-            )}
+            render={() => <LoginPage onLogin={onLogin} authenticated={auth}/>}
           />
 
           <AuthRoute path="/" exact component={Home} />
@@ -99,7 +107,7 @@ const Root = () => {
         </Switch>
       </Container>
 
-      <HideIfLogin authenticated={authenticated}>
+      <HideIfLogin authenticated={auth}>
         <Footer />
       </HideIfLogin>
     </BrowserRouter>

@@ -228,7 +228,6 @@ const ViewPetitionPage = ({ match, isManager }: ViewPetitionPageProps) => {
         content: answerContent,
       });
 
-      console.log(result);
       if (result.data.status === 200) {
         await Swal.fire({
           title: "성공",
