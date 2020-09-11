@@ -86,6 +86,11 @@ const ContentArea = styled.p`
   line-height: 2rem;
 `;
 
+const AnswerContentArea = styled(ContentArea)`
+  background-color: #FFF3FA;
+  border-color: ${colors.main};
+`;
+
 const ContentInput = styled.textarea`
   font-family: "Noto Sans KR", sans-serif;
   font-size: 1.1rem;
@@ -128,6 +133,7 @@ const ViewPetitionPage = ({ match, isManager }: ViewPetitionPageProps) => {
       likes: data.likesLength,
       createdAt: dayjs(data.createdAt),
       until: dayjs(data.until),
+      answer: data.answer ? data.answer.content : null,
     });
 
     setAgree(data.me.like);
@@ -158,13 +164,25 @@ const ViewPetitionPage = ({ match, isManager }: ViewPetitionPageProps) => {
       });
 
       if (result.isConfirmed) {
-        await axios.post("/petitions/" + id + "/like");
+        const res = await axios.post("/petitions/" + id + "/like");
         await fetch();
-        Swal.fire({
-          title: "성공",
-          text: "청원에 동의했습니다.",
-          icon: "success",
-        });
+
+        if (res.data.status === 200) {
+          Swal.fire({
+            title: "성공",
+            text: "청원에 동의했습니다.",
+            icon: "success",
+            confirmButtonText: "네",
+          });
+        } else {
+          Swal.fire({
+            title: "오류",
+            text: "청원 동의에 오류가 발생했습니다.",
+            icon: "error",
+            confirmButtonText: "네",
+          });
+        }
+
       }
     } else {
       const result = await Swal.fire({
@@ -204,7 +222,7 @@ const ViewPetitionPage = ({ match, isManager }: ViewPetitionPageProps) => {
     });
 
     if (result.isConfirmed) {
-      const answerTitle = "'" + petition.title + "' 에 대한 답변입니다.";
+      const answerTitle = "'" + petition.title + "'에 대한 답변입니다.";
       const result = await axios.post("/petitions/" + id + "/answer", {
         title: answerTitle,
         content: answerContent,
@@ -233,7 +251,7 @@ const ViewPetitionPage = ({ match, isManager }: ViewPetitionPageProps) => {
         }
 
         Swal.fire({
-          title: "실패",
+          title: "오류",
           text: errorMessage,
           icon: "error",
           confirmButtonColor: colors.main,
@@ -269,6 +287,13 @@ const ViewPetitionPage = ({ match, isManager }: ViewPetitionPageProps) => {
         </InfoItem>
       </InfoList>
 
+      {petition.answer && (
+        <Control>
+          <Subtitle>청원 답변</Subtitle>
+          <AnswerContentArea>{petition.answer}</AnswerContentArea>
+        </Control>
+      )}
+
       <Control>
         <Subtitle>청원 내용</Subtitle>
         <ContentArea>{petition.content}</ContentArea>
@@ -287,7 +312,7 @@ const ViewPetitionPage = ({ match, isManager }: ViewPetitionPageProps) => {
         </Control>
       )}
 
-      {isManager && (
+      {!petition.answer && isManager && (
         <Control>
           <Subtitle>답변 내용</Subtitle>
           <ContentInput
@@ -298,21 +323,22 @@ const ViewPetitionPage = ({ match, isManager }: ViewPetitionPageProps) => {
           />
         </Control>
       )}
-      {isManager ? (
-        <ButtonPair
-          onClickLeft={onCancel}
-          onClickRight={onAnswer}
-          leftText="취소"
-          rightText="답변하기"
-        />
-      ) : (
-        <ButtonPair
-          onClickLeft={onCancel}
-          onClickRight={onAgree}
-          leftText="취소"
-          rightText={agree ? "동의 취소" : "동의"}
-        />
-      )}
+      {!petition.answer &&
+        (isManager ? (
+          <ButtonPair
+            onClickLeft={onCancel}
+            onClickRight={onAnswer}
+            leftText="취소"
+            rightText="답변하기"
+          />
+        ) : (
+          <ButtonPair
+            onClickLeft={onCancel}
+            onClickRight={onAgree}
+            leftText="취소"
+            rightText={agree ? "동의 취소" : "동의"}
+          />
+        ))}
     </>
   );
 };

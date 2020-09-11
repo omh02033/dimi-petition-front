@@ -191,7 +191,7 @@ const NavBar = ({ userData }: NavBarProps) => {
     removeCookie("auth");
 
     history.push("/login");
-    window.location.reload(false);
+    window.location.reload(true);
   };
 
   return (

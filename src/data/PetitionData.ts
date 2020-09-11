@@ -41,6 +41,7 @@ interface PetitionData {
   until?: Dayjs;
   likes: number;
   status: PetitionStatus;
+  answer?: string;
 }
 
 export default PetitionData;
