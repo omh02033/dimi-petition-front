@@ -23,7 +23,7 @@ const Nav = styled.nav`
   padding: 0;
   margin: 0 auto;
 
-  grid-template-columns: 100px 1fr 160px;
+  grid-template-columns: auto 1fr 160px;
   grid-template-rows: 1fr;
 
   width: 50%;
@@ -37,12 +37,31 @@ const Nav = styled.nav`
   }
 
   @media ${devices.tablet} {
-    grid-template-columns: 100px 1fr;
+    grid-template-columns: auto 1fr;
     grid-template-rows: 1fr 90px;
     grid-gap: 1rem;
 
     padding: 1.5rem 0 0 0;
   }
+`;
+
+const LogoLink = styled(Link)`
+  height: 100%;
+  padding: 0 0.5rem;
+  display: flex;
+
+  box-sizing: border-box;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
+
+  &.current {
+    border-bottom: 3px solid ${colors.main};
+
+    @media ${devices.tablet} {
+      border-bottom: 3px solid transparent;
+    }
+  }
+
 `;
 
 const LogoImage = styled.img`
@@ -82,6 +101,7 @@ const MenuListItem = styled.li`
   text-align: center;
   word-break: keep-all;
   overflow: hidden;
+  margin-top: 3px;
 
   &:not(:last-child) {
     margin-right: 2rem;
@@ -174,9 +194,9 @@ const NavBar = ({ userData }: NavBarProps) => {
 
   return (
     <Nav>
-      <Link to="/">
+      <LogoLink to="/" className={location.pathname === "/" ? "current" : ""}>
         <LogoImage src="/council-logo-small.svg" />
-      </Link>
+      </LogoLink>
 
       <MenuList>
         {itemList.map((item) => {

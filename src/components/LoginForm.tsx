@@ -63,6 +63,7 @@ const LoginForm = ({ onLogin }: LoginFormProps) => {
         gradeNumber: respond.data.grade,
         classNumber: respond.data.class,
         photo: respond.data.photo,
+        manager: respond.data.manager
       };
 
       onLogin(userData);
