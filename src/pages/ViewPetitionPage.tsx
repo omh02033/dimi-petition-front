@@ -87,7 +87,7 @@ const ContentArea = styled.p`
 `;
 
 const AnswerContentArea = styled(ContentArea)`
-  background-color: #FFF3FA;
+  background-color: #fff3fa;
   border-color: ${colors.main};
 `;
 
@@ -123,20 +123,20 @@ const ViewPetitionPage = ({ match, isManager }: ViewPetitionPageProps) => {
     const response = await axios.get("/petitions/" + id);
     const data = response.data.petition;
 
-    setPetition({
-      id: id,
-      title: data.title,
-      content: data.content,
-      links: data.relatedUrls,
-      category: data.category,
-      status: data.status,
-      likes: data.likesLength,
-      createdAt: dayjs(data.createdAt),
-      until: dayjs(data.until),
-      answer: data.answer ? data.answer.content : null,
-    });
+      setPetition({
+        id: id,
+        title: data.title,
+        content: data.content,
+        links: data.relatedUrls,
+        category: data.category,
+        status: data.status,
+        likes: data.likesLength,
+        createdAt: dayjs(data.createdAt),
+        until: dayjs(data.until),
+        answer: data.answer ? data.answer.content : null,
+      });
 
-    setAgree(data.me.like);
+      setAgree(data.me?.like);
   }, [id]);
 
   useEffect(() => {
@@ -182,7 +182,6 @@ const ViewPetitionPage = ({ match, isManager }: ViewPetitionPageProps) => {
             confirmButtonText: "네",
           });
         }
-
       }
     } else {
       const result = await Swal.fire({
@@ -239,6 +238,7 @@ const ViewPetitionPage = ({ match, isManager }: ViewPetitionPageProps) => {
 
         window.location.reload(false);
       } else {
+        console.log(result);
         let errorMessage;
         switch (result.data.status) {
           case 423:

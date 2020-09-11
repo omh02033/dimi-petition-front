@@ -9,6 +9,7 @@ import CategorySelect from "components/CategorySelect";
 import LinkList from "components/LinkList";
 import Category, { getCategoryId } from "data/Category";
 import ButtonPair from "components/ButtonPair";
+import colors from "assets/colors";
 
 const Form = styled.form`
   width: 100%;
@@ -80,6 +81,19 @@ const PetitionForm = () => {
       return;
     }
 
+    const result = await Swal.fire({
+      icon: "question",
+      title: "확인",
+      text: "청원을 등록하시겠습니까?",
+      showCancelButton: true,
+      confirmButtonColor: colors.main,
+      cancelButtonColor: "#d9d9d9",
+      confirmButtonText: "네",
+      cancelButtonText: "취소",
+    });
+
+    if (result.isDismissed) return;
+
     const response = await axios.post("/petitions", {
       title: title,
       content: content,
@@ -93,7 +107,7 @@ const PetitionForm = () => {
         title: "성공",
         text: "청원을 등록하였습니다.",
       });
-      history.push('/petition/' + response.data._id);
+      history.push("/petition/" + response.data._id);
     } else {
       Swal.fire({
         icon: "error",

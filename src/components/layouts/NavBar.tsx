@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 import { FiLogOut } from "react-icons/fi";
@@ -177,9 +177,8 @@ const LogoutIcon = styled(FiLogOut)`
 `;
 
 const NavBar = ({ userData }: NavBarProps) => {
-  const history = useHistory();
   const location = useLocation();
-  const [, , removeCookie] = useCookies();
+  const [cookies, , removeCookie] = useCookies();
   const itemList = [
     { title: "분야별 청원", location: "/category/" },
     { title: "추천순 청원", location: "/popularity/" },
@@ -189,8 +188,6 @@ const NavBar = ({ userData }: NavBarProps) => {
   const onLogout = async () => {
     await axios.post("/users/logout");
     removeCookie("auth");
-
-    history.push("/login");
   };
 
   return (
