@@ -61,7 +61,6 @@ const LogoLink = styled(Link)`
       border-bottom: 3px solid transparent;
     }
   }
-
 `;
 
 const LogoImage = styled.img`
@@ -178,7 +177,7 @@ const LogoutIcon = styled(FiLogOut)`
 
 const NavBar = ({ userData }: NavBarProps) => {
   const location = useLocation();
-  const [cookies, , removeCookie] = useCookies();
+  const [, , removeCookie] = useCookies();
   const itemList = [
     { title: "분야별 청원", location: "/category/" },
     { title: "추천순 청원", location: "/popularity/" },
