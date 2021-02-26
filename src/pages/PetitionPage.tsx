@@ -47,11 +47,11 @@ const PetitionPage = ({isAgree}: PetitionPageProps) => {
           <WarningItem>
             한번 작성된 청원은 수정이나 삭제가 불가능합니다. 최초 청원 취지와
             다른 내용으로 변경되는 것을 방지하여 청원 참여자의 의견을 보호하기
-            위한 조치입니다.
+            위한 조치입니다. (별도 삭제를 원하는 경우 관리자에게 연락)
           </WarningItem>
           <WarningItem>
-            작성한 청원은 모두 익명으로 표시되지만 청원내용이 처벌 대상의 경우
-            관리자는 실명확인이 가능합니다.
+            작성한 청원은 모두 익명으로 표시되지만 청원내용이 처벌 대상인 경우
+            관리자는 예외적으로 실명 확인이 가능합니다.
           </WarningItem>
         </WarningList>
       </WarningBox>
