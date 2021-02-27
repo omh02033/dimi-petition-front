@@ -109,6 +109,7 @@ const PetitionForm = () => {
       });
       history.push("/petition/" + response.data._id);
     } else {
+      console.log(response);
       Swal.fire({
         icon: "error",
         title: "오류",

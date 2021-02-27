@@ -13,7 +13,7 @@ import "./index.css";
 
 import * as serviceWorker from "./serviceWorker";
 
-axios.defaults.baseURL = "http://localhost:80";
+axios.defaults.baseURL = "https://petition-api.dimigo.hs.kr";
 axios.defaults.withCredentials = true;
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk)); 
