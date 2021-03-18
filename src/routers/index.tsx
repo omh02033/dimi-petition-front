@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import {
   Redirect,
@@ -25,6 +25,7 @@ import RulesPageContainer from "pages/RulesPageContainer";
 import PetitionPageContainer from "pages/PetitionPageContainer";
 import ViewPetitionPage from "pages/ViewPetitionPage";
 import UserData from "data/UserData";
+import ScrollToTop from "./ScrollToTop";
 
 const Container = styled.main`
   display: flex;
@@ -54,8 +55,12 @@ const HideIfLogin = ({ children, authenticated }: any) => {
 
 const Root = () => {
   const [cookies, setCookie] = useCookies(["auth"]);
-  const [auth, setAuth] = useState(cookies.auth !== "null" && cookies.auth !== undefined);
-  const [userData, setUserData] = useState<UserData|null>(auth ? cookies.auth : null);
+  const [auth, setAuth] = useState(
+    cookies.auth !== "null" && cookies.auth !== undefined
+  );
+  const [userData, setUserData] = useState<UserData | null>(
+    auth ? cookies.auth : null
+  );
 
   const onLogin = (data: UserData) => {
     setCookie("auth", data, { maxAge: 43200 });
@@ -83,6 +88,8 @@ const Root = () => {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
+
       <HideIfLogin authenticated={auth}>
         <NavBar userData={userData!} />
         <Banner />
@@ -93,7 +100,7 @@ const Root = () => {
           <Route
             path="/login"
             exact
-            render={() => <LoginPage onLogin={onLogin} authenticated={auth}/>}
+            render={() => <LoginPage onLogin={onLogin} authenticated={auth} />}
           />
 
           <AuthRoute path="/" exact component={Home} />

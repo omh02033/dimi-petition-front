@@ -15,7 +15,7 @@ const AnsweredPage = () => {
     <>
       <PetitionStatus />
 
-      <ComponentTitle>분야별 청원 답변 보기</ComponentTitle>
+      <ComponentTitle>분야별 청원 답변</ComponentTitle>
       <SelectContainer>
         <CategorySelect onChangeSelect={(c) => setFilter(c)} />
       </SelectContainer>

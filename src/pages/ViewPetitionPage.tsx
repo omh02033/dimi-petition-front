@@ -123,20 +123,20 @@ const ViewPetitionPage = ({ match, isManager }: ViewPetitionPageProps) => {
     const response = await axios.get("/petitions/" + id);
     const data = response.data.petition;
 
-      setPetition({
-        id: id,
-        title: data.title,
-        content: data.content,
-        links: data.relatedUrls,
-        category: data.category,
-        status: data.status,
-        likes: data.likesLength,
-        createdAt: dayjs(data.createdAt),
-        until: dayjs(data.until),
-        answer: data.answer ? data.answer.content : null,
-      });
+    setPetition({
+      id: id,
+      title: data.title,
+      content: data.content,
+      links: data.relatedUrls,
+      category: data.category,
+      status: data.status,
+      likes: data.likesLength,
+      createdAt: dayjs(data.createdAt),
+      until: dayjs(data.until),
+      answer: data.answer ? data.answer.content : null,
+    });
 
-      setAgree(data.me?.like);
+    setAgree(data.me?.like);
   }, [id]);
 
   useEffect(() => {

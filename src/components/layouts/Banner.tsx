@@ -10,7 +10,7 @@ const Container = styled.section`
   background-image: url("/school.png");
   background-position: center;
   background-repeat: no-repeat;
-  box-shadow: inset 0 0 0 2000px rgba(255, 0, 150, 0.3);
+  box-shadow: inset 0 0 0 2000px rgba(255, 0, 150, 0.4);
 
   display: flex;
   flex-direction: column;
