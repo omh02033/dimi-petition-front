@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 
 import ComponentTitle from "components/ComponentTitle";
 import PetitionData, { statusToString } from "data/PetitionData";
+import LoadingPage from "./LoadingPage";
 import ButtonPair from "components/ButtonPair";
 import colors from "assets/colors";
 
@@ -143,7 +144,7 @@ const ViewPetitionPage = ({ match, isManager }: ViewPetitionPageProps) => {
     fetch();
   }, [fetch]);
 
-  if (!petition) return null;
+  if (!petition) return <LoadingPage />;
 
   const onCancel = () => {
     window.scrollTo(0, 0);
