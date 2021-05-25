@@ -95,7 +95,7 @@ function PetitionList({
 }: PetitionListProps) {
   const [currentPage, setCurrentPage] = useState(0);
 
-  let data = petitionData.reverse();
+  let data = petitionData.slice().reverse();
   if (categoryFilter !== null) {
     data = data.filter((item) => item.category === categoryFilter);
   }
