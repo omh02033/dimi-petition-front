@@ -323,7 +323,7 @@ const ViewPetitionPage = ({ match, isManager }: ViewPetitionPageProps) => {
           />
         </Control>
       )}
-      {!petition.answer &&
+      {petition.status === "p" &&
         (isManager ? (
           <ButtonPair
             onClickLeft={onCancel}
