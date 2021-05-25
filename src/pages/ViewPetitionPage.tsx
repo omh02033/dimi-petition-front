@@ -155,7 +155,7 @@ const ViewPetitionPage = ({ match, isManager }: ViewPetitionPageProps) => {
     if (!agree) {
       const result = await Swal.fire({
         title: "확인",
-        text: "이 청원에 동의하시겠습니까?",
+        text: "이 청원에 동의하시겠습니까? 한 번 동의한 청원은 취소가 불가능합니다!",
         icon: "question",
         showCancelButton: true,
         confirmButtonColor: colors.main,

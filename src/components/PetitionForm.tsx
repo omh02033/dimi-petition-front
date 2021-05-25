@@ -84,7 +84,7 @@ const PetitionForm = () => {
     const result = await Swal.fire({
       icon: "question",
       title: "확인",
-      text: "청원을 등록하시겠습니까?",
+      text: "청원을 등록하시겠습니까? 한 번 등록한 청원은 수정 및 삭제가 불가능하며, 익명으로 등록되지만 처벌 대상 청원일 경우 신원 확인이 가능합니다.",
       showCancelButton: true,
       confirmButtonColor: colors.main,
       cancelButtonColor: "#d9d9d9",
