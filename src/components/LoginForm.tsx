@@ -67,12 +67,14 @@ const LoginForm = ({ onLogin }: LoginFormProps) => {
       };
 
       onLogin(userData);
-    } else
+    } else {
+      console.log(respond);
       Swal.fire({
         icon: "error",
         title: "오류",
         text: "아이디 또는 비밀번호가 올비르지 않습니다.",
       });
+    }
   };
 
   return (

@@ -152,58 +152,34 @@ const ViewPetitionPage = ({ match, isManager }: ViewPetitionPageProps) => {
   };
 
   const onAgree = async () => {
-    if (!agree) {
-      const result = await Swal.fire({
-        title: "확인",
-        text: "이 청원에 동의하시겠습니까? 한 번 동의한 청원은 취소가 불가능합니다!",
-        icon: "question",
-        showCancelButton: true,
-        confirmButtonColor: colors.main,
-        cancelButtonColor: "#d9d9d9",
-        confirmButtonText: "네",
-        cancelButtonText: "취소",
-      });
+    const result = await Swal.fire({
+      title: "확인",
+      text: "이 청원에 동의하시겠습니까? 한 번 동의한 청원은 취소가 불가능합니다!",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: colors.main,
+      cancelButtonColor: "#d9d9d9",
+      confirmButtonText: "네",
+      cancelButtonText: "취소",
+    });
 
-      if (result.isConfirmed) {
-        const res = await axios.post("/petitions/" + id + "/like");
-        await fetch();
+    if (result.isConfirmed) {
+      const res = await axios.post("/petitions/" + id + "/like");
+      await fetch();
 
-        if (res.data.status === 200) {
-          Swal.fire({
-            title: "성공",
-            text: "청원에 동의했습니다.",
-            icon: "success",
-            confirmButtonText: "네",
-          });
-        } else {
-          Swal.fire({
-            title: "오류",
-            text: "청원 동의에 오류가 발생했습니다.",
-            icon: "error",
-            confirmButtonText: "네",
-          });
-        }
-      }
-    } else {
-      const result = await Swal.fire({
-        title: "확인",
-        text: "이 청원에 동의를 취소하시겠습니까?",
-        icon: "question",
-        showCancelButton: true,
-        confirmButtonColor: colors.main,
-        cancelButtonColor: "#d9d9d9",
-        confirmButtonText: "네",
-        cancelButtonText: "취소",
-      });
-
-      if (result.isConfirmed) {
-        await axios.delete("/petitions/" + id + "/like");
-        await fetch();
-
+      if (res.data.status === 200) {
         Swal.fire({
           title: "성공",
-          text: "청원 동의를 취소했습니다.",
-          icon: "info",
+          text: "청원에 동의했습니다.",
+          icon: "success",
+          confirmButtonText: "네",
+        });
+      } else {
+        Swal.fire({
+          title: "오류",
+          text: "청원 동의에 오류가 발생했습니다.",
+          icon: "error",
+          confirmButtonText: "네",
         });
       }
     }
@@ -332,12 +308,14 @@ const ViewPetitionPage = ({ match, isManager }: ViewPetitionPageProps) => {
             rightText="답변하기"
           />
         ) : (
-          <ButtonPair
-            onClickLeft={onCancel}
-            onClickRight={onAgree}
-            leftText="취소"
-            rightText={agree ? "동의 취소" : "동의"}
-          />
+          !agree && (
+            <ButtonPair
+              onClickLeft={onCancel}
+              onClickRight={onAgree}
+              leftText="취소"
+              rightText="동의"
+            />
+          )
         ))}
     </>
   );
