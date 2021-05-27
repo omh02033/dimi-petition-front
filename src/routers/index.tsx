@@ -100,7 +100,7 @@ const Root = () => {
           <Route
             path="/login"
             exact
-            render={() => <LoginPage onLogin={onLogin} authenticated={auth} />}
+            render={() => <LoginPage onLogin={onLogin} />}
           />
 
           <AuthRoute path="/" exact component={Home} />

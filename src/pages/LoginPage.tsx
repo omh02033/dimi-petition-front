@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { Redirect } from "react-router-dom";
 
 import LoginForm, { LoginFormProps } from "components/LoginForm";
 
@@ -87,11 +86,8 @@ const LoginSection = styled.section`
   justify-content: center;
 `;
 
-const LoginPage = ({
-  onLogin,
-  authenticated,
-}: LoginFormProps & { authenticated: boolean }) => {
-  if (authenticated) return <Redirect to="/" />;
+const LoginPage = ({ onLogin }: LoginFormProps) => {
+  //if (authenticated) return <Redirect to="/" />;
 
   return (
     <Container>

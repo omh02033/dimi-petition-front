@@ -181,6 +181,7 @@ const ViewPetitionPage = ({ match, isManager }: ViewPetitionPageProps) => {
           icon: "error",
           confirmButtonText: "네",
         });
+        console.log(res);
       }
     }
   };
