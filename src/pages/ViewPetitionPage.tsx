@@ -300,24 +300,24 @@ const ViewPetitionPage = ({ match, isManager }: ViewPetitionPageProps) => {
           />
         </Control>
       )}
-      {petition.status === "p" &&
-        (isManager ? (
+      {isManager && petition.status === "p" && (
+        <ButtonPair
+          onClickLeft={onCancel}
+          onClickRight={onAnswer}
+          leftText="취소"
+          rightText="답변하기"
+        />
+      )}
+      {!isManager &&
+        (petition.status === "p" || petition.status === "w") &&
+        !agree && (
           <ButtonPair
             onClickLeft={onCancel}
-            onClickRight={onAnswer}
+            onClickRight={onAgree}
             leftText="취소"
-            rightText="답변하기"
+            rightText="동의"
           />
-        ) : (
-          !agree && (
-            <ButtonPair
-              onClickLeft={onCancel}
-              onClickRight={onAgree}
-              leftText="취소"
-              rightText="동의"
-            />
-          )
-        ))}
+        )}
     </>
   );
 };
