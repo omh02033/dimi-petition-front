@@ -106,6 +106,7 @@ const LinkList = styled.ul``;
 
 const LinkItem = styled.li`
   font-size: 1.2rem;
+  word-break: break-word;
 `;
 
 interface ViewPetitionPageProps {
