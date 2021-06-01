@@ -21,7 +21,7 @@ const Home = () => {
         statusFilter={Status.Waiting}
       />
       <PetitionListContainer
-        title="만료된 청원"
+        title="답변된 청원"
         perPage={5}
         statusFilter={Status.Answered}
       />
