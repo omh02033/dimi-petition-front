@@ -12,7 +12,7 @@ const Home = () => {
       <PetitionSteps />
       <PetitionListContainer
         title="진행중인 청원"
-        perPage={5}
+        perPage={8}
         statusFilter={Status.Progress}
       />
       <PetitionListContainer
