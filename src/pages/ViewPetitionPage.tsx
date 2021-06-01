@@ -291,23 +291,23 @@ const ViewPetitionPage = ({ match, isManager }: ViewPetitionPageProps) => {
       )}
 
       {!petition.answer && isManager && (
-        <Control>
-          <Subtitle>답변 내용</Subtitle>
-          <ContentInput
-            placeholder="청원 답변을 입력하세요."
-            rows={15}
-            value={answerContent}
-            onChange={(e) => setAnswerContent(e.target.value)}
+        <>
+          <Control>
+            <Subtitle>답변 내용</Subtitle>
+            <ContentInput
+              placeholder="청원 답변을 입력하세요."
+              rows={15}
+              value={answerContent}
+              onChange={(e) => setAnswerContent(e.target.value)}
+            />
+          </Control>
+          <ButtonPair
+            onClickLeft={onCancel}
+            onClickRight={onAnswer}
+            leftText="취소"
+            rightText="답변하기"
           />
-        </Control>
-      )}
-      {isManager && petition.status === "p" && (
-        <ButtonPair
-          onClickLeft={onCancel}
-          onClickRight={onAnswer}
-          leftText="취소"
-          rightText="답변하기"
-        />
+        </>
       )}
       {!isManager &&
         (petition.status === "p" || petition.status === "w") &&
