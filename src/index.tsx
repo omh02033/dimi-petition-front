@@ -4,19 +4,26 @@ import App from "./App";
 import axios from "axios";
 import { CookiesProvider } from "react-cookie";
 
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import ReduxThunk from 'redux-thunk';
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import ReduxThunk from "redux-thunk";
 
-import rootReducer from './modules';
+import rootReducer from "./modules";
 import "./index.css";
 
 import * as serviceWorker from "./serviceWorker";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
 
 axios.defaults.baseURL = "https://petition-api.dimigo.hs.kr";
 axios.defaults.withCredentials = true;
 
-const store = createStore(rootReducer, applyMiddleware(ReduxThunk)); 
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.tz.setDefault("Asia/Seoul");
+
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 ReactDOM.render(
   <React.StrictMode>
