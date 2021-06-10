@@ -32,7 +32,7 @@ const Container = styled.main`
   flex-direction: column;
   align-items: center;
 
-  margin: 0 auto;
+  margin: 0 auto 4rem auto;
   width: 50%;
 
   @media ${devices.laptopL} {
