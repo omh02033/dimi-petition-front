@@ -39,14 +39,10 @@
 
   @media (max-width: 767px) {
     li {
-      display: none;
+      font-size: 0.7rem;
 
-      &.selected, &:first-child, &:last-child {
-        display: block;
-      }
-
-      &.selected {
-        margin: 0;
+      a {
+        padding: 0.5rem 0.6rem;
       }
     }
   }

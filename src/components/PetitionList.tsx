@@ -146,12 +146,12 @@ function PetitionList({
       <ReactPaginate
         containerClassName="pagination"
         pageCount={pageCount}
-        marginPagesDisplayed={2}
-        pageRangeDisplayed={1}
+        marginPagesDisplayed={1}
+        pageRangeDisplayed={0}
         onPageChange={handlePageClick}
         forcePage={currentPage}
-        previousLabel="< PREV"
-        nextLabel="NEXT >"
+        previousLabel="PREV"
+        nextLabel="NEXT"
       />
     </Container>
   );
