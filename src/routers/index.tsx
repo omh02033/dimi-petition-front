@@ -60,6 +60,9 @@ const Root = () => {
   };
 
   const AuthRoute = ({ component: Component, ...rest }: any) => {
+    const location = history.location.pathname;
+    const param = location === "/" ? "" : `?next=${location}`;
+
     return (
       <Route
         {...rest}
@@ -67,7 +70,7 @@ const Root = () => {
           auth ? (
             <Component {...props} isManager={userData!.manager} />
           ) : (
-            <Redirect to="/login" />
+            <Redirect to={`/login${param}`} />
           )
         }
       />

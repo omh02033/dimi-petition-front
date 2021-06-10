@@ -12,10 +12,6 @@ import UserData from "data/UserData";
 
 import "assets/styles/LoginForm.scss";
 
-export interface LoginFormProps {
-  onLogin: (data: UserData) => void;
-}
-
 const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -50,7 +46,12 @@ const Submit = styled(PrimaryButton)`
   margin-top: 3rem;
 `;
 
-const LoginForm = ({ onLogin }: LoginFormProps) => {
+export interface LoginFormProps {
+  onLogin: (data: UserData) => void;
+  nextPath: string;
+}
+
+const LoginForm = ({ onLogin, nextPath }: LoginFormProps) => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
 
@@ -69,7 +70,7 @@ const LoginForm = ({ onLogin }: LoginFormProps) => {
       };
 
       onLogin(userData);
-      history.push("/");
+      history.push(nextPath);
     } else {
       console.log(respond);
       Swal.fire({

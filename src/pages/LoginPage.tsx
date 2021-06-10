@@ -4,6 +4,7 @@ import styled from "styled-components";
 import LoginForm, { LoginFormProps } from "components/LoginForm";
 
 import devices from "assets/devices";
+import UserData from "data/UserData";
 
 const Container = styled.div`
   display: flex;
@@ -86,8 +87,13 @@ const LoginSection = styled.section`
   justify-content: center;
 `;
 
-const LoginPage = ({ onLogin }: LoginFormProps) => {
+interface LoginPageProps {
+  onLogin: (data: UserData) => void;
+}
+
+const LoginPage = ({ onLogin }: LoginPageProps) => {
   //if (authenticated) return <Redirect to="/" />;
+  const nextPath = new URLSearchParams(window.location.search).get("next");
 
   return (
     <Container>
@@ -104,7 +110,7 @@ const LoginPage = ({ onLogin }: LoginFormProps) => {
       </Logo>
 
       <LoginSection>
-        <LoginForm onLogin={onLogin} />
+        <LoginForm onLogin={onLogin} nextPath={nextPath || "/"} />
       </LoginSection>
     </Container>
   );
