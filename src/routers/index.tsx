@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Redirect, Router, Switch, Route, useLocation } from "react-router-dom";
 import history from "./history";
 
@@ -48,7 +48,9 @@ const HideIfLogin = ({ children, authenticated }: any) => {
 };
 
 const Root = () => {
-  const rawUserData = window.localStorage.getItem("user_data");
+  const [rawUserData, setRawUserData] = useState(
+    window.localStorage.getItem("user_data")
+  );
   const userData: UserData | null = rawUserData
     ? JSON.parse(rawUserData)
     : null;
@@ -56,6 +58,7 @@ const Root = () => {
 
   const onLogin = (data: UserData) => {
     window.localStorage.setItem("user_data", JSON.stringify(data));
+    setRawUserData(window.localStorage.getItem("user_data"));
   };
 
   const AuthRoute = ({ component: Component, ...rest }: any) => {

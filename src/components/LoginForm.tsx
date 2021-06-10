@@ -56,6 +56,7 @@ const LoginForm = ({ onLogin }: LoginFormProps) => {
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     const loginData = { username: id, password: password };
     const respond = await axios.post("/users/login", loginData);
     if (respond.data.status === 200) {
