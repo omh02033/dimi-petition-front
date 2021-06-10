@@ -38,20 +38,27 @@ const Content = styled.p`
   font-size: 0.9rem;
 `;
 
+const Link = styled.a`
+  color: white;
+`;
+
 const Footer = () => (
   <Container>
     <ContentContainer>
       <Title>한국디지털미디어고등학교 학생자치회 학생청원 홈페이지</Title>
       <hr />
-      <Content>청원이용안내 개인정보처리방침</Content>
+      <Content>
+        <Link href="https://drive.google.com/file/d/14-IusvkS2OkuHfvjpQKWhnztIh-NQcjg/view?usp=sharing">
+          운영규정
+        </Link>
+      </Content>
       <Content>
         경기도 안산시 단원구 사세충열로 94 한국디지털미디어고등학교 / 교무실 :
         031)363-7800 / 행정실 : 031)363-7873 / 팩스 : 031)402-8363
       </Content>
       <Content>
-        한국디지털미디어고등학교 학생자치회 학생청원 홈페이지 / 총괄 :
-        박상욱(17기) / 개발 : 이종복(17기), 서동휘(18기) / 디자인: 김한경,
-        박승아(18기)
+        한국디지털미디어고등학교 학생자치회 학생청원 홈페이지 / 총괄 : 제19대
+        학생자치회
       </Content>
       <hr />
       <Content>
