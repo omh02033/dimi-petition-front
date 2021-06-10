@@ -1,11 +1,6 @@
-import React, { useEffect } from "react";
-import {
-  Redirect,
-  BrowserRouter,
-  Switch,
-  Route,
-  useLocation,
-} from "react-router-dom";
+import React from "react";
+import { Redirect, Router, Switch, Route, useLocation } from "react-router-dom";
+import history from "./history";
 
 import styled from "styled-components";
 
@@ -25,8 +20,6 @@ import PetitionPageContainer from "pages/PetitionPageContainer";
 import ViewPetitionPage from "pages/ViewPetitionPage";
 import UserData from "data/UserData";
 import ScrollToTop from "./ScrollToTop";
-import useLocalStorage from "hooks/useLocalStorage";
-import axios from "axios";
 
 const Container = styled.main`
   display: flex;
@@ -55,14 +48,14 @@ const HideIfLogin = ({ children, authenticated }: any) => {
 };
 
 const Root = () => {
-  const [userData, setUserData] = useLocalStorage<UserData | null>(
-    "user_data",
-    null
-  );
+  const rawUserData = window.localStorage.getItem("user_data");
+  const userData: UserData | null = rawUserData
+    ? JSON.parse(rawUserData)
+    : null;
   const auth = userData !== null;
 
   const onLogin = (data: UserData) => {
-    setUserData(data);
+    window.localStorage.setItem("user_data", JSON.stringify(data));
   };
 
   const AuthRoute = ({ component: Component, ...rest }: any) => {
@@ -81,7 +74,7 @@ const Root = () => {
   };
 
   return (
-    <BrowserRouter>
+    <Router history={history}>
       <ScrollToTop />
 
       <HideIfLogin authenticated={auth}>
@@ -110,7 +103,7 @@ const Root = () => {
       <HideIfLogin authenticated={auth}>
         <Footer />
       </HideIfLogin>
-    </BrowserRouter>
+    </Router>
   );
 };
 

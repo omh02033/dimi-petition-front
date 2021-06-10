@@ -9,7 +9,6 @@ import { FiLogOut } from "react-icons/fi";
 import colors from "assets/colors";
 import devices from "assets/devices";
 import UserData from "data/UserData";
-import useLocalStorage from "hooks/useLocalStorage";
 
 interface NavBarProps {
   userData: UserData;
@@ -177,8 +176,6 @@ const LogoutIcon = styled(FiLogOut)`
 `;
 
 const NavBar = ({ userData }: NavBarProps) => {
-  const [, setUserData] = useLocalStorage("user_data", null);
-
   const location = useLocation();
 
   const itemList = [
@@ -189,7 +186,7 @@ const NavBar = ({ userData }: NavBarProps) => {
 
   const onLogout = async () => {
     await axios.post("/users/logout");
-    setUserData(null);
+    window.localStorage.removeItem("user_data");
 
     history.push("/login");
   };

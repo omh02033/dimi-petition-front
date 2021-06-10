@@ -6,7 +6,6 @@ import { CookiesProvider } from "react-cookie";
 
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
-import history from "routers/history";
 import ReduxThunk from "redux-thunk";
 
 import rootReducer from "./modules";
@@ -21,6 +20,7 @@ axios.defaults.baseURL = "https://petition-api.dimigo.hs.kr";
 axios.defaults.withCredentials = true;
 axios.interceptors.response.use((response: any) => {
   if (response.data.status === 401) {
+    window.localStorage.removeItem("user_data");
   }
 
   return response;
