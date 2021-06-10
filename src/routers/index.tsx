@@ -48,17 +48,15 @@ const HideIfLogin = ({ children, authenticated }: any) => {
 };
 
 const Root = () => {
-  const [rawUserData, setRawUserData] = useState(
-    window.localStorage.getItem("user_data")
+  const rawUserData = window.localStorage.getItem("user_data");
+  const [userData, setUserData] = useState<UserData | null>(
+    rawUserData ? JSON.parse(rawUserData) : null
   );
-  const userData: UserData | null = rawUserData
-    ? JSON.parse(rawUserData)
-    : null;
   const auth = userData !== null;
 
   const onLogin = (data: UserData) => {
     window.localStorage.setItem("user_data", JSON.stringify(data));
-    setRawUserData(window.localStorage.getItem("user_data"));
+    setUserData(data);
   };
 
   const AuthRoute = ({ component: Component, ...rest }: any) => {
