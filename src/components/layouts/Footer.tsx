@@ -55,7 +55,7 @@ const Footer = () => (
       </Content>
       <hr />
       <Content>
-        Copyright © 2020 Korea Digital Media High School. All Rights Reserved
+        Copyright © 2021 Korea Digital Media High School. All Rights Reserved
       </Content>
     </ContentContainer>
   </Container>
