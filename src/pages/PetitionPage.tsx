@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import history from "routers/history";
 import styled from "styled-components";
 
 import ComponentTitle from "components/ComponentTitle";
@@ -7,7 +7,7 @@ import PetitionForm from "components/PetitionForm";
 
 interface PetitionPageProps {
   isAgree: boolean;
-};
+}
 
 const TitleContainer = styled.div`
   padding: 2.5rem 0;
@@ -28,9 +28,7 @@ const WarningItem = styled.li`
   margin: 0.5rem 0;
 `;
 
-const PetitionPage = ({isAgree}: PetitionPageProps) => {
-  const history = useHistory();
-
+const PetitionPage = ({ isAgree }: PetitionPageProps) => {
   if (!isAgree) {
     history.push("/rules");
     return null;

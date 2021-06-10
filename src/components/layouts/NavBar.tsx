@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
-import { useCookies } from "react-cookie";
-import { Link, useLocation, useHistory } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import history from "routers/history";
 import styled from "styled-components";
 
 import { FiLogOut } from "react-icons/fi";
@@ -9,6 +9,7 @@ import { FiLogOut } from "react-icons/fi";
 import colors from "assets/colors";
 import devices from "assets/devices";
 import UserData from "data/UserData";
+import useLocalStorage from "hooks/useLocalStorage";
 
 interface NavBarProps {
   userData: UserData;
@@ -176,9 +177,10 @@ const LogoutIcon = styled(FiLogOut)`
 `;
 
 const NavBar = ({ userData }: NavBarProps) => {
+  const [, setUserData] = useLocalStorage("user_data", null);
+
   const location = useLocation();
-  const history = useHistory();
-  const [, , removeCookie] = useCookies();
+
   const itemList = [
     { title: "분야별 청원", location: "/category/" },
     { title: "추천순 청원", location: "/popularity/" },
@@ -187,7 +189,8 @@ const NavBar = ({ userData }: NavBarProps) => {
 
   const onLogout = async () => {
     await axios.post("/users/logout");
-    removeCookie("auth", { maxAge: 43200 });
+    setUserData(null);
+
     history.push("/login");
   };
 

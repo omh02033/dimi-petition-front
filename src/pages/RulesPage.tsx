@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import history from "routers/history";
 import styled from "styled-components";
 
 import ComponentTitle from "components/ComponentTitle";
@@ -64,15 +64,14 @@ const ErrorMessage = styled.p`
 
 interface RulesPageProps {
   setAgree: () => void;
-};
+}
 
-const RulesPage = ({setAgree}: RulesPageProps) => {
+const RulesPage = ({ setAgree }: RulesPageProps) => {
   const [checkedList, setCheckedList] = useState<Array<boolean | null>>(
     Array(rules.length).fill(null)
   );
   const [isError, setIsError] = useState(false);
   const allAgreed = checkedList.every((x) => x);
-  const history = useHistory();
 
   const onCancel = () => {
     history.push("/");
@@ -124,9 +123,7 @@ const RulesPage = ({setAgree}: RulesPageProps) => {
               type="radio"
               name="agree-all"
               checked={allAgreed}
-              onChange={() =>
-                setCheckedList(Array(rules.length).fill(true))
-              }
+              onChange={() => setCheckedList(Array(rules.length).fill(true))}
             />
             <div className="state p-primary-o">
               <label>모두 동의</label>
@@ -137,9 +134,7 @@ const RulesPage = ({setAgree}: RulesPageProps) => {
               type="radio"
               name="agree-all"
               checked={!allAgreed}
-              onChange={() =>
-                setCheckedList(Array(rules.length).fill(null))
-              }
+              onChange={() => setCheckedList(Array(rules.length).fill(null))}
             />
             <div className="state p-primary-o">
               <label>동의하지 않음</label>

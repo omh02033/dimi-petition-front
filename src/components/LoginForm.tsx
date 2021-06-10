@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
+import history from "routers/history";
 import axios from "axios";
 
 import Swal from "sweetalert2";
@@ -53,7 +53,6 @@ const Submit = styled(PrimaryButton)`
 const LoginForm = ({ onLogin }: LoginFormProps) => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
-  const history = useHistory();
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

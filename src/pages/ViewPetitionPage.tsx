@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { useHistory } from "react-router-dom";
+import history from "routers/history";
 import axios from "axios";
 import styled from "styled-components";
 import dayjs from "dayjs";
@@ -119,7 +119,6 @@ const ViewPetitionPage = ({ match, isManager }: ViewPetitionPageProps) => {
   const [petition, setPetition] = useState<PetitionData | null>(null);
   const [agree, setAgree] = useState(false);
   const [answerContent, setAnswerContent] = useState("");
-  const history = useHistory();
 
   const fetch = useCallback(async () => {
     const response = await axios.get("/petitions/" + id);

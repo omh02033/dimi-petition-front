@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import history from "routers/history";
 import styled from "styled-components";
 
 import { TextInput } from "assets/styles/BasicComponent";
@@ -52,8 +52,6 @@ const SubmitContainer = styled.div`
 `;
 
 const PetitionForm = () => {
-  const history = useHistory();
-
   const onCancel = () => {
     history.push("/");
     window.scrollTo(0, 0);

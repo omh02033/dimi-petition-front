@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import history from "routers/history";
 import styled from "styled-components";
 
 import ComponentTitle from "components/ComponentTitle";
@@ -53,7 +53,6 @@ const RegisterButton = styled(PrimaryButton)`
 `;
 
 function PetitionSteps() {
-  const history = useHistory();
   const stepTitles = [
     "청원 작성",
     "청원 동의",

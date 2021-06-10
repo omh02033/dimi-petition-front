@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
+import React, { useEffect } from "react";
 import {
   Redirect,
   BrowserRouter,
@@ -26,6 +25,8 @@ import PetitionPageContainer from "pages/PetitionPageContainer";
 import ViewPetitionPage from "pages/ViewPetitionPage";
 import UserData from "data/UserData";
 import ScrollToTop from "./ScrollToTop";
+import useLocalStorage from "hooks/useLocalStorage";
+import axios from "axios";
 
 const Container = styled.main`
   display: flex;
@@ -54,22 +55,15 @@ const HideIfLogin = ({ children, authenticated }: any) => {
 };
 
 const Root = () => {
-  const [cookies, setCookie] = useCookies(["auth"]);
-  const [auth, setAuth] = useState(
-    cookies.auth !== "null" && cookies.auth !== undefined
+  const [userData, setUserData] = useLocalStorage<UserData | null>(
+    "user_data",
+    null
   );
-  const [userData, setUserData] = useState<UserData | null>(
-    auth ? cookies.auth : null
-  );
+  const auth = userData !== null;
 
   const onLogin = (data: UserData) => {
-    setCookie("auth", data, { maxAge: 43200 });
     setUserData(data);
   };
-
-  useEffect(() => {
-    setAuth(cookies.auth !== "null" && cookies.auth !== undefined);
-  }, [cookies]);
 
   const AuthRoute = ({ component: Component, ...rest }: any) => {
     return (
