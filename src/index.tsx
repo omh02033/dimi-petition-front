@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import axios from "axios";
-import { CookiesProvider } from "react-cookie";
+import history from "routers/history";
 
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
@@ -21,6 +21,7 @@ axios.defaults.withCredentials = true;
 axios.interceptors.response.use((response: any) => {
   if (response.data.status === 401) {
     window.localStorage.removeItem("user_data");
+    history.push(`/login?next=${history.location.pathname}`);
   }
 
   return response;
@@ -34,11 +35,9 @@ const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 ReactDOM.render(
   <React.StrictMode>
-    <CookiesProvider>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </CookiesProvider>
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

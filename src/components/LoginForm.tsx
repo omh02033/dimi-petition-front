@@ -46,7 +46,7 @@ const Submit = styled(PrimaryButton)`
   margin-top: 3rem;
 `;
 
-export interface LoginFormProps {
+interface LoginFormProps {
   onLogin: (data: UserData) => void;
   nextPath: string;
 }

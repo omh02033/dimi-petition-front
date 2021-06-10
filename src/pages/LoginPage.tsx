@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import LoginForm, { LoginFormProps } from "components/LoginForm";
+import LoginForm from "components/LoginForm";
 
 import devices from "assets/devices";
 import UserData from "data/UserData";
