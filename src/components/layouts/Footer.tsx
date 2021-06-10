@@ -49,7 +49,7 @@ const Footer = () => (
       <hr />
       <Content>
         <Link href="https://drive.google.com/file/d/14-IusvkS2OkuHfvjpQKWhnztIh-NQcjg/view?usp=sharing">
-          운영규정
+          디미청원 운영규정
         </Link>
       </Content>
       <Content>
