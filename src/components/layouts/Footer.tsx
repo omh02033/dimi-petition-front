@@ -40,6 +40,8 @@ const Content = styled.p`
 
 const Link = styled.a`
   color: white;
+
+  margin-right: 0.5rem;
 `;
 
 const Footer = () => (
@@ -50,6 +52,9 @@ const Footer = () => (
       <Content>
         <Link href="https://drive.google.com/file/d/14-IusvkS2OkuHfvjpQKWhnztIh-NQcjg/view?usp=sharing">
           디미청원 운영규정
+        </Link>
+        <Link href="https://drive.google.com/file/d/1b_gpPnNmItSWO4uDFfrKuu6PNn-sMd7S/view?usp=sharing">
+          개인정보처리방침
         </Link>
       </Content>
       <Content>
