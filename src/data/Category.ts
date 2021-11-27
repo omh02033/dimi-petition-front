@@ -8,13 +8,13 @@ enum Category {
 export function getCategoryId(category: Category) {
   switch (category) {
     case Category.Safety:
-      return "5f564eba5ba38a46d0cd84c3";
+      return "61a1f7e8e0803b836812d096";
     case Category.HumanRights:
-      return "5f564ebe5ba38a46d0cd84c4";
+      return "61a1f859e0803b836812d097";
     case Category.Life:
-      return "5f564ec35ba38a46d0cd84c5";
+      return "61a1f87ae0803b836812d099";
     case Category.Dormitory:
-      return "5f564ec75ba38a46d0cd84c6";
+      return "61a1f883e0803b836812d09a";
   }
 }
 
