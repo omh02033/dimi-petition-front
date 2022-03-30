@@ -12,9 +12,9 @@ export function getCategoryId(category: Category) {
     case Category.HumanRights:
       return "61a1fe9ad44b39001c316234";
     case Category.Life:
-      return "61a1fe78d44b39001c316235";
+      return "61a1feb6d44b39001c316235";
     case Category.Dormitory:
-      return "61a1fe78d44b39001c316236";
+      return "61a1fec9d44b39001c316236";
   }
 }
 
